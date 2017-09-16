@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>缴款/编辑</title>
+  <style>
+    body{
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table{
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td{
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+    td:first-child{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.9.5-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=缴款页面" target="_blank">http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.9.5-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=缴款页面</a> </td>
+  </tr>
+
+  <th>操作</th>
+  <th>响应</th>
+  <tr>
+    <td >界面初始化</td>
+    <td>
+      判断页面操作权限，权限ID：缴款登记<br>
+      界面显示的操作权限判断：[所有操作按钮: 暂时不判断权限 ]<br>
+      获取 收银缴款单信息, 调用接口<a href="#" target="_blank">收银缴款单待定</a><br><br>
+      备注可填写: [0, 100]<br>
+      现金.实付款: 必填 maxlength=8, >=0,  金额保留两位2小数, 进入界面时默认选中<br>
+      其他支付.实付款: 必填 maxlength=8,  >=0, 金额保留两位2小数<br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>改写"现金.实付款"</td>
+    <td>
+      该行的"长短款"同步修改, 最下面的合计信息同步修改
+    </td>
+  </tr>
+  <tr>
+    <td>点击"确认缴款"按钮</td>
+    <td>
+      数据判断: 现金.实付款, 其他支付.实付款 必须填写<br>
+      调用接口<a href="#" target="_blank">保存待定</a><br>
+      if 失败 then hdtip('保存失败', 'error', 失败原因)<br>
+      if 成功 then hdtip('保存成功', 'success'), 路径跳转 <a href="employeePayDeliveryDtl.html" target="_self">缴款单明细</a>
+    </td>
+  </tr>
+
+</table>
+
+</body>
+</html>

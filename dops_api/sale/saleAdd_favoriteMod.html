@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>销售-收藏夹设置</title>
+  <style>
+    body{
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table{
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td{
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+    td:first-child{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.13-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=销售收银及结算" target="_blank">销售收银及结算</a> </td>
+  </tr>
+
+  <th>操作</th>
+  <th>响应</th>
+  <tr>
+    <td >界面初始化</td>
+    <td>
+      根据获得的"收藏夹"数据对象, 显示收藏夹信息 <br>
+      默认得到的信息是"第一个分类"的商品列表 <br>
+      "第一个分类"样式选中
+    </td>
+  </tr>
+  <tr>
+    <td>点击"新增分类"</td>
+    <td>
+      弹出新增对话框, 分类名称: maxlength 6 <br>
+      确定: <br>
+      　调用接口: <a href="../apiDefine/_{shop}_skuFavorite_saveNewSkuFavCategory.js" target="_blank">/{shop}/skuFavorite/saveNewSkuFavCategory</a> <br>
+      　成功：hdTip, 关闭对话框, 分类选中新创建的"分类" , 调用接口<a href="../apiDefine/_{shop}_skuFavorite_get_byShop.js" target="_blank">/{shop}/skuFavorite/get/byShop</a> 获得最新的分组信息<br>
+      　失败：hdTip <br>
+      取消: 关闭对话框
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"XX分类"</td>
+    <td>
+      调用接口: <a href="../apiDefine/_{shop}_skuFavorite_get_byCategory.js" target="_blank">/{shop}/skuFavorite/get/byCategory</a> <br>
+      选中的"XX分类", 样式选中
+    </td>
+  </tr>
+  <tr>
+    <td>编辑分类</td>
+    <td>
+      弹出编辑对话框, 分类名称: maxlength 6 <br>
+      确定: <br>
+      　调用接口: <a href="../apiDefine/_{shop}_skuFavorite_saveModifySkuFavCategory.js" target="_blank">/{shop}/skuFavorite/saveModifySkuFavCategory</a> <br>
+      　成功：hdTip, 关闭对话框, 分类选中新创建的"分类" , 调用接口<a href="../apiDefine/_{shop}_skuFavorite_get_byShop.js" target="_blank">/{shop}/skuFavorite/get/byShop</a> 获得最新的分组信息<br>
+      　失败：hdTip <br>
+      取消: 关闭对话框
+    </td>
+  </tr>
+  <tr>
+    <td>删除分类</td>
+    <td>
+      弹出删除对话框<br>
+      确定: <br>
+      　调用接口: <a href="../apiDefine/_{shop}_skuFavorite_removeSkuFavCategory.js" target="_blank">/{shop}/skuFavorite/removeSkuFavCategory</a> <br>
+      　成功：hdTip, 关闭对话框, 分类选中新创建的"分类" , 调用接口<a href="../apiDefine/_{shop}_skuFavorite_get_byShop.js" target="_blank">/{shop}/skuFavorite/get/byShop</a> 获得最新的分组信息<br>
+      　失败：hdTip <br>
+      取消: 关闭对话框
+    </td>
+  </tr>
+  <tr>
+    <td>添加商品输入</td>
+    <td>
+      获得门店商品列表, 调用接口: <a href="../apiDefine/_{shop}_shopSkuService_queryInputSearch.js" target="_blank">/{shop}/shopSkuService/queryInputSearch</a> <br>
+      选中商品: <a href="../apiDefine/_{shop}_skuFavorite_saveNew.js" target="_blank">/{shop}/skuFavorite/saveNew</a> <br>
+      更新该分类的商品, 调用接口: <a href="../apiDefine/_{shop}_skuFavorite_get_byCategory.js" target="_blank">/{shop}/skuFavorite/get/byCategory</a> <br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"全选/清除"</td>
+    <td>
+      全选: 分类商品全部打勾 <br>
+      清除: 分类商品全部不打勾 <br>
+    </td>
+  </tr>
+  <tr>
+    <td>编辑商品按钮</td>
+    <td>
+      出现: 编辑商品弹出框，调用接口 <a href="../apiDefine/_{shop}_shopSkuService_readSimple.js" target="_blank">/{shop}/shopSkuService/readSimple</a><br>
+      商品简称: maxlength=12 <br>
+      点击"使用默认名称", 显示商品的全称 <br>
+      确定: <a href="../apiDefine/_{shop}_skuFavorite_updataSkuShortName.js" target="_blank">/{shop}/skuFavorite/updataSkuShortName</a> <br>
+      更新该分类的商品, 调用接口: <a href="../apiDefine/_{shop}_skuFavorite_get_byCategory.js" target="_blank">/{shop}/skuFavorite/get/byCategory</a>
+    </td>
+  </tr>
+  <tr>
+    <td>删除商品按钮</td>
+    <td>
+     调用接口 <a href="../apiDefine/_{shop}_skuFavorite_delete_batch.js" target="_blank">/{shop}/skuFavorite/delete/batch</a><br>
+    </td>
+  </tr>
+  <tr>
+    <td>批量删除商品按钮</td>
+    <td>
+      调用接口 <a href="../apiDefine/_{shop}_skuFavorite_delete_batch.js" target="_blank">/{shop}/skuFavorite/delete/batch</a><br>
+    </td>
+  </tr>
+  <tr>
+    <td>移动商品分组按钮</td>
+    <td>
+      当只有一个分类时, 此按钮disabled <br>
+      出现: 移动商品分组商品弹出框 <br>
+      调用接口: <a href="../apiDefine/_{shop}_skuFavorite_getAllSkuCategory.js" target="_blank">/{shop}/skuFavorite/getAllSkuCategory</a> <font color="red">这个多余</font> <br>
+      选择非当前分类的一个其他分类 <br>
+      确定: <a href="../apiDefine/_{shop}_skuFavorite_moveTo_category.js" target="_blank">/{shop}/skuFavorite/moveTo/category</a> <br>
+      更新该分类的商品, 调用接口: <a href="../apiDefine/_{shop}_skuFavorite_get_byCategory.js" target="_blank">/{shop}/skuFavorite/get/byCategory</a>
+    </td>
+  </tr>
+  <tr>
+    <td>拖拽商品, 调整排序</td>
+    <td>
+      拖拽完毕: <a href="../apiDefine/_{shop}_skuFavorite_sort.js" target="_blank">/{shop}/skuFavorite/sort</a> <br>
+      更新该分类的商品, 调用接口: <a href="../apiDefine/_{shop}_skuFavorite_get_byCategory.js" target="_blank">/{shop}/skuFavorite/get/byCategory</a>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

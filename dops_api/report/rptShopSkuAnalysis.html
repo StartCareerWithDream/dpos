@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>标签统计报表</title>
+    <style>
+        body{
+            font-family: Calibri, "Microsoft YaHei";
+            font-size: 14px;
+        }
+
+        table{
+            border-collapse: separate;
+            border-spacing: 1px;
+            background-color: gainsboro;
+            width: 100%;
+        }
+
+        td{
+            background-color: white;
+            padding: 4px;
+            vertical-align: top;
+            line-height: 180%;
+        }
+        td:first-child{
+            width: 200px;
+        }
+
+    </style>
+</head>
+<body>
+
+<table>
+
+    <tr>
+        <td>页面布局</td>
+        <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.14-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=商品修改记录" target="_blank">商品修改记录</a> </td>
+    </tr>
+
+    <th>操作</th>
+    <th>响应</th>
+    <tr>
+        <td >界面初始化</td>
+        <td>
+            如果该界面从商品跳转过来，需要接受参数{名称，uuid，以及barcode}<br>
+            此时界面商品输入框显示名称，并且根据uuid来进行搜索数据<br>
+            获取商品修改记录,调用接口<a href="../apiDefine/_{shop}_report_v2_queryShopSkuModifyLog.js" target="_blank">/{shop}/report/v2/queryShopSkuModifyLog</a><br>
+            <br>
+            <br>
+            如果没有携带参数<br>
+            时间段 默认显示 7天前的时间 （到） 今日时间<br>
+            7天: 起始日期= 今天 - 6, 截至日期 = 今天<br>
+            3个月: 起始日期= 今天 - 89, 截至日期 = 今天<br>
+            半年: 起始日期= 今天 - 182, 截至日期 = 今天<br><br>
+            商品输入框进行精确查询，<a href="../apiDefine/_{shop}_shopSkuService_queryInputSearch.js" target="_blank">调用接口/{shop}/shopSkuService/queryInputSearch</a><br>
+            下拉框只展示10条数据<br>
+            获取操作人列表,调用接口<a href="../apiDefine/_{shop}_report_v2_queryAllEmployee.js" target="_blank">/{shop}/report/v2/queryAllEmployee</a>，操作人为多选<br>
+            修改内容多选下拉<br>
+            下拉内容为{<br>
+            "barcode":'条码',<br>
+            "code":'自编码',<br>
+            "lastInPrice":'最新进价',<br>
+            "salePrice":'售价',<br>
+            "costPrice":'成本价',<br>
+            "autoRpl":'是否自动补货',<br>
+            "minInvQty":'最小库存数'<br>
+            }<br>
+            获取商品修改记录,调用接口<a href="../apiDefine/_{shop}_report_v2_queryShopSkuModifyLog.js" target="_blank">/{shop}/report/v2/queryShopSkuModifyLog</a><br>
+            表格中显示，商品名称【居左】，条码【居中】，修改时间【居中】，操作人【居左】，修改内容【居左】<br>
+            表格中的内容，默认显示2行，当小于等于2行时，不显示下拉箭头，若大于2行，则将2行之外的隐藏，并且显示下拉箭头<br>
+            默认按照修改时间倒序来排列<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td>商品输入回车</td>
+        <td>
+            获取商品修改记录,调用接口<a href="../apiDefine/_{shop}_report_v2_queryShopSkuModifyLog.js" target="_blank">/{shop}/report/v2/queryShopSkuModifyLog</a><br>
+
+        </td>
+    </tr>
+
+    <tr>
+        <td>点击 7天/3个月/半年 </td>
+        <td>
+            按照规则,修改 起始日期, 结束日期 输入框中的值
+        </td>
+    </tr>
+    <tr>
+        <td>点击"查询"</td>
+        <td>
+            组织查询的各项参数<br>
+            获取商品修改记录,调用接口<a href="../apiDefine/_{shop}_report_v2_queryShopSkuModifyLog.js" target="_blank">/{shop}/report/v2/queryShopSkuModifyLog</a><br>
+        </td>
+    </tr>
+
+    <tr>
+        <td>点击"重置"</td>
+        <td>
+            查询中的各项条件, 回复初始值
+        </td>
+    </tr>
+    <tr>
+        <td>点击"表格中的下拉箭头"</td>
+        <td>
+            展开剩余数据，并且下拉箭头变成上拉箭头。
+        </td>
+    </tr>
+    <tr>
+        <td>点击"表格中的上拉箭头"</td>
+        <td>
+            收起数据，变成2行，并且下拉箭头变成上拉箭头。
+        </td>
+    </tr>
+    <tr>
+        <td>点击列表中"名称/条码/修改时间/"的排序</td>
+        <td>
+            组织查询的各项参数<br>
+            获取商品修改记录,调用接口<a href="../apiDefine/_{shop}_report_v2_queryShopSkuModifyLog.js" target="_blank">/{shop}/report/v2/queryShopSkuModifyLog</a><br>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

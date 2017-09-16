@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dposApp">
+<head>
+  <meta charset="UTF-8">
+  <link href="libs/hd.ui/font/iconfont.css" rel="stylesheet">
+  <link href="libs/hd.ui/css/hd.ui.min.css" rel="stylesheet">
+  <link href="libs/hd.ui/css/theme.css" rel="stylesheet">
+  <link href="css/zhaorong.css" rel="stylesheet">
+  <title></title>
+  <script>
+    var sHDQF_Domain = window.location.hostname;
+    //        sHDQF_Domain = 'auth-test.1000sails.com';
+    sHDQF_Domain = sHDQF_Domain.substring(sHDQF_Domain.indexOf('.') + 1, 200);
+    //        alert(sHDQF_Domain)
+    document.domain = sHDQF_Domain;
+  </script>
+</head>
+<body ng-controller="myCtrl">
+<div ui-view></div>
+<!--第三方 start-->
+<script src="libs/jquery.min.js"></script>
+<script src="//download.qianfan123.com/resources/libs/angular.min.js"></script>
+<script src="//download.qianfan123.com/resources/libs/angular-route.min.js"></script>
+<script src="libs/angular-ui-router.js"></script>
+<script src="libs/angular-sanitize.min.js"></script>
+<script src="libs/ocLazyLoad.js"></script>
+<script src="libs/hd.ui/js/hd.ui.min.js"></script>
+<script src="libs/jquery.dragsort-0.5.2.min.js"></script>
+<!--第三方 end-->
+
+<!--app start-->
+<script type="application/javascript" src="js/utils.js"></script>
+<script type="application/javascript" src="app.controller.js"></script>
+<script type="application/javascript" src="js/directives/hd-tab/tab.directive.js"></script>
+<script type="application/javascript" src="js/directives/hd-authPermission/hd-authPermission.service.js"></script>
+<script type="application/javascript" src="js/provider/service.js"></script>
+<!--app end-->
+
+</body>
+</html>

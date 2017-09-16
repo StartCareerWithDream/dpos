@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="libs/jquery.min.js"></script>
+  <!--<script src="libs/echarts.min.js"></script>-->
+  <script src="index.controller.js"></script>
+  <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="libs/treeView/metroStyle/metroStyle.css">
+  <script src="api.js"></script>
+  <!--<script src="//auth-test.qianfan123.com/dpos-auth-web/angular/libs/api/api.min.js"></script>-->
+</head>
+<body ng-controller="myCtrl">
+<!--下面的html临时使用，以后可以直接删除-->
+<button onclick="showMenu()">盘点界面</button>
+<div id="menu" style="width: 1024px;height: 200px;display: none;">
+  <ul style="list-style-type: none;margin-left: 0;padding-left: 0">
+    <li style="cursor: pointer" ui-sref="loading">loading</li>
+    <li style="cursor: pointer" ui-sref="checkBillList">盘点单列表</li>
+    <li style="cursor: pointer" ui-sref="checkBillDtl">盘点单详情</li>
+    <li style="cursor: pointer" ui-sref="checkBillUpload">盘点单文件上传</li>
+    <li style="cursor: pointer" ui-sref="checkBillImport">盘点单文件导入</li>
+    <li style="cursor: pointer" ui-sref="inv">库存调整记录查询</li>
+    <li style="cursor: pointer" ui-sref="employeePayDeliveryList">收银缴款列表</li>
+    <li style="cursor: pointer" ui-sref="employeePayDeliveryDtl">收银缴款明细</li>
+    <li style="cursor: pointer" ui-sref="employeePayDeliveryMod">收银缴款编辑</li>
+    <li style="cursor: pointer" ui-sref="rptBusinessAnalysis">分析报表</li>
+    <li style="cursor: pointer" ui-sref="rptTagAnalysis">标签统计报表</li>
+    <li style="cursor: pointer" ui-sref="rptPeriodAnalysis">时段统计报表</li>
+    <li style="cursor: pointer" ui-sref="rptSkuAnalysis">单品商品销售报表</li>
+    <li style="cursor: pointer" ui-sref="goodsModifyRecord">商品修改记录</li>
+  </ul>
+</div>
+
+<div id="dpos-angular"></div>
+<!--下面的js临时使用，以后可以直接删除-->
+<script>
+  var count = 0;
+  function showMenu() {
+    count++;
+    if (count % 2 == 0) {
+      document.getElementById('menu').style.display = 'none';
+    } else {
+      document.getElementById('menu').style.display = 'block';
+    }
+  }
+
+  //测试模拟用户、门店、权限
+  /*1、权限  window.sessionStorage.setItem('permissions', Ext.JSON.encode(Ext.clone(permissions)));
+   2、门店  window.sessionStorage.setItem('shop', Ext.JSON.encode(Ext.clone(shop)));
+   3、用户 window.sessionStorage.setItem('user', Ext.JSON.encode(Ext.clone(user)));
+   */
+  var jsPermissions = ["商品", "进货", "销售", "销售退货", "销售改价", "库存", "收藏夹", "解款", "收付款", "采购", "批发", '自行缴款', '缴款登记', "进价查看"];
+  //       {"id":"s01c1521","name":"董思捷门店1","shortName":"董思捷门店1","address":"\u5929\u6d25\u5e02\u5e02\u8f96\u533a\u4e1c\u4e3d\u533aeyshhgf ","owner":"b441a25b-a618-4d92-9625-25fcc7f37031","printSaleTpl":null,"saleTagTpl":"\u6a21\u677f\u4e00","changesMode":0,"onlinePayments":[],"serviceProvider":null,"serviceProviderName":null,"serviceProvider400Phone":"400-1234-4567","expireTime":null,"expireNoticeType":null,"expireNoticeDays":"3"};
+  var jsShop = {
+    "id": "s01c6530",
+    "name": "jsama\u70b8\u836f\u5e93",
+    "shortName": "\u96f7",
+    "address": "\u4e0a\u6d77\u5e02\u53bf\u5d07\u660e\u53bfsss ",
+    "owner": "087847e6-0532-4aed-b88a-cd6943e3637a",
+    "printSaleTpl": null,
+    "saleTagTpl": "\u6a21\u677f\u4e00",
+    "changesMode": 1,
+    "onlinePayments": [],
+    "serviceProvider": null,
+    "serviceProviderName": null,
+    "serviceProvider400Phone": "400-1234-5678",
+    "businessType": "\u65e5\u7528\u767e\u8d27",
+    "expireTime": "2044-09-03 15:59:11",
+    "expireNoticeType": null,
+    "expireNoticeDays": "3",
+    "defaultPayModel": "\u73b0\u91d1\u652f\u4ed8",
+    "costPriceArithmetic": "assign",
+    "balanceBarcodeRule": null,
+    "workShifts": {
+      "shiftType": "threeShifts",
+      "allDay": false,
+      "startTime": "07:00",
+      "endTime": "23:00",
+      "enable": true,
+      "lines": [{"shiftName": "\u65e9\u73ed", "lineNo": 1, "startTime": "07:00", "endTime": "13:00"}, {
+        "shiftName": "\u4e2d\u73ed",
+        "lineNo": 2,
+        "startTime": "13:00",
+        "endTime": "18:00"
+      }, {"shiftName": "\u665a\u73ed", "lineNo": 3, "startTime": "18:00", "endTime": "23:00"}]
+    }
+  }
+  var jsUser = {"id": "087847e6-0532-4aed-b88a-cd6943e3637a", "name": "jsama", "mobile": "13816638979", "photo": null};
+
+
+  window.sessionStorage.clear();
+  window.sessionStorage.setItem('permissions', JSON.stringify(jsPermissions));
+  window.sessionStorage.setItem('shop', JSON.stringify(jsShop));
+  window.sessionStorage.setItem('user', JSON.stringify(jsUser));
+</script>
+</body>
+</html>

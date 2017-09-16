@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>收银缴款明细</title>
+  <style>
+    body{
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table{
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td{
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+    td:first-child{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.9.5-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=缴款单详情_待签字_" target="_blank">http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.9.5-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=缴款单详情_待签字_</a> </td>
+  </tr>
+
+  <th>操作</th>
+  <th>响应</th>
+  <tr>
+    <td >界面初始化</td>
+    <td>
+      判断页面操作权限，权限ID：缴款登记<br>
+      界面显示的操作权限判断：[所有操作按钮: 暂时不判断权限 ]<br>
+      获取 收银缴款单信息, 调用接口<a href="#" target="_blank">收银缴款单待定</a><br><br>
+      状态为: 空, 操作按钮: 缴款, 理论上, 应该不会出现, 因为进不来<br>
+      状态为: 待签字, 操作按钮: 签字 打印 编辑 删除<br>
+      状态为: 待处理, 操作按钮: 处理 作废<br>
+      状态为: 已处理, 操作按钮: 无<br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"编辑"按钮</td>
+    <td>
+      参数: 缴款单UUID, 路径跳转 <a href="employeePayDeliveryMod.html" target="_self">缴款单编辑</a><br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"打印"按钮</td>
+    <td>
+      打印此单据, 具体写法, 需要问问林柱怎么打印销售单的.
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"签字"按钮</td>
+    <td>
+      调用接口<a href="#" target="_blank">签字待定</a><br>
+      if 失败 then hdtip('签字失败', 'error', 失败原因)<br>
+      if 成功 then hdtip('签字成功', 'success'), 根据查询条件, 排序要求, 获取收银缴款单数据，调用接口<a href="#" target="_blank">收银缴款单待定</a>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"删除"按钮</td>
+    <td>
+      确认提示: 确定要删除这张收银缴款单吗? <br>
+      调用接口<a href="#" target="_blank">删除待定</a><br>
+      if 失败 then hdtip('删除失败', 'error', 失败原因)<br>
+      if 成功 then hdtip('删除成功', 'success'), 根据查询条件, 排序要求, 获取收银缴款单数据，调用接口<a href="#" target="_blank">收银缴款单待定</a>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"处理"按钮</td>
+    <td>
+      调用接口<a href="#" target="_blank">处理待定</a><br>
+      if 失败 then hdtip('处理失败', 'error', 失败原因)<br>
+      if 成功 then hdtip('处理成功', 'success'), 根据查询条件, 排序要求, 获取收银缴款单数据，调用接口<a href="#" target="_blank">收银缴款单待定</a>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"作废"按钮</td>
+    <td>
+      确认提示: 确定要作废这张收银缴款单吗? <br>
+      调用接口<a href="#" target="_blank">作废待定</a><br>
+      if 失败 then hdtip('作废失败', 'error', 失败原因)<br>
+      if 成功 then hdtip('作废成功', 'success'), 根据查询条件, 排序要求, 获取收银缴款单数据，调用接口<a href="#" target="_blank">收银缴款单待定</a>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"返回"按钮</td>
+    <td>
+      history.back(), 返回列表页面
+    </td>
+  </tr>
+
+
+</table>
+
+</body>
+</html>

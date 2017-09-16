@@ -1,0 +1,124 @@
+<div class="mainContent">
+  <table class="dtlBar">
+    <tr>
+      <td width="10%">时间从:</td>
+      <td width="30%">
+        <hd-date-input ng-model="dataManage.request.query.filters[3].value[0]" style="width: 130px"></hd-date-input>
+        -
+        <hd-date-input ng-model="dataManage.request.query.filters[3].value[1]" style="width: 130px"></hd-date-input>
+      </td>
+      <td width="10%">最近:</td>
+      <td width="20%">
+        <ul class="hd-tab-pill">
+          <li ng-click="changeDate('week')" ng-class="{'focus':dataManage.other.index=='week'}">7天</li>
+          <li ng-click="changeDate('month')" ng-class="{'focus':dataManage.other.index=='month'}">1个月</li>
+          <li ng-click="changeDate('threeMonth')" ng-class="{'focus':dataManage.other.index=='threeMonth'}">3个月</li>
+        </ul>
+      </td>
+      <td width="10%"></td>
+      <td width="20%">
+      </td>
+    </tr>
+    <!--<tr>-->
+      <!--<td colspan="6">-->
+        <!--<ul class="hd-tab-pill" hd-tab ng-model="dataManage.dateType">-->
+          <!--<li value="week" ng-click="changeDate('week')">本周</li>-->
+          <!--<li value="month" ng-click="changeDate('month')">本月</li>-->
+          <!--<li value="threeMonth" ng-click="changeDate('threeMonth')">近三个月</li>-->
+        <!--</ul>-->
+      <!--</td>-->
+    <!--</tr>-->
+    <tr>
+      <td width="10%">商品:</td>
+      <td width="30%"><input type="text" class="hd-form-control" style="width: 273px" ng-model="dataManage.request.query.filters[0].value"/></td>
+      <td width="10%">标签:</td>
+      <td width="20%">
+        <select ng-model="dataManage.request.query.filters[1].value" class="hd-form-control">
+          <option value="">全部</option>
+          <option ng-repeat="item in dataManage.response.tags" value="{{item.tag}}">{{item.tag}}</option>
+        </select>
+      </td>
+      <td width="10%">操作人:</td>
+      <td width="20%"><input type="text" ng-model="dataManage.request.query.filters[2].value" class="hd-form-control"/></td>
+    </tr>
+    <tr>
+      <td width="10%"></td>
+      <td width="30%"></td>
+      <td width="10%"></td>
+      <td width="20%"></td>
+      <td width="10%"></td>
+      <td width="20%" style="text-align: right">
+        <button btnSearch=s1 ng-click="search()" class="mainBtn s2-btn"><i class="iconfont icon-fangdajing"></i>查询</button>
+        <button btnSearch=s2 ng-click="reset()" class="mainBtn s2-btn">重置</button>
+      </td>
+    </tr>
+  </table>
+
+  <div>
+    <table class="listBar">
+      <tr>
+        <th class="th">商品名称</th>
+        <th class="th">商品条码</th>
+        <th class="th">操作人</th>
+        <th class="th">操作时间</th>
+        <th class="th">调整方式</th>
+        <th class="th">调整前库存数</th>
+        <th class="th">调整后库存数</th>
+        <th class="th">调整数量</th>
+        <th class="th" has-permission="进价查看">成本额</th>
+        <th class="th">售价额</th>
+      </tr>
+      <tr class="tr" ng-repeat="item in dataManage.response.items">
+        <td class="td"><a href="javascript:void(0)" ng-click="goToDetail(item.shopSku)"> {{item.shopSkuName}} </a></td>
+        <td class="td">{{item.barcode}}</td>
+        <td class="td">{{item.creator.name}}</td>
+        <td class="td center">{{item.created}}</td>
+        <td class="td">{{item.adjustMethodName}}</td>
+        <td class="td right">{{item.originalQty}}</td>
+        <td class="td right">{{item.newQty}}</td>
+        <td class="td right">{{item.newQty-item.originalQty}}</td>
+        <td class="td right" has-permission="进价查看">{{item.costAmount| currency:'￥'}}</td>
+        <td class="td right">{{item.saleAmount| currency:'￥'}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="page-bar">
+    <table style="width: 100%;">
+      <tr>
+        <!-- <td style="width:70px;">一共x页</td>
+         <td style="width:105px;">现在是第y页</td>-->
+        <td ng-show="total>0">当前显示{{(currentPage-1)*pageSize+1}}-{{(total-currentPage*pageSize)>0?currentPage*pageSize:total}}行,共有{{total}}行</td>
+        <!--<td style="width:40%;"></td>-->
+        <td class="dpos-page">
+          <ul class="pull-right dpos-pagenation-div">
+            <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="currentPage=1;pageGo(1)" ng-disabled="currentPage === 1"><span
+              class="fa fa-angle-double-left"></span></li>
+            <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="pageFrom()" ng-disabled="currentPage === 1"><span
+              class="fa fa-angle-left"></span></li>
+            <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==1}" ng-click="currentPage=1;pageGo(1)"> 1</li>
+            <li class="dpos-page-div" ng-show="page>=3"> ...</li>
+            <li class="dpos-page-div" ng-show="pageCount>2" ng-class="{'dpos-clicked-page':currentPage==page}" ng-click="currentPage=page;pageGo(page)">
+              {{page}}
+            </li>
+            <li class="dpos-page-div" ng-show="pageCount>3" ng-class="{'dpos-clicked-page':currentPage==page+1}" ng-click="currentPage=page+1;pageGo(page+1)">
+              {{page+1}}
+            </li>
+            <li class="dpos-page-div" ng-show="pageCount>4" ng-class="{'dpos-clicked-page':currentPage==page+2}" ng-click="currentPage=page+2;pageGo(page+2)">
+              {{page+2}}
+            </li>
+            <li class="dpos-page-div" ng-show="pageCount>5" ng-class="{'dpos-clicked-page':currentPage==page+3}" ng-click="currentPage=page+3;pageGo(page+3)">
+              {{page+3}}
+            </li>
+            <li class="dpos-page-div" ng-show="page+3<pageCount-1"> ...</li>
+            <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==pageCount}" ng-show="pageCount>1"
+                ng-click="currentPage=pageCount;pageGo(pageCount)">{{pageCount}}
+            </li>
+            <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div" ng-click="pageTo(page+1)"><span class="fa fa-angle-right"></span></li>
+            <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div" ng-click="currentPage=pageCount;pageGo(pageCount)"><span
+              class="fa fa-angle-double-right"></span></li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

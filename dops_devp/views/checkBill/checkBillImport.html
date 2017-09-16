@@ -1,0 +1,220 @@
+<div class="mainContent">
+<!--  <div>
+    <table class="titleBar">
+      <tr>
+        <td>
+          <div class="titleBar-cleanInfo">
+            <i class="fa fa-info-circle titleBar-icon"></i>如果要全店的整体库存更新(未导入商品的库存为零)，可先清空门店的所有库存 <a ng-click="openCleanStock()" has-permission="库存">点击清空库存</a>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>-->
+
+  <table class="titleBar">
+    <tr>
+      <td class="td1">导入盘点单</td>
+      <td class="td2" >
+        <button ng-class="{'btn Main':disabledImport == false,'btn Main forbidden':disabledImport == true}" has-permission="库存" ng-click="startImport()" ng-disabled="disabledImport" title="{{showDisabledTitleInfo}}">开始导入</button>
+      </td>
+    </tr>
+    <tr>
+      <td class="titleBar-cleanInfo" colspan="2">
+        已上传文件: 《{{upImportPara.setFileName}}》
+<!--        <div class="inline pull-left">
+          <ul class="imported-file-list">
+            <li ng-repeat="a in $root.upLoadFileList track by $index">{{a.split('-')[0]}}</li>
+          </ul>
+        </div>-->
+        <a ui-sref="checkBillUpload" ng-click="returnToUpload()">返回重选</a>
+<br>
+        不可识别的商品数量为: {{undefinedCount}}<span ng-show="platformCount > 0">，其中有{{platformCount}}个可点击：<a ui-sref="platSkuImport">从云平台中批量导入</a></span>
+      </td>
+
+    </tr>
+  </table>
+
+<!--  <div>
+    <table class="titleBar upLoadFile-list ">
+      <tr>
+        <td>
+
+          您有{{undefinedCount}}个商品不可识别
+          <span ng-show="platformCount > 0">，其中有{{platformCount}}个可点击：<a ui-sref="platSkuImport">从云平台中批量导入</a></span>
+        </td>
+        <td align="right" class="pull-right btn-import">
+          <div>
+            <button ng-class="{'btn Main':disabledImport == false,'btn Main forbidden':disabledImport == true}" has-permission="库存" ng-click="startImport()" ng-disabled="disabledImport" title="{{showDisabledTitleInfo}}">开始导入</button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>-->
+  <div class="hr"></div>
+  <div>
+    <table class="dtlBar upLoadFile-list">
+      <tr>
+        <td align="center">
+          <div>
+            <ul class="hd-tab-pill" hd-tab ng-model="tab1">
+              <li value="all" class="tab-confirm" ng-click="pickConfirmType('all')">全部({{totalCount}})</li>
+              <li value="normal" class="tab-confirm" ng-click="pickConfirmType('normal')">可识别({{normal}})</li>
+              <li value="undefined" class="tab-confirm" ng-click="pickConfirmType('undefined')">不可识别({{undefinedCount}})</li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="table-content">
+    <table class="listBar">
+      <thead>
+      <tr>
+        <th class="th">商品条码</th>
+        <th class="th">商品名称</th>
+        <th class="th">商品数量</th>
+        <th class="th">当前库存数量</th>
+        <th class="th">导入与当前库存数量差</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="tr" ng-repeat="goods in tableData track by $index">
+        <td class="td">{{goods.shopSkuBarcode}}</td>
+        <td class="td">{{goods.shopSkuName}}</td>
+        <td class="td right">{{goods.qty}}</td>
+        <td class="td right">{{goods.invQty}}</td>
+        <td class="td right">{{goods.profitQty}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <!--<div class="upLoadFile-list page-bar">-->
+    <!--<table style="width: 100%;">-->
+    <!--<tr>-->
+    <!--&lt;!&ndash; <td style="width:70px;">一共x页</td>-->
+    <!--<td style="width:105px;">现在是第y页</td>&ndash;&gt;-->
+    <!--<td style="width:120px;">当前显示1-20行</td>-->
+    <!--&lt;!&ndash;<td style="width:40%;"></td>&ndash;&gt;-->
+    <!--<td class="dpos-page">-->
+    <!--<ul class="pull-right dpos-pagenation-div">-->
+    <!--<li class="dpos-current-page dpos-page-div" ng-click="currentPage=1;pageGo(1)" ng-disabled="currentPage === 1"><span-->
+    <!--class="fa fa-angle-double-left"></span></li>-->
+    <!--<li class="dpos-current-page dpos-page-div" ng-click="pageFrom()" ng-disabled="currentPage === 1"><span class="fa fa-angle-left"></span></li>-->
+    <!--<li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==1}" ng-click="currentPage=1;pageGo(1)"> 1</li>-->
+    <!--<li class="dpos-page-div" ng-show="page>=3"> ...</li>-->
+    <!--<li class="dpos-page-div" ng-show="pageCount>2" ng-class="{'dpos-clicked-page':currentPage==page}" ng-click="currentPage=page;pageGo(page)">-->
+    <!--{{page}}-->
+    <!--</li>-->
+    <!--<li class="dpos-page-div" ng-show="pageCount>3" ng-class="{'dpos-clicked-page':currentPage==page+1}" ng-click="currentPage=page+1;pageGo(page+1)">-->
+    <!--{{page+1}}-->
+    <!--</li>-->
+    <!--<li class="dpos-page-div" ng-show="pageCount>4" ng-class="{'dpos-clicked-page':currentPage==page+2}" ng-click="currentPage=page+2;pageGo(page+2)">-->
+    <!--{{page+2}}-->
+    <!--</li>-->
+    <!--<li class="dpos-page-div" ng-show="pageCount>5" ng-class="{'dpos-clicked-page':currentPage==page+3}" ng-click="currentPage=page+3;pageGo(page+3)">-->
+    <!--{{page+3}}-->
+    <!--</li>-->
+    <!--<li class="dpos-page-div" ng-show="page+3<pageCount-1"> ...</li>-->
+    <!--<li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==pageCount}" ng-show="pageCount>1"-->
+    <!--ng-click="currentPage=pageCount;pageGo(pageCount)">{{pageCount}}-->
+    <!--</li>-->
+    <!--<li class="dpos-current-page dpos-page-div" ng-click="pageTo(page+1)"><span class="fa fa-angle-right"></span></li>-->
+    <!--<li class="dpos-current-page dpos-page-div" ng-click="currentPage=pageCount;pageGo(pageCount)"><span class="fa fa-angle-double-right"></span></li>-->
+    <!--</ul>-->
+    <!--</td>-->
+    <!--</tr>-->
+    <!--</table>-->
+    <!--</div>-->
+    <div class="page-bar">
+      <table style="width: 100%;">
+        <tr>
+          <!-- <td style="width:70px;">一共x页</td>
+           <td style="width:105px;">现在是第y页</td>-->
+          <td ng-show="total>0">当前显示{{(currentPage-1)*pageSize+1}}-{{(total-currentPage*pageSize)>0?currentPage*pageSize:total}}行,共有{{total}}行</td>
+          <!--<td style="width:40%;"></td>-->
+          <td class="dpos-page">
+            <ul class="pull-right dpos-pagenation-div">
+              <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="currentPage=1;pageGo(1)" ng-disabled="currentPage === 1"><span
+                class="fa fa-angle-double-left"></span></li>
+              <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="pageFrom()" ng-disabled="currentPage === 1"><span
+                class="fa fa-angle-left"></span></li>
+              <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==1}" ng-click="currentPage=1;pageGo(1)"> 1</li>
+              <li class="dpos-page-div" ng-show="page>=3"> ...</li>
+              <li class="dpos-page-div" ng-show="pageCount>2" ng-class="{'dpos-clicked-page':currentPage==page}" ng-click="currentPage=page;pageGo(page)">
+                {{page}}
+              </li>
+              <li class="dpos-page-div" ng-show="pageCount>3" ng-class="{'dpos-clicked-page':currentPage==page+1}" ng-click="currentPage=page+1;pageGo(page+1)">
+                {{page+1}}
+              </li>
+              <li class="dpos-page-div" ng-show="pageCount>4" ng-class="{'dpos-clicked-page':currentPage==page+2}" ng-click="currentPage=page+2;pageGo(page+2)">
+                {{page+2}}
+              </li>
+              <li class="dpos-page-div" ng-show="pageCount>5" ng-class="{'dpos-clicked-page':currentPage==page+3}" ng-click="currentPage=page+3;pageGo(page+3)">
+                {{page+3}}
+              </li>
+              <li class="dpos-page-div" ng-show="page+3<pageCount-1"> ...</li>
+              <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==pageCount}" ng-show="pageCount>1"
+                  ng-click="currentPage=pageCount;pageGo(pageCount)">{{pageCount}}
+              </li>
+              <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div" ng-click="pageTo(page+1)"><span class="fa fa-angle-right"></span></li>
+              <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div" ng-click="currentPage=pageCount;pageGo(pageCount)"><span
+                class="fa fa-angle-double-right"></span></li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<hd-dialog id="successDialog">
+  <div class="hd-dialog-close" hd-dialog-close><i class="iconfont icon-fou"></i></div>
+  <div class="hd-dialog-content successDialog">
+    <div class="successInfo"><i class="iconfont icon-shi"></i></div>
+    <div class="successInfoTitle">导入成功！</div>
+    <div class="successInfoDesc">导入商品品相:{{normal}}</div>
+  </div>
+  <div class="hd-dialog-button">
+    <button class="btn Main" ui-sref="checkBillUpload">继续导入</button>
+    <button class="btn Soft"  ng-click="trunTocheckBillDtl()">盘点单详情</button>
+  </div>
+</hd-dialog>
+
+<hd-dialog id="errorDialog">
+  <div class="hd-dialog-close" hd-dialog-close><i class="iconfont icon-fou"></i></div>
+  <div class="hd-dialog-content errorDialog">
+    <div class="errorInfo"><i class="iconfont icon-fou"></i></div>
+    <div class="errorInfoTitle" >导入失败！</div>
+  </div>
+  <div class="hd-dialog-button">
+    <button class="btn Main" ng-click="startImportAgain()">再试一次</button>
+    <button class="btn Soft" ui-sref="checkBillUpload">返回重选</button>
+  </div>
+</hd-dialog>
+
+<hd-dialog id="startImport">
+  <div class="hd-dialog-close" ng-click="closestartImport()"><i class="iconfont icon-fou"></i></div>
+  <div class="hd-dialog-content startImportContent">
+    <div class="upLoadFile-content">不可识别商品品相：{{undefinedCount}}</div>
+    <div class="modal-content-title">系统将会导入可识别的商品 ( 品相：{{normal}})</div>
+    <div class="modal-content-title">是否确认更新库存？</div>
+  </div>
+  <div class="hd-dialog-button">
+    <button class="btn Main" ng-click="importFile()">确认</button>
+    <button class="btn Soft" ng-click="closestartImport()">取消</button>
+  </div>
+</hd-dialog>
+
+<hd-dialog id="cleanStock">
+  <div class="hd-dialog-close" ng-click="closecleanStock()"><i class="iconfont icon-fou"></i></div>
+  <div class="hd-dialog-content cleanStockDialog">
+    <div class="modal-content-title modal-content-warn">清空库存后所有商品的<span class="modal-content-warn-confirm">账面库存均变为零</span>，且操作<span class="modal-content-danger">不可逆</span></div>
+    <div class="modal-content-title modal-content-warn">是否确认清空库存？</div>
+  </div>
+  <div class="hd-dialog-button">
+    <button class="btn Main" ng-click="cleanAllStock()">确认</button>
+    <button class="btn Soft" ng-click="closecleanStock()">取消</button>
+  </div>
+</hd-dialog>

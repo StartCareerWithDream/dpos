@@ -1,0 +1,77 @@
+<div class="mainContent">
+    <table class="dtlBar">
+        <tr>
+            <td width="10%">时间从:</td>
+            <td width="40%">
+                <hd-date-input ng-model="dataManage.request.query.filters[0].value[0]" style="width: 140px"></hd-date-input>
+                -
+                <hd-date-input ng-model="dataManage.request.query.filters[0].value[1]" style="width: 140px"></hd-date-input>
+            </td>
+            <td width="10%">最近:</td>
+            <td width="40%">
+                <ul class="hd-tab-pill">
+                    <li ng-click="changeStartTime('sevenDay')" ng-class="{'focus':dataManage.other.index=='sevenDay'}">7天</li>
+                    <li ng-click="changeStartTime('threeMonth')" ng-class="{'focus':dataManage.other.index=='threeMonth'}">1个月</li>
+                    <li ng-click="changeStartTime('sixMonth')" ng-class="{'focus':dataManage.other.index=='sixMonth'}">3个月</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+
+            <td width="10%">标签:</td>
+            <td width="40%">
+                <div hdMultiple="periodAnalysisMult" needSearch maxCount="3" style="width: 293px">
+                    <select ><option>最多选择3个标签</option></select>
+                    <div hdMultipleContent>
+                        <div hdMultipleList>
+                            <table>
+                                <tr ng-repeat="item in dataManage.response.shopSkuTags" itemObj="{{item}}">
+                                    <td><div class="hdCheck"><input type="checkbox"><label></label></div></td>
+                                    <td text>{{item.tag}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div hdMultipleCtrl>
+                           <a checkNone>清除</a>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td width="10%"></td>
+            <td width="40%" style="text-align: right">
+                <button btnSearch=s1 ng-click="search()" class="mainBtn s2-btn"><i class="iconfont icon-fangdajing"></i>查询
+                </button>
+                <button btnSearch=s2 ng-click="reset()" class="mainBtn s2-btn">重置</button>
+            </td>
+        </tr>
+    </table>
+
+    <div style="/*overflow-y: auto*/">
+        <table class="listBar" style="/*min-width:900px;overflow-x: auto*/" >
+            <tr>
+                <th class="th" style="width: 95px"rowspan="2">零售时段</th>
+                <th class="th" style="width: 90px" rowspan="2">零售总额</th>
+                <!--<th class="th" width="100px">零售数量</th>-->
+                <th class="th" style="width: 60px"rowspan="2">客单价</th>
+                <th class="th" style="width: 60px"rowspan="2">交易笔数</th>
+                <th class="th" style="width: 90px"rowspan="2">零售毛利额</th>
+                <th class="th" style="width: 60px"rowspan="2">毛利率</th>
+                <th class="th" style="width: 160px; height:20px" colspan="2" ng-repeat="item in dataManage.request.params.tagNames track by $index">{{item}}</th>
+            </tr>
+            <tr >
+                <th class="th" style="width: 80px; height:20px" ng-repeat="item in dataManage.other.periodTh track by $index">{{item}}</th>
+            </tr>
+            <tr class="tr" ng-repeat="item in dataManage.response.periodAnalysisList track by $index">
+                <td class="td center">{{item.date}}</td>
+                <td class="td right">{{item.saleAmount | currency:'' }}</td>
+                <!--<td class="td right">{{item.wholesaleCount}}</td>-->
+                <td class="td right">{{(item.saleCount==0?0:item.saleAmount / item.saleCount) | currency:''}}</td>
+                <td class="td right">{{item.saleCount}}</td>
+                <td class="td right">{{item.saleGrossAmount | currency:''}}</td>
+                <td class="td right">{{(item.saleAmount==0?0:(item.saleGrossAmount / item.saleAmount)*100) | currency:''}}%</td>
+                <td class="td right" ng-repeat="item in dataManage.other.periodTd[$index] track by $index">{{item}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,176 @@
+<div hdInputSearch="hdInputSearch1">
+  <table>
+    <!--<tr hdInputSearchExFun>-->
+      <!--<td colspan="100">其他的自定义功能, 如新增, 可以没有</td>-->
+    <!--</tr>-->
+    <tr ng-repeat="item in dataManage.response.query2Data" itemObj="{{item}}">
+      <td>{{item.name}}</td>
+    </tr>
+  </table>
+</div>
+<hd-dialog id="favoriteModDialog" >
+  <div class="hd-dialog-title"></div>
+  <div class="hd-dialog-close" hd-dialog-close><i class="iconfont icon-fou"></i></div>
+  <div class="hd-dialog-content" style="height:560px;max-height:560px;">
+    <div class="saleAddFavoriteModUl">
+      <div class="saleAddFavoriteModTotal"><span class="f24">收藏夹</span><span class="pl10">{{dataManage.response.totalCount}}/{{dataManage.response.favProdLimit}}</span></div>
+      <button btnMain="m1" class="saleAddFavoriteModAddBtn" ng-click="addFavorite()">新增分类</button>
+    </div>
+    <div class="p1020" ng-show="dataManage.response.skufavcategoryList.length!=0">
+      <div class="saleAddFavoriteModEditBtn">
+        <ul hdTab_1 class="saleFavoriteTab" style="white-space: normal;!important;"><!--如一个界面中有多个同类型标签，则需要把name="tab1"修改其中的name-->
+          <li id="hhhh{{$index}}" tabindex="1" ng-blur="closeTips()" style="position: relative;height:inherit;" name="tab4" ng-click="onClickTabMod(tab)" ng-repeat="tab in dataManage.response.skufavcategoryList"  ng-class="{'tbfocus':tab==isActiveTabMod}">
+            <span style="display:inline-block;vertical-align:3px;">{{tab.categoryName}}</span>
+            <span ng-show="tab==isActiveTabMod" class="iconfont saleAddFavoriteModUpDown" ng-class="{'icon-xiangshang':favoriteModEditSelfFlag,'icon-xiangxia':!favoriteModEditSelfFlag}" ng-click="favoriteModEditSelf($event,$index)"></span>
+            <div class="saleFavoriteModP"  style="position: absolute;top: 32px;left: 0;background: #fff;border: 1px solid #ccc;color: #000;z-index:10;" ng-show="tab==isActiveTabMod && !favoriteModEditSelfFlag">
+              <span class="favoriteModBtnAll" ng-click="removeFavorite(tab,$event)">删除</span>
+              <span class="favoriteModBtnAll"  ng-click="editFavorite(tab,$event)">编辑</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="p10">
+        <div>
+          <span class="iconfont icon-add"></span>添加商品
+          <input style="height:25px;width:320px;" class="saleTopCenterInput" ng-model="dataManage.request.query2.query" hdInputSearch="hdInputSearch1" title="条码 自编码 商品名称 拼音">
+        </div>
+        <div class="ptb10">
+          <!--复选框-->
+          <hd-checkbox ng-model="config.checkAll" ng-change="selectAll()" note="全选"></hd-checkbox>
+          <span class="pl10">对选中的商品（{{config.checked.length}}）</span>
+          <button btnLink ng-disabled="config.checked.length==0" class="saleAddFavoriteModAll" ng-click="favoriteModDelteAll()"> <span class="iconfont icon-shanchu"></span> 批量删除</button>
+          <button btnLink ng-disabled="config.checked.length==0" class="saleAddFavoriteModAll" ng-click="favoriteModMoveAll()"> <span class="iconfont icon-bijiao"></span> 批量移动</button>
+          <span class="saleAddFavoriteModAddBtn"><i class="iconfont icon-jinggao btnRed"></i>您可以直接拖拽商品设置默认排序</span>
+        </div>
+      </div>
+      <div class="sku-box positionStatic">
+        <div class="item_content gridly" id="gridly" style="height:300px;">
+          <div class="draggle-item brick" id="{{item.shopSku}}" ng-repeat="item in tabListMod">
+            <div calss="saleAddFavoriteModSku">
+              <p style="text-align: left;margin:0;">
+                <!--复选框-->
+                <hd-checkbox class="mt3l5" ng-model="item.checked" ng-change="selectOne()"></hd-checkbox>
+              </p>
+              <p class="saleAddFavoriteModCheck">{{item.name}}</p>
+            </div>
+            <div class="favoriteModPrice"><span>¥{{item.salePrice|number:2}}</span></div>
+            <div class="favoriteModBox">
+              <button btnLink class="iconfont icon-bianji favoriteModBtn" ng-click="favoriteModEdit(item.shopSku)"></button>
+              <button btnLink class="iconfont icon-bijiao favoriteModBtn" ng-disabled="dataManage.response.skufavcategoryList.length<=1" ng-click="favoriteModMove($index)"></button>
+              <button btnLink class="iconfont icon-shanchu favoriteModBtn" ng-click="favoriteModDelete(item.id)"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</hd-dialog>
+<hd-dialog id="newFavoriteDialog">
+    <div class="hd-dialog-title">新增分类</div>
+    <div class="hd-dialog-close" hd-dialog-close><i class="iconfont icon-fou"></i></div>
+    <div class="hd-dialog-content" >
+      <div class="detailBar">
+        <div class="detailBox">
+          <div class="detailBox-single">
+            <table class="table">
+              <tr>
+                <td class="text"><span class="red">*</span>分类名称：</td>
+                <td class="component">
+                  <span id="addfavorite">
+                    <input class="saleTopCenterInput" ng-model="dataManage.request.addfavoriteparams.name" hdMust="分类名称"  maxlength="6" title="输入分类名称">
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hd-dialog-button">
+      <button btnMain="m3" hd-dialog-close>取消</button>
+      <button btnMain="m1" ng-click="dialogSubmit()">确定</button>
+    </div>
+</hd-dialog>
+<hd-dialog id="editFavoriteModDialog">
+  <div class="hd-dialog-title">编辑分类</div>
+  <div class="hd-dialog-close" hd-dialog-close><i class="iconfont icon-fou"></i></div>
+  <div class="hd-dialog-content">
+    <div class="detailBar">
+      <div class="detailBox">
+        <div class="detailBox-single">
+          <table class="table">
+            <tr>
+              <td class="text">收藏夹名称：</td>
+              <td class="component">
+                  <span id="editfavorite">
+                    <input class="saleTopCenterInput" ng-model="dataManage.request.editfavoriteparams.categoryName" hdMust="收藏夹名称" maxlength="6" title="输入分类名称">
+                  </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hd-dialog-button">
+    <button btnMain="m3" hd-dialog-close>取消</button>
+    <button btnMain="m1" ng-click="editFavoriteModDialogSave()">确定</button>
+  </div>
+</hd-dialog>
+<hd-dialog id="editFavoriteDialog">
+  <div class="hd-dialog-title">编辑商品</div>
+  <div class="hd-dialog-close" hd-dialog-close><i class="iconfont icon-fou"></i></div>
+  <div class="hd-dialog-content" >
+      <div class="detailBar">
+        <div class="detailBox">
+          <div class="detailBox-single">
+            <table class="table">
+              <tr>
+                <td class="text">商品简称：</td>
+                <td class="component">
+                  <input class="saleTopCenterInput" name="shortName" ng-model="dataManage.response.favoritegetskuData.shortName" maxlength="12">
+                </td>
+              </tr>
+              <tr>
+                <td class="text"></td>
+                <td class="component">
+                  <a class="favoriteReset" ng-click="favoriteModNameReset()">使用默认名称</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="hd-dialog-button">
+    <button btnMain="m3" hd-dialog-close>取消</button>
+   <button btnMain="m1" ng-click="favoriteModEditSave()">确定</button>
+  </div>
+</hd-dialog>
+<hd-dialog id="moveFavoriteDialog">
+  <div class="hd-dialog-title">选择分组</div>
+  <div class="hd-dialog-close" hd-dialog-close><i class="iconfont icon-fou"></i></div>
+  <div class="hd-dialog-content" >
+    <div class="detailBar">
+      <div class="detailBox p10">
+        <div>为商品重新选择分组</div>
+        <div>
+          <span class="favoriteModMoveSKu" ng-repeat="tab in dataManage.response.skufavcategoryList">
+            <!--复选框-->
+            <div class="hdCheck" ng-show="tab==isActiveTabMod" ng-disabled="true">
+              <input type="checkbox" disabled ng-checked="true" id="sku{{$index}}">
+              <label for="sku{{$index}}"></label>
+            </div>
+            <!--复选框-->
+            <hd-checkbox ng-show="tab!=isActiveTabMod" ng-model="tab.checked" ng-change="favoriteModChange(tab)" note="{{tab.categoryName}}"></hd-checkbox>
+          </span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="hd-dialog-button">
+    <button btnMain="m3" hd-dialog-close>取消</button>
+    <button btnMain="m1" ng-click="favoriteModMoveSave()">确定</button>
+  </div>
+</hd-dialog>

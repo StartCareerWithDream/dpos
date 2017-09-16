@@ -1,0 +1,18 @@
+<div class="saleTop">
+  <div class="saleTopLeft">
+    <span class="iconfont icon-xiangzuo"></span>
+    <span class="plr10" ng-show="$parent.stateFlag">123456-1123</span>
+    <span class="plr10" ng-show="!$parent.stateFlag">123456-010</span>
+    <a class="saleNumber" ng-show="$parent.stateFlag" ng-click="stateChange()">加密</a>
+    <a class="saleNumber" ng-show="!$parent.stateFlag" ng-click="stateChange()">正常</a>
+    <span class="iconfont icon-xiangyou"></span>
+  </div>
+  <div class="saleTopCenter">
+    <em class="saleTopCenterMember">会员 F6</em>
+    <input style="width:183px;" class="saleTopCenterInput" ng-model="member.memberInfo"  hdInputSearch="hdInputSearch1" title="输入号码、名称" ng-blur="memberShow()">
+  </div>
+  <div class="saleTopRight">
+    <button btnMain="m1" ng-click="pendingShow()" >挂单 F8</button>
+    <span class="iconfont saleAddTopBtn" ng-class="{true:'icon-circleright', false:'icon-circleleft'}[$parent.backLeftOrRight]" ng-click="backTop()"></span>
+  </div>
+</div>

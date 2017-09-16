@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "id": "faa456e1-a2bb-418e-8472-6438bb6d734b",
+      "version": 0,
+      "created": null,
+      "creator": null,
+      "lastModified": null,
+      "lastModifier": null,
+      "shop": "s02c0302",
+      "checkBill": "6bc91c9c-7431-4c39-bc74-7942d91ba959",
+      "lineNo": 6,
+      "shopSku": "0b809626-6bc1-422e-ad73-e08a9673b611",
+      "shopSkuName": "陆永杰饼干",
+      "shopSkuBarcode": "690451780271",
+      "qty": 600,
+      "invQty": 600,
+      "profitQty": 0,
+      "costAmount": 1,
+      "saleAmount": 2
+    },
+    {
+      "id": "faa456e1-a2bb-418e-8472-6438bb6d734b",
+      "version": 0,
+      "created": null,
+      "creator": null,
+      "lastModified": null,
+      "lastModifier": null,
+      "shop": "s02c0302",
+      "checkBill": "6bc91c9c-7431-4c39-bc74-7942d91ba959",
+      "lineNo": 6,
+      "shopSku": "0b809626-6bc1-422e-ad73-e08a9673b611",
+      "shopSkuName": "宋坚果",
+      "shopSkuBarcode": "690451780272",
+      "qty": 1600,
+      "invQty": 1600,
+      "profitQty": 3,
+      "costAmount": 4,
+      "saleAmount": 5
+    }
+  ],
+  "success": true,
+  "message": null,
+  "fields": null,
+  "total": 2
+}

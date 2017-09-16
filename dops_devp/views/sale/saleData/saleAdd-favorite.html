@@ -1,0 +1,41 @@
+<div class="listBar">
+  <div class="tableCon">
+    <div class="saleAddFavoriteDiv">
+      <div class="ptb10"  ng-show="dataManage.response.skufavcategoryList.length!=0">
+        <!--向左-->
+        <span class="iconfont icon-xiangzuo saleAddFavoriteBtn"  ng-click="leftBtn()"></span>
+        <div id="overrun">
+          <ul hdTab_1 class="saleFavoriteTab" id="run"><!--如一个界面中有多个同类型标签，则需要把name="tab1"修改其中的name-->
+            <li name="tab1" ng-click="onClickTab(tab.categoryName)" ng-repeat="tab in $parent.dataManage.response.skufavcategoryList" ng-class="{'tbfocus':tab.categoryName==$parent.isActiveTab}">{{tab.categoryName}}</li>
+          </ul>
+        </div>
+        <span class="iconfont icon-xiangyou saleAddFavoriteBtn" ng-click="rightBtn()"></span>
+      </div>
+    </div>
+    <div class="tool">
+      <!-- 标签1 -->
+      排序:
+      <ul hdTab_1 class="pl0"><!--如一个界面中有多个同类型标签，则需要把name="tab1"修改其中的name-->
+        <li name="tab2"  style="line-height:23px;" onclick="$('li[name=tab2]').removeClass('tbfocus'); $(this).addClass('tbfocus')" ng-click="title='';desc=0;" class="tbfocus">默认</li>
+        <li name="tab2" style="line-height:21px;" onclick="$('li[name=tab2]').removeClass('tbfocus'); $(this).addClass('tbfocus')" ng-click="title='salePrice';desc=!desc;" >价格<span class="iconfont" ng-class={'icon-shengxu':desc==1&&title=='salePrice','icon-jiangxu':desc==0&&title=='salePrice','icon-morenpaixu':title!='salePrice'}></span></li>
+        <li name="tab2" style="line-height:21px;" onclick="$('li[name=tab2]').removeClass('tbfocus'); $(this).addClass('tbfocus')" ng-click="title='name';desc=!desc">名称<span class="iconfont" ng-class={'icon-shengxu':desc==1&&title=='name','icon-jiangxu':desc==0&&title=='name','icon-morenpaixu':title!='name'}></span></li>
+      </ul>
+      <span class="iconfont icon-shezhi saleAddFavortieSetBtn" ng-click="favoriteModShow()"></span>
+    </div>
+    <div class="sku-box pTop">
+      <div ng-show="$parent.tabList.length==0">
+        <div class="favoriteImgDiv">
+          <span class="favoriteImg"></span>
+        </div>
+        <p class="saleAddFavoriteTips">收藏常用或无码商品<br>在销售时可以快速录入哦</p>
+      </div>
+      <div class="saleAddFavoriteContent"  ng-show="$parent.tabList.length!=0">
+        <div class="sku-item" ng-repeat="item in $parent.tabList | orderBy : title : desc" ng-click="pushSku($index)">
+          <div class="skuNameDiv">{{item.name}}</div>
+          <div class="skuSalePriceDiv"><span>¥{{item.salePrice|number:2}}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

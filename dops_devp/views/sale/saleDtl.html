@@ -1,0 +1,258 @@
+<table hdView style="width: auto">
+  <tr hdHead>
+    <td><span hdHeadLine>
+      <!-- 标题*开始-->
+      销售查询>详情
+      <!-- 标题*结束-->
+      </span></td>
+    <td>
+      <!-- 按钮*开始-->
+      <!-- 按钮*开始-->
+    </td>
+  </tr>
+  <tr hdContaner>
+    <td colspan="2">
+      <div hdContanerDiv>
+        <!-- 内容*开始-->
+        <div class="partBar">
+          <div class="partBox">
+            <div class="partLeft" style="width: 75%;">
+              <div class="partDiv">
+                 <!--左侧内容开始-->
+                <span>
+                  <span ng-show="turnScreet">{{dataManage.response.goodsList.encryptNumber}}</span>
+                  <span ng-show="turnNormal">{{dataManage.response.goodsList.number}}</span>
+                  <span class="blue" ng-show="turnScreet" ng-click="lock()" style="cursor: pointer">加密</span>
+                  <span class="blue" ng-show="turnNormal" ng-click="open()" style="cursor: pointer">正常</span>
+                  <span class="red">会员：</span>
+                  <span>{{dataManage.response.goodsList.creator.name}}</span>
+                </span>
+                <span>
+                  <ul style="float: right">
+                    <li>
+                      <span ng-click="goUpDetail()" class="iconfont saleAddFavoriteModUpDown icon-xiangshang" style="cursor: pointer"></span>
+                      <span style="cursor: pointer">&nbsp;上一单</span>
+                    </li>
+                    <li>
+                      <span ng-click="goDownDetail()" class="iconfont saleAddFavoriteModUpDown icon-xiangxia" style="cursor: pointer"></span>
+                      <span style="cursor: pointer">&nbsp;下一单</span>
+                    </li>
+                  </ul>
+                  <button btnMain="m3" ng-click="goSaleReturn()" style="float: right;margin-right: 10px;margin-top: 8px">退货</button>
+                  <button btnMain="m2" ng-click="goSaleDtlEdit()" style="float: right;margin-right: 10px;margin-top: 8px">编辑</button>
+                  <button btnMain="m1" ng-click="goSaleAdd()" style="float: right;margin-right: 10px;margin-top: 8px">新增</button>
+                </span>
+
+                <div class="listBar" style="margin-top: 20px">
+                  <div class="tableCon">
+                    <div class="tableDiv">
+                      <!-- 如果需要table的横向滚动，则修改设置table的min-width，具体值应为td的宽度总和-->
+                      <table class="table" cellpadding="1" cellspacing="1" style="min-width:100px;margin-top: 30px">
+                        <colgroup>
+                          <!--必须自定义td宽度-->
+                          <col style="width: auto">
+                          <col style="width: 120px">
+                          <col style="width: 100px">
+                          <col style="width: 100px">
+                          <col style="width: 100px">
+                          <col style="width: 100px">
+                        </colgroup>
+                        <tr>
+                          <td class="textCenter" nowrap="true">#</td>
+                          <td nowrap="true">商品名称</td>
+                          <td class="textRight" nowrap="true">单位</td>
+                          <td nowrap="true">单价</td>
+                          <td nowrap="true" class="textCenter">数量</td>
+                          <td nowrap="true" class="textCenter">金额</td>
+                        </tr>
+                        <tr ng-repeat="item in dataManage.response.goodsList.lines track by $index">
+                          <td class="textCenter">{{item.line}}</td>
+                          <td>
+                            {{item.sku.code}}<br>
+                            <span class="blue" style="cursor: pointer" ng-click="goodsEdit($index)">{{item.sku.name}}</span>
+                          </td>
+                          <td class="textRight">{{item.skuMunit}}</td>
+                          <td>{{item.price | number:2}}</td>
+                          <td class="textCenter">{{item.qty}}</td>
+                          <td class="textCenter">{{item.amount | number:2}}</td>
+                        </tr>
+                        <tr sum>
+                          <td class="textCenter">
+                            <button btnMain="m1" ng-click="print()">打印小票</button>
+                          </td>
+                          <td></td>
+                          <td class="textRight"></td>
+                          <td>商品数量:</td>
+                          <td>{{qtySum}}件</td>
+                          <td class="textCenter">{{amountSum | number:2}}</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 左侧内容结束-->
+              </div>
+            </div>
+
+
+            <div class="partRight">
+              <div class="partDiv">
+                <!-- 右侧内容开始-->
+                <ul hdTab_3><!--如一个界面中有多个同类型标签，则需要把name="tab3"修改其中的name-->
+                  <li name="tab3" onclick="$('li[name=tab3]').removeClass('tbfocus'); $(this).addClass('tbfocus')" value="today" class="tbfocus"
+                      ng-click="checkMessage()">结算信息
+                  </li>
+                  <li name="tab3" onclick="$('li[name=tab3]').removeClass('tbfocus'); $(this).addClass('tbfocus')" value="week" ng-click="checkModify()">创建与修改
+                  </li>
+                </ul>
+              <div ng-show="showOrder">
+                <div class="detailBox">
+                  <div class="detailBox-single">
+                    <table class="table">
+                      <tr>
+                        <td class="text">合计：</td>
+                        <td class="component">{{dataManage.response.goodsList.amount}}</td>
+                      </tr>
+                      <tr>
+                        <td class="text">优惠：</td>
+                        <td class="component">{{dataManage.response.goodsList.discountAmount}}</td>
+                      </tr>
+                      <tr>
+                        <td class="text">应收：</td>
+                        <td class="component">{{receivable}}</td>
+                      </tr>
+                      <tr>
+                        <td class="text">实收：</td>
+                        <td class="component">{{receipt}}</td>
+                      </tr>
+                      <tr>
+                        <td class="text">找零：</td>
+                        <td class="component">{{dataManage.response.goodsList.changeAmount}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <ul hdTab_3><!--如一个界面中有多个同类型标签，则需要把name="tab3"修改其中的name-->
+                  <li name="tab3" value="today">支付方式</li>
+                </ul>
+                <div class="detailBox">
+                  <div class="detailBox-single">
+                    <table class="table">
+                      <tr ng-repeat="item in dataManage.response.goodsList.payments track by $index">
+                        <td class="text" ng-show="item.paidAmount!='0'" >{{item.payChannel=='CASH'?'现金':item.payChannel=='CREDIT'?'赊账':'其他'}}</td>
+                        <td class="component">{{item.paidAmount}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div ng-show="showCreator">
+                <div class="detailBox">
+                  <div class="detailBox-single">
+                    <table class="table">
+                      <tr>
+                        <td class="text" style="width: 25%">最近修改</td>
+                        <td class="component">{{dataManage.response.goodsList.lastModified}}</td>
+                      </tr>
+                      <tr>
+                        <td class="text">操作人</td>
+                        <td class="component">{{dataManage.response.goodsList.lastModifier.name}}</td>
+                      </tr>
+                      <tr>
+                        <td class="text">创建于</td>
+                        <td class="component">{{dataManage.response.goodsList.created}}</td>
+                      </tr>
+                      <tr>
+                        <td class="text">操作人</td>
+                        <td class="component">{{dataManage.response.goodsList.creator.name}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+                <!-- 右侧内容结束-->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 内容*结束-->
+      </div>
+    </td>
+  </tr>
+</table>
+
+<hd-dialog id="goodsEditMessage">
+  <div class="hd-dialog-title">商品信息</div>
+  <div class="hd-dialog-close" hd-dialog-close><i class="iconfont icon-fou"></i></div>
+  <div class="hd-dialog-content">
+
+    <div class="detailBox">
+      <div class="detailBox-second">
+        <table class="table">
+          <tr>
+            <td class="text"><span class="red">*</span>商品名称</td>
+            <td class="component">{{dataManage.response.goodsMessageList.name}}</td>
+          </tr>
+          <tr>
+            <td class="text">简称</td>
+            <td class="component"><input maxlength="16" ng-model="dataManage.response.goodsMessageList.shortName"></td>
+            <td class="text">条码</td>
+            <td class="component">{{dataManage.response.goodsMessageList.barcode}}</td>
+
+          </tr>
+          <tr>
+            <td class="text">最新进价</td>
+            <td class="component"><input maxlength="11" ng-model="dataManage.response.goodsMessageList.lastInPrice"></td>
+            <td class="text">售价</td>
+            <td class="component"><input maxlength="11" ng-model="dataManage.response.goodsMessageList.salePrice"></td>
+
+          </tr>
+          <tr>
+            <td class="text">成本价</td>
+            <td class="component"><input maxlength="11" ng-model="dataManage.response.goodsMessageList.costPrice"></td>
+            <td class="text">规格</td>
+            <td class="component">{{dataManage.response.goodsMessageList.spec}}</td>
+          </tr>
+          <tr>
+            <td class="text">计量单位</td>
+            <td class="component">{{dataManage.response.goodsMessageList.munit}}</td>
+            <td class="text">自编码</td>
+            <td class="component"><input maxlength="13" ng-model="dataManage.response.goodsMessageList.code"></td>
+          </tr>
+          <tr>
+            <td class="text">标签</td>
+            <td class="component">
+              <div hdMultiple="orderWayTree" needSearch>
+                <select><option></option></select>
+                <div hdMultipleContent>
+                  <div hdMultipleList>
+                    <table>
+                      <tr ng-repeat="item in payWayList" itemObj="{{item}}">
+                        <td><div class="hdCheck"><input type="checkbox"><label></label></div></td>
+                        <td text>{{item.name}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="text">备注</td>
+            <td class="component">
+              <textarea maxlength="256" ng-model="dataManage.response.goodsMessageList.remark"></textarea>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+  <div class="hd-dialog-button">
+    <button btnMain="m1" ng-click="dialogSubmit()">保存</button>
+  </div>
+</hd-dialog>
+

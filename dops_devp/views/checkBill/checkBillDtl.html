@@ -1,0 +1,120 @@
+<div class="mainContent">
+  <table class="titleBar">
+    <tr>
+      <td class="td1">
+        盘点单:{{dataManage.response.dtl.number}}
+      </td>
+      <td class="td3">
+        <div class="btn-pick-singleBill">
+          <div>
+            <ul>
+              <li ng-click="goDetail(dataManage.response.summary.nextId)"
+                  ng-class="{'btn-pick-singleBill-forbidden':dataManage.response.summary.nextId?false:true}">
+                <span><i class="fa fa-angle-up"></i>  &nbsp;上一单</span>
+              </li>
+              <li ng-click="goDetail(dataManage.response.summary.prevId)"
+                  ng-class="{'btn-pick-singleBill-forbidden':dataManage.response.summary.prevId?false:true}">
+                <span><i class="fa fa-angle-down"></i>  &nbsp;下一单</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </td>
+      <td class="td2">
+        <button class="btn Main" has-permission="库存" ui-sref="checkBillUpload"><i class="fa fa-share"></i>导入盘点单</button>
+        <button class="btn Main"  ui-sref="checkBillList">返回盘点单列表</button>
+      </td>
+    </tr>
+  </table>
+  <div class="hr"></div>
+
+  <div class="headBar">
+    <div class="headBarText">概要</div>
+  </div>
+
+  <table class="dtlBar">
+    <tr>
+      <td width="12.33%">盈亏数量:</td>
+      <td width="21%">{{dataManage.response.dtl.profitQty}}</td>
+      <td width="12.33%">盈亏成本(¥):</td>
+      <td width="21%">{{dataManage.response.dtl.costAmount| currency:''}}</td>
+      <td width="12.33%" has-permission="进价查看">盈亏金额(¥):</td>
+      <td width="21%" has-permission="进价查看">{{dataManage.response.dtl.saleAmount| currency:''}}</td>
+    </tr>
+    <tr>
+      <td>生成时间:</td>
+      <td>{{dataManage.response.dtl.created}}</td>
+      <td>生成方式:</td>
+      <td>{{dataManage.response.dtl.createMethod}}</td>
+      <td>操作人员:</td>
+      <td>{{dataManage.response.dtl.creator}}</td>
+    </tr>
+    <tr>
+      <td>备注:</td>
+      <td colspan="5">{{dataManage.response.dtl.remark}}</td>
+    </tr>
+  </table>
+
+  <div>
+    <table class="listBar">
+      <tr>
+        <th class="th" width="35">行</th>
+        <th class="th">商品</th>
+        <th class="th">商品数量</th>
+        <th class="th">当前库存数</th>
+        <th class="th">盈亏数量</th>
+        <th class="th">盈亏成本</th>
+        <th class="th" has-permission="进价查看">盈亏金额</th>
+      </tr>
+
+      <tr class="tr" ng-repeat="item in dataManage.response.items">
+        <td class="td left">{{$index+1}}</td>
+        <td class="td">{{item.shopSkuName}}<br><span style="font-size: 12px">{{item.shopSkuBarcode}}</span></td>
+        <td class="td right">{{item.qty}}</td>
+        <td class="td right">{{item.invQty}}</td>
+        <td class="td right">{{item.profitQty}}</td>
+        <td class="td right">{{item.costAmount| currency:'￥'}}</td>
+        <td class="td right" has-permission="进价查看">{{item.saleAmount| currency:'￥'}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="page-bar">
+    <table style="width: 100%;">
+      <tr>
+        <!-- <td style="width:70px;">一共x页</td>
+         <td style="width:105px;">现在是第y页</td>-->
+        <td ng-show="total>0">当前显示{{(currentPage-1)*pageSize+1}}-{{(total-currentPage*pageSize)>0?currentPage*pageSize:total}}行,共有{{total}}行</td>
+        <!--<td style="width:40%;"></td>-->
+        <td class="dpos-page">
+          <ul class="pull-right dpos-pagenation-div">
+            <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="currentPage=1;pageGo(1)" ng-disabled="currentPage === 1"><span
+              class="fa fa-angle-double-left"></span></li>
+            <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="pageFrom()" ng-disabled="currentPage === 1"><span
+              class="fa fa-angle-left"></span></li>
+            <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==1}" ng-click="currentPage=1;pageGo(1)"> 1</li>
+            <li class="dpos-page-div" ng-show="page>=3"> ...</li>
+            <li class="dpos-page-div" ng-show="pageCount>2" ng-class="{'dpos-clicked-page':currentPage==page}" ng-click="currentPage=page;pageGo(page)">
+              {{page}}
+            </li>
+            <li class="dpos-page-div" ng-show="pageCount>3" ng-class="{'dpos-clicked-page':currentPage==page+1}" ng-click="currentPage=page+1;pageGo(page+1)">
+              {{page+1}}
+            </li>
+            <li class="dpos-page-div" ng-show="pageCount>4" ng-class="{'dpos-clicked-page':currentPage==page+2}" ng-click="currentPage=page+2;pageGo(page+2)">
+              {{page+2}}
+            </li>
+            <li class="dpos-page-div" ng-show="pageCount>5" ng-class="{'dpos-clicked-page':currentPage==page+3}" ng-click="currentPage=page+3;pageGo(page+3)">
+              {{page+3}}
+            </li>
+            <li class="dpos-page-div" ng-show="page+3<pageCount-1"> ...</li>
+            <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==pageCount}" ng-show="pageCount>1"
+                ng-click="currentPage=pageCount;pageGo(pageCount)">{{pageCount}}
+            </li>
+            <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div" ng-click="pageTo(page+1)"><span class="fa fa-angle-right"></span></li>
+            <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div" ng-click="currentPage=pageCount;pageGo(pageCount)"><span
+              class="fa fa-angle-double-right"></span></li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "id": "59658f4f-5ab5-4ac6-9ae5-082d21ca2477",
+      "version": 0,
+      "created": "2017-05-16 11:01:17",
+      "creator": {
+        "id": "18221201154",
+        "code": null,
+        "name": "<li>常山赵子龙</li>",
+        "newUcn": false
+      },
+      "lastModified": "2017-05-16 11:01:17",
+      "lastModifier": {
+        "id": "18221201154",
+        "code": null,
+        "name": "<li>常山赵子龙</li>",
+        "newUcn": false
+      },
+      "shop": "s02c0302",
+      "shopSku": "05468ecc-25e2-4087-b3fc-96e96f86b480",
+      "shopSkuName": "43",
+      "originalQty": 10,
+      "newQty": 5,
+      "reason": "",
+      "adjustMethod": "adjust",
+      "adjustMethodName": "损溢",
+      "costAmount": -40,
+      "saleAmount": -50
+    },
+    {
+      "id": "230cc2fd-9a2d-4a00-82ea-885ff46680e1",
+      "version": 0,
+      "created": "2017-05-16 11:00:00",
+      "creator": {
+        "id": "18221201154",
+        "code": null,
+        "name": "<li>常山赵子龙</li>",
+        "newUcn": false
+      },
+      "lastModified": "2017-05-16 11:00:00",
+      "lastModifier": {
+        "id": "18221201154",
+        "code": null,
+        "name": "<li>常山赵子龙</li>",
+        "newUcn": false
+      },
+      "shop": "s02c0302",
+      "shopSku": "05468ecc-25e2-4087-b3fc-96e96f86b480",
+      "shopSkuName": "43",
+      "originalQty": 0,
+      "newQty": 10,
+      "reason": "",
+      "adjustMethod": "adjust",
+      "adjustMethodName": "损溢",
+      "costAmount": 0,
+      "saleAmount": 0
+    }
+  ],
+  "success": true,
+  "message": null,
+  "fields": null,
+  "total": 2
+}

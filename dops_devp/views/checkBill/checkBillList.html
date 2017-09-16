@@ -1,0 +1,59 @@
+<div class="mainContent">
+  <table class="titleBar">
+    <tr>
+      <td class="td1">盘点单列表</td>
+      <td class="td2">
+        <button class="btn Main" has-permission="库存" ng-click="gotoCheckBillUpload()"><i class="fa fa-share"></i>导入盘点单</button>
+      </td>
+    </tr>
+  </table>
+  <div class="hr"></div>
+  <div>
+    <table class="listBar">
+      <tr>
+        <th class="th">单号<i class="fa fa-arrow-circle-up sortIcon" aria-hidden="true"></i></th>
+        <th class="th">生成时间<i class="fa fa-arrow-circle-down sortIcon" aria-hidden="true"></i></th>
+        <th class="th">生成方式</th>
+        <th class="th">操作人</th>
+        <th class="th">盈亏数量</th>
+        <th class="th">盈亏成本</th>
+        <th class="th" has-permission="进价查看">盈亏金额</th>
+      </tr>
+      <tr class="tr" ng-repeat="item in dataManage.response.items">
+        <td class="td center"><a ui-sref="checkBillDtl({id:item.id})"> {{item.number}} </a></td>
+        <td class="td center">{{item.created}}</td>
+        <td class="td">{{item.createMethod}}</td>
+        <td class="td">{{item.creator}}</td>
+        <td class="td right">{{item.profitQty}}</td>
+        <td class="td right">{{item.costAmount| currency:'￥'}}</td>
+        <td class="td right" has-permission="进价查看">{{item.saleAmount| currency:'￥'}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="page-bar">
+    <table style="width: 100%;">
+      <tr>
+        <td ng-show="total>0">当前显示{{(currentPage-1)*pageSize+1}}-{{(total-currentPage*pageSize)>0?currentPage*pageSize:total}}行,共有{{total}}行</td>
+        <td class="dpos-page">
+          <ul class="pull-right dpos-pagenation-div">
+            <li ng-hide="currentPage==1"  class="dpos-current-page dpos-page-div" ng-click="currentPage=1;pageGo(1)" ng-disabled="currentPage === 1"><span
+              class="fa fa-angle-double-left"></span></li>
+            <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="pageFrom()" ng-disabled="currentPage === 1"><span class="fa fa-angle-left"></span></li>
+            <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==1}" ng-click="currentPage=1;pageGo(1)"> 1</li>
+            <li class="dpos-page-div" ng-show="page>=3"> ...</li>
+            <li class="dpos-page-div" ng-show="pageCount>2" ng-class="{'dpos-clicked-page':currentPage==page}" ng-click="currentPage=page;pageGo(page)"> {{page}}</li>
+            <li class="dpos-page-div" ng-show="pageCount>3" ng-class="{'dpos-clicked-page':currentPage==page+1}" ng-click="currentPage=page+1;pageGo(page+1)"> {{page+1}}</li>
+            <li class="dpos-page-div" ng-show="pageCount>4" ng-class="{'dpos-clicked-page':currentPage==page+2}" ng-click="currentPage=page+2;pageGo(page+2)"> {{page+2}}</li>
+            <li class="dpos-page-div" ng-show="pageCount>5" ng-class="{'dpos-clicked-page':currentPage==page+3}" ng-click="currentPage=page+3;pageGo(page+3)"> {{page+3}}</li>
+            <li class="dpos-page-div" ng-show="page+3<pageCount-1"> ...</li>
+            <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==pageCount}" ng-show="pageCount>1" ng-click="currentPage=pageCount;pageGo(pageCount)">{{pageCount}}</li>
+            <li  ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div" ng-click="pageTo(page+1)"><span class="fa fa-angle-right"></span></li>
+            <li  ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div" ng-click="currentPage=pageCount;pageGo(pageCount)"><span class="fa fa-angle-double-right"></span></li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+

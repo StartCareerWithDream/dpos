@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>盘点单上传文件</title>
+  <style>
+    body{
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table{
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td{
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+    td:first-child{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.8-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=盘点单列表" target="_blank">盘点单上传文件</a>
+    </td>
+  </tr>
+
+  <th>操作</th>
+  <th>响应</th>
+  <tr>
+    <td >界面初始化</td>
+    <td>
+      判断页面操作权限，权限ID：“库存”<br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击“选择文件”按钮</td>
+    <td>
+      打开windows弹出框，供用户选择：“*.xls; *.xlsx”文件
+    </td>
+  </tr>
+
+  <tr>
+    <td>在windows框中点击确定后</td>
+    <td>
+      页面获得文件名<br>
+      调用上传文件接口<a href="../apiDefine/_%7Bshop%7D_checkBill_upload.js" target="_blank">/{shop}/checkBill/upload</a><br>
+      获得接口返回的 获得商品的重复记录（可能有） + 本次上传操作的“唯一ID” <br>
+      if 无商品的重复记录 then <br>
+      　路径跳转 <a href="checkBillImport.html" target="_self">盘点单导入</a>，带上参数“本次上传操作的唯一ID”， “文件名”<br>
+      if 有商品的重复记录 then <br>
+      　显示“商品重复记录”浮层。
+    </td>
+  </tr>
+
+  <tr>
+    <td>在“商品重复记录”浮层<br>点击“继续操作”</td>
+    <td>
+      路径跳转 <a href="checkBillImport.html" target="_self">盘点单导入</a>，带上参数“本次上传操作的唯一ID”， “文件名”<br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>在“商品重复记录”浮层<br>点击“取消”</td>
+    <td>
+      浮层关闭
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

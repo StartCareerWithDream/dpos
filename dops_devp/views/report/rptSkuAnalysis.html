@@ -1,0 +1,183 @@
+<div class="mainContent">
+    <table class="dtlBar">
+        <tr>
+            <td width="21%" colspan="6" style="text-align: center">
+                <ul hdTab_1 style="padding-left: 0"><!--如一个界面中有多个同类型标签，则需要把name="tab1"修改其中的name-->
+                    <li name="tab4" onclick="$('li[name=tab4]').removeClass('tbfocus'); $(this).addClass('tbfocus')"
+                        value="false" class="tbfocus" ng-click="changeSale(false)">已销售商品
+                    </li>
+                    <li name="tab4" onclick="$('li[name=tab4]').removeClass('tbfocus'); $(this).addClass('tbfocus')"
+                        value="true" ng-click="changeSale(true)">未动销商品
+                    </li>
+                </ul>
+                <!--<ul hdTab_3 style="padding-left: 0">-->
+
+                <!--</ul>-->
+            </td>
+        </tr>
+        <tr>
+            <td width="10%">时间从:</td>
+            <td width="40%">
+                <hd-date-input ng-model="dataManage.request.query.filters[0].value[0]"  style="width: 140px"></hd-date-input>
+                -
+                <hd-date-input ng-model="dataManage.request.query.filters[0].value[1]"  style="width: 140px"></hd-date-input>
+            </td>
+            <td width="10%">最近:</td>
+            <td width="40%">
+                <ul class="hd-tab-pill">
+                    <li ng-click="changeStartTime('sevenDay')" ng-class="{'focus':dataManage.other.index=='sevenDay'}">7天</li>
+                    <li ng-click="changeStartTime('threeMonth')" ng-class="{'focus':dataManage.other.index=='threeMonth'}">1个月</li>
+                    <li ng-click="changeStartTime('sixMonth')" ng-class="{'focus':dataManage.other.index=='sixMonth'}">3个月</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%">标签:</td>
+            <td width="40%">
+                <div hdMultiple="skuAnalysisMult" needSearch style="width: 293px">
+                    <select onclick="console.log(1)">
+                        <option>请选择</option>
+                    </select>
+                    <div hdMultipleContent>
+                        <div hdMultipleList>
+                            <table>
+                                <tr ng-repeat="item in dataManage.response.shopSkuTags" itemObj="{{item}}">
+                                    <td>
+                                        <div class="hdCheck"><input type="checkbox"><label></label></div>
+                                    </td>
+                                    <td text>{{item.tag}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div hdMultipleCtrl>
+                            <a checkAll>全选</a><a checkNone>清除</a>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td width="10%">商品：</td>
+            <td width="40%">
+                <input placeholder="输入关键字或条码回车搜索" ng-model="dataManage.request.query.filters[2].value" style="width: 293px"
+                       ng-keyup="enterSearch()">
+            </td>
+        </tr>
+        <tr>
+            <td width="10"></td>
+            <td width="40%"></td>
+            <td width="10"></td>
+            <td width="40%" style="text-align: right">
+                <button btnSearch=s1 ng-click="search()" class="mainBtn s2-btn"><i class="iconfont icon-fangdajing"></i>查询
+                </button>
+                <button btnSearch=s2 ng-click="reset()" class="mainBtn s2-btn">重置</button>
+            </td>
+        </tr>
+    </table>
+
+    <div>
+        <table class="listBar">
+            <tr ng-show="!dataManage.request.params.onlyNoSaleSku">
+                <th class="th" width="200px">名称规格</th>
+                <th class="th" width="100px">条码</th>
+                <th class="th" width="80px">标签</th>
+                <th class="th" width="120px">库存数量
+                </th>
+                <th class="th" width="120px" has-permission="进价查看">毛利额</th>
+                <th class="th" width="100px" has-permission="进价查看">毛利率</th>
+                <th class="th" width="120px"><i class="iconfont icon-morenpaixu sortIcon" aria-hidden="true"></i>销售数量
+                </th>
+                <th class="th" width="120px"><i class="iconfont icon-morenpaixu sortIcon" aria-hidden="true"></i>销售额
+                </th>
+            </tr>
+            <tr ng-show="dataManage.request.params.onlyNoSaleSku">
+                <th class="th" width="200px">名称规格</th>
+                <th class="th" width="100px">条码</th>
+                <th class="th" width="80px">标签</th>
+                <th class="th" width="120px"><i class="iconfont icon-morenpaixu sortIcon" aria-hidden="true"></i>库存数量
+                </th>
+                <th class="th" width="120px"><i class="iconfont icon-morenpaixu sortIcon" aria-hidden="true"></i>库存金额
+                </th>
+                <th class="th" width="120px" has-permission="进价查看">最新进价</th>
+                <th class="th" width="100px">售价</th>
+            </tr>
+            <tr class="tr" ng-repeat="item in dataManage.response.skuAnalysisList"
+                ng-show="!dataManage.request.params.onlyNoSaleSku">
+                <td class="td left">{{item.shopSkuName}}</td>
+                <td class="td left">{{item.shopSkuBarcode}}</td>
+                <td class="td left">{{item.shopSkuTags}}</td>
+                <td class="td right">{{item.invQty}}</td>
+                <td class="td right" has-permission="进价查看">{{item.saleGrossAmount | currency:''}}</td>
+                <td class="td right" has-permission="进价查看">
+                    {{item.saleAmount==0?0:(item.saleGrossAmount/item.saleAmount)*100 | currency:''}}%
+                </td>
+                <td class="td right">{{item.saleQty}}</td>
+                <td class="td right">{{item.saleAmount | currency:''}}</td>
+            </tr>
+            <tr class="tr" ng-repeat="item in dataManage.response.skuAnalysisList"
+                ng-show="dataManage.request.params.onlyNoSaleSku">
+                <td class="td left">{{item.shopSkuName}}</td>
+                <td class="td left">{{item.shopSkuBarcode}}</td>
+                <td class="td left">{{item.shopSkuTags}}</td>
+                <td class="td right">{{item.invQty}}</td>
+                <td class="td right">{{item.invAmount | currency:''}}</td>
+                <td class="td right" has-permission="进价查看">{{item.lastInPrice | currency:''}}</td>
+                <td class="td right">{{item.salePrice | currency:''}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="page-bar">
+        <table style="width: 100%;">
+            <tr>
+                <!-- <td style="width:70px;">一共x页</td>
+                 <td style="width:105px;">现在是第y页</td>-->
+                <td ng-show="total>0">
+                    当前显示{{(currentPage-1)*pageSize+1}}-{{(total-currentPage*pageSize)>0?currentPage*pageSize:total}}行,共有{{total}}行
+                </td>
+                <!--<td style="width:40%;"></td>-->
+                <td class="dpos-page">
+                    <ul class="pull-right dpos-pagenation-div">
+                        <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div"
+                            ng-click="currentPage=1;pageGo(1)" ng-disabled="currentPage === 1"><span
+                                class="fa fa-angle-double-left"></span></li>
+                        <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="pageFrom()"
+                            ng-disabled="currentPage === 1"><span
+                                class="fa fa-angle-left"></span></li>
+                        <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==1}"
+                            ng-click="currentPage=1;pageGo(1)"> 1
+                        </li>
+                        <li class="dpos-page-div" ng-show="page>=3"> ...</li>
+                        <li class="dpos-page-div" ng-show="pageCount>2"
+                            ng-class="{'dpos-clicked-page':currentPage==page}" ng-click="currentPage=page;pageGo(page)">
+                            {{page}}
+                        </li>
+                        <li class="dpos-page-div" ng-show="pageCount>3"
+                            ng-class="{'dpos-clicked-page':currentPage==page+1}"
+                            ng-click="currentPage=page+1;pageGo(page+1)">
+                            {{page+1}}
+                        </li>
+                        <li class="dpos-page-div" ng-show="pageCount>4"
+                            ng-class="{'dpos-clicked-page':currentPage==page+2}"
+                            ng-click="currentPage=page+2;pageGo(page+2)">
+                            {{page+2}}
+                        </li>
+                        <li class="dpos-page-div" ng-show="pageCount>5"
+                            ng-class="{'dpos-clicked-page':currentPage==page+3}"
+                            ng-click="currentPage=page+3;pageGo(page+3)">
+                            {{page+3}}
+                        </li>
+                        <li class="dpos-page-div" ng-show="page+3<pageCount-1"> ...</li>
+                        <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==pageCount}"
+                            ng-show="pageCount>1"
+                            ng-click="currentPage=pageCount;pageGo(pageCount)">{{pageCount}}
+                        </li>
+                        <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div"
+                            ng-click="pageTo(page+1)"><span class="fa fa-angle-right"></span></li>
+                        <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div"
+                            ng-click="currentPage=pageCount;pageGo(pageCount)"><span
+                                class="fa fa-angle-double-right"></span></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

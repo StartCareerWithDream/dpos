@@ -1,0 +1,138 @@
+<div class="mainContent">
+  <table class="titleBar">
+    <tr>
+      <td class="td1">收银缴款</td>
+    </tr>
+  </table>
+  <div class="hr"></div>
+  <br/>
+  <table class="dtlBar">
+    <tr>
+      <td width="12.33%" has-permission="缴款登记">收银员:</td>
+      <td width="21%" has-permission="缴款登记"><input type="text" class="hd-form-control" ng-model="dataManage.request.query.filters[0].value" /></td>
+      <td width="12.33%">长短款:</td>
+      <td width="21%">
+        <input type="text" style="width: 75px" ng-model="dataManage.request.query.filters[1].value[0]"/> -
+        <input type="text" style="width: 75px" ng-model="dataManage.request.query.filters[1].value[1]"/>
+      </td>
+      <td width="12.33%">状态:</td>
+      <td width="21%">
+        <select ng-model="dataManage.request.query.filters[3].value" class="hd-form-control">
+          <option value="">全部</option>
+          <option ng-repeat="item in dataManage.response.statusItems" value="{{item.value}}">{{item.text}}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>班次:</td>
+      <td>
+        <select ng-model="dataManage.request.query.filters[4].value" class="hd-form-control">
+          <option value="">全部</option>
+          <option ng-repeat="item in dataManage.response.classItems" value="{{item.shiftName}}">{{item.shiftName}}</option>
+        </select>
+      </td>
+      <td>开始时间:</td>
+      <td>
+        <hd-date-input ng-model="dataManage.request.query.filters[2].value[0]" hd-date-input-format="YYYY-MM-DD"></hd-date-input>
+      </td>
+      <td>结束时间:</td>
+      <td>
+        <hd-date-input ng-model="dataManage.request.query.filters[2].value[1]" hd-date-input-format="YYYY-MM-DD"></hd-date-input>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="5">
+        <ul class="hd-tab-pill" hd-tab ng-model="dataManage.dateType">
+          <li value="sevenDay" ng-click="changeDate('sevenDay')">7天</li>
+          <li value="month" ng-click="changeDate('threeMonth')">3个月</li>
+          <li value="threeMonth" ng-click="changeDate('sixMonth')">半年</li>
+        </ul>
+      </td>
+      <td>
+        <div style="float: right">
+          <button btnsearch="s1" ng-click="search()"><i class="iconfont icon-fangdajing"></i>搜索</button>
+          <button btnsearch="s2" ng-click="reset()">清空</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div>
+    <table class="listBar">
+      <tr>
+        <th class="th" width="100px"><i class="iconfont icon-morenpaixu sortIcon" aria-hidden="true"></i>生成日期</th>
+        <th class="th" width="100px"><i class="iconfont icon-morenpaixu sortIcon" aria-hidden="true"></i>缴款单号</th>
+        <th class="th" width="80px">班次</th>
+        <th class="th" width="100px">缴款店员</th>
+        <th class="th" width="120px"><i class="iconfont icon-morenpaixu sortIcon" aria-hidden="true"></i>待缴款</th>
+        <th class="th" width="120px"><i class="iconfont icon-morenpaixu sortIcon" aria-hidden="true"></i>实缴款</th>
+        <th class="th" width="120px"><i class="iconfont icon-morenpaixu sortIcon" aria-hidden="true"></i>长短款</th>
+        <th class="th" width="60px">状态</th>
+        <th class="th">操作</th>
+      </tr>
+      <tr class="tr" ng-repeat="item in dataManage.response.items">
+        <td class="td center">{{item.generateDate|dateFormat}}</td>
+        <td class="td">
+          <a ng-show="item.number" ui-sref="employeePayDeliveryDtl({uuid:item.id})"> {{item.number}} </a>
+          <span ng-show="!item.number"> - </span>
+        </td>
+        <td class="td center">{{item.workShift==null?'-':item.workShift}}</td>
+        <td class="td">{{item.cashier==null?'-':item.cashier}}</td>
+        <td class="td right">{{item.waitToPayAmount==null?'-':(item.waitToPayAmount| currency:'￥')}}</td>
+        <td class="td right">{{item.realPayAmount==null?'-':(item.realPayAmount| currency:'￥')}}</td>
+        <td class="td right">{{item.overShort==null?'-':(item.overShort| currency:'￥')}}</td>
+        <td class="td center"><span ng-bind-html="item.state|status:'small'"></span></td>
+        <td class="td">
+          <div ng-if="canPay(item)">
+            <a ng-show="item.state==null" ui-sref="employeePayDeliveryMod({uuid:item.id})">缴款</a>
+            <a ng-show="item.state=='待签字'" href="javascript:void(0);" ng-click="sign(item)">签字</a>
+            <a ng-show="item.state=='待签字'" href="javascript:void(0);" ng-click="print(item)">打印</a>
+            <a ng-show="item.state=='待签字'" ui-sref="employeePayDeliveryMod({uuid:item.id})">编辑</a>
+            <a ng-show="item.state=='待签字'" href="javascript:void(0);" ng-click="delete(item)">删除</a>
+            <a ng-show="item.state=='待处理'" href="javascript:void(0);" ng-click="handle(item)">处理</a>
+            <a ng-show="item.state=='待处理'" href="javascript:void(0);" ng-click="invalid(item)">作废</a>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="page-bar">
+    <table style="width: 100%;">
+      <tr>
+        <!-- <td style="width:70px;">一共x页</td>
+         <td style="width:105px;">现在是第y页</td>-->
+        <td ng-show="total>0">当前显示{{(currentPage-1)*pageSize+1}}-{{(total-currentPage*pageSize)>0?currentPage*pageSize:total}}行,共有{{total}}行</td>
+        <!--<td style="width:40%;"></td>-->
+        <td class="dpos-page">
+          <ul class="pull-right dpos-pagenation-div">
+            <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="currentPage=1;pageGo(1)" ng-disabled="currentPage === 1"><span
+              class="fa fa-angle-double-left"></span></li>
+            <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="pageFrom()" ng-disabled="currentPage === 1"><span
+              class="fa fa-angle-left"></span></li>
+            <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==1}" ng-click="currentPage=1;pageGo(1)"> 1</li>
+            <li class="dpos-page-div" ng-show="page>=3"> ...</li>
+            <li class="dpos-page-div" ng-show="pageCount>2" ng-class="{'dpos-clicked-page':currentPage==page}" ng-click="currentPage=page;pageGo(page)">
+              {{page}}
+            </li>
+            <li class="dpos-page-div" ng-show="pageCount>3" ng-class="{'dpos-clicked-page':currentPage==page+1}" ng-click="currentPage=page+1;pageGo(page+1)">
+              {{page+1}}
+            </li>
+            <li class="dpos-page-div" ng-show="pageCount>4" ng-class="{'dpos-clicked-page':currentPage==page+2}" ng-click="currentPage=page+2;pageGo(page+2)">
+              {{page+2}}
+            </li>
+            <li class="dpos-page-div" ng-show="pageCount>5" ng-class="{'dpos-clicked-page':currentPage==page+3}" ng-click="currentPage=page+3;pageGo(page+3)">
+              {{page+3}}
+            </li>
+            <li class="dpos-page-div" ng-show="page+3<pageCount-1"> ...</li>
+            <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==pageCount}" ng-show="pageCount>1"
+                ng-click="currentPage=pageCount;pageGo(pageCount)">{{pageCount}}
+            </li>
+            <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div" ng-click="pageTo(page+1)"><span class="fa fa-angle-right"></span></li>
+            <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div" ng-click="currentPage=pageCount;pageGo(pageCount)"><span
+              class="fa fa-angle-double-right"></span></li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

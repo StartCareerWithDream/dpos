@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>销售-顶栏</title>
+  <style>
+    body{
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table{
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td{
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+    td:first-child{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.13-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=销售收银及结算" target="_blank">销售收银及结算</a> </td>
+  </tr>
+
+  <th>操作</th>
+  <th>响应</th>
+  <tr>
+    <td >顶栏初始化</td>
+    <td>
+      顶栏包含: 单号, 上一单切换, 加密流水号, 会员录入, 挂单, 右侧面板收起. <br>
+      单号: 通过接口获得. <br>
+      数据应该都是从 <a href="../apiDefine/_%7Bshop%7D_save_v2_create.js" target="_blank">/{shop}/sale/v2/create</a> 获得 <br>
+
+      <br>
+      if (上一单存在) then (上一单的信息字段是: preId)<br>
+      　　"上一单按钮"enabled <br>
+      else <br>
+      　　"上一单按钮"disabled <br>
+      <br>
+      if (缓存.加密流水号 = true) then <br>
+      　　流水号显示加密内容, 字段是: encryptNumber <br>
+      　　链接显示＂正常流水号＂ <br>
+      else <br>
+      　　流水号显示正常内容, 字段是: number <br>
+      　　链接显示＂加密流水号＂ <br>
+      <br>
+      if (缓存.会员信息存在) then <br>
+      　　显示＂会员手机号＂ <br>
+      <br>
+      if (当前录入商品行数量 == 0) then <br>
+      　　显示＂恢复挂单＂按钮 <br>
+      　　 当已挂单数量 > 0时, 按钮右上角显示已挂单数量); <br>
+      　　 当已挂单数量 = 0时, 按钮显示"挂单", disabled); <br>
+      else <br>
+      　　显示＂挂单＂按钮 <br>
+      <br>
+      if (右侧面板 = 展示) then <br>
+      　　显示＂收起右侧面板＂按钮 <br>
+      else <br>
+      　　显示＂展开右侧面板＂按钮 <br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"上一单"按钮</td>
+    <td>
+      路径跳转 <a href="saleDtl.html" target="_self">销售单详情</a>, 待参数: 上一单的uuid, 数据来源preId字段<br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击 "加密流水号"/"正常流水号" 链接</td>
+    <td>
+      "加密流水号" <br>
+      1. localStorage.setItem('{shop}.sale-{user}-encryptNumber', 'true') <br>
+      2. 当前流水号加密, 显示字段是: encryptNumber <br>
+      "加密流水号" <br>
+      1. localStorage.setItem('{shop}.sale-{user}-encryptNumber', 'false') <br>
+      2. 当前流水号正常, 显示字段是: number
+    </td>
+  </tr>
+  <tr>
+    <td>点击＂收起右侧面板＂/＂展开右侧面板＂按钮</td>
+    <td>
+      收起展开右侧面板
+    </td>
+  </tr>
+
+  <tr>
+    <td>录入"会员"</td>
+    <td>
+      当录入的字符串长度 > 1 时 <br>
+      1. 调用接口: get方法 <a href="../apiDefine/_{shop}_member_queryMatch.js" target="_blank">/{shop}/member/queryMatch</a> 获得匹配的数据 <br>
+      2. 当获得匹配信息为空, 显示无法匹配, 否则显示下拉列表, 供用户选择 <br>
+      3. 用户选中后, 得到会员的对象. 调用: <a href="../apiDefine/_{shop}_member_memberInfo.js" target="_blank">/{shop}/member/memberInfo</a> 获得更详细的信息
+    </td>
+  </tr>
+  <tr>
+    <td>会员输入框打回车<br></td>
+    <td>
+      如果输入内容为空: 则品名输入框得到焦点 <br>
+      非空: 调用: <a href="../apiDefine/_{shop}_member_queryMatch.js" target="_blank">/{shop}/member/queryMatch</a><br>
+      用户选中后:<br>
+      会员模块展示: "会员数据对象"增加一条。调用: <a href="../apiDefine/_{shop}_member_memberInfo.js" target="_blank">/{shop}/member/memberInfo</a> 获得更详细的信息<br>
+    </td>
+  </tr>
+  <tr>
+    <td>离开录入"会员"焦点</td>
+    <td>
+      当会员录入信息为空, return true; <br>
+      当会员对象已有, return true; <br>
+      当会员对象为null, 且录入信息不为空, 且有多个会员匹配信息, 显示会员信息查询框. <br>
+      当会员对象为null, 且录入信息不为空, 且有1个会员匹配信息, 调用: <a href="../apiDefine/_{shop}_member_memberInfo.js" target="_blank">/{shop}/member/memberInfo</a>, 获得会员对象信息<br>
+      当会员对象为null, 且录入信息不为空, 无会员匹配信息, 不允许离开焦点 <br>
+      当会员对象为null, 且录入信息不为空, 无会员匹配信息, 且输入为11为数字(手机号), 显示"新增", 不允许离开焦点 <br>
+      点击"新增",调用 <a href="../apiDefine/_{shop}_member_saveNew.js" target="_blank">/{shop}/member/saveNew</a>, 并得到返回的会员对象
+    </td>
+  </tr>
+  <tr>
+    <td>录入屏幕快捷键列表</td>
+    <td>
+      1. F6: 会员, 会员输入框获得焦点 <br>
+      2. F8: 挂单, 打开挂单界面  <a href="saleAdd_pending.html" target="saleAdd_pending">详细链接</a>
+    </td>
+  </tr>
+  <tr>
+    <td>键盘事件</td>
+    <td>
+      会员输入框: <br>
+      下: 第一商品行的品名focus
+      enter: 输入内容为空, 或已经得到了会员数据对象, 第一商品行的品名focus
+      tab:, 第一商品行的品名focus
+    </td>
+  </tr>
+
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>销售-录入</title>
+  <style>
+    body{
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table{
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td{
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+    td:first-child{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.13-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=销售收银及结算" target="_blank">销售收银及结算</a> </td>
+  </tr>
+
+  <th>操作</th>
+  <th>响应</th>
+  <tr>
+    <td >初始化</td>
+    <td>
+      根据商品录入数据对象, 显示商品信息 <br>
+      <font color="red">运营商的云商品怎么样的规则?</font> <br>
+      默认有第一个空行, "品名"输入框 focus, 品名输入框: maxlength=128 <br>
+    </td>
+  </tr>
+  <tr>
+    <td>品名输入框输入字符</td>shopSkuService/query/match
+    <td>
+      如果输入字符数量 >= 2, 调用: <a href="../apiDefine/_{shop}_shopSkuService_query_match.js" target="_blank">/{shop}/shopSkuService/query/match</a> 商品列表 <br>
+      选中一个商品: "商品录入数据对象"增加一条 <br>
+      选中"新增": 单价 = 0, 并有以下不同，后不复述<br>
+      　如果是纯数字: "商品录入数据对象"增加一条, 条码/商品=录入信息 <br>
+      　如果非纯数字: "商品录入数据对象"增加一条, 条码=空, 商品=录入信息 <br>
+      <br>
+      "商品录入数据对象"变化后, 商品数量/应收金额 相应变化. 以后不再复述.
+    </td>
+  </tr>
+  <tr>
+    <td>品名输入框打回车</td>
+    <td>
+      如果输入内容为空: 则此输入框继续得到焦点, return false; <br>
+      非空，且有1个品名匹配信息, : 调用: <a href="../apiDefine/_{shop}_shopSkuService_query_precise.js" target="_blank">/{shop}/shopSkuService/query/precise</a> <br>
+      　如有商品: "商品录入数据对象"增加一条<br>
+      　如无商品: 是纯数字: "商品录入数据对象"增加一条, 条码/商品=录入信息 <br>
+      　如有商品: 非纯数字: "商品录入数据对象"增加一条, 条码=空, 商品=录入信息 <br>
+    </td>
+  </tr>
+  <tr>
+    <td>离开品名输入框焦点</td>
+    <td>
+      当品名录入信息为空, return true; <br>
+      当品名对象已有, return true; <br>
+      当品名对象为null, 且录入信息不为空, 且有多个品名匹配信息, 显示品名信息查询框. <br>
+      当品名对象为null, 且录入信息不为空, 且有1个品名匹配信息, 调用: <a href="../apiDefine/_{shop}_shopSkuService_query_precise.js" target="_blank">/{shop}/shopSkuService/query
+      /precise</a>, 获得品名对象信息<br>
+      当品名对象为null, 且录入信息不为空, 无品名匹配信息, 不允许离开焦点 <br>
+      当品名对象为null, 且录入信息不为空, 无品名匹配信息,显示"新增", 不允许离开焦点 <br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击"品名"的链接</td>
+    <td>
+      获得标签: 调用: <a href="../apiDefine/_{shop}_shopSkuService_getShopSkuTags.js" target="_blank">/{shop}/shopSkuService/getShopSkuTags</a> <br>
+      如果是已有商品, 获得商品信息: 调用: <a href="../apiDefine/_{shop}_shopSkuService_getSkuSimple.js" target="_blank">/{shop}/shopSkuService/getSkuSimple</a> <br>
+      弹出"商品信息"的编辑 <br>
+      品名: maxlength=128 <br>
+      检查: maxlength=12 <br>
+      条码: maxlength=25 数字/字母/符号(-) <br>
+      进价: maxlength=9, hdMax = 999999.00, hdMin=0.00 <br>
+      售价: maxlength=9, hdMax = 999999.00, hdMin=0.00 <br>
+      成本价: maxlength=9, hdMax = 999999.00, hdMin=0.00 <br>
+      规格: maxlength=20 <br>
+      计量单位: maxlength=10 <br>
+      自编码: maxlength=13 <br>
+      标签: 多选下拉框 <br>
+      备注: maxlength=120 <br>
+      保存:<a href="../apiDefine/_{shop}_shopSkuService_update.js" target="_blank">/{shop}/shopSkuService/update</a> <br>
+      hdTip: 商品保存成功 <br>
+      关闭弹窗
+    </td>
+  </tr>
+  <tr>
+    <td>点击"删除"</td>
+    <td>
+      指定行的商品信息, 从"商品录入数据对象"中删除
+    </td>
+  </tr>
+  <tr>
+    <td>修改单价</td>
+    <td>
+      获得焦点, 自动 selected <br>
+      单价: maxlength=9, hdMax = 999999.00, hdMin=0.00 <br>
+      "商品录入数据对象", 该行商品的金额 = 单价 * 数量 <br>
+    </td>
+  </tr>
+  <tr>
+  <td>修改数量</td>
+    <td>
+      获得焦点, 自动 selected <br>
+      数量: maxlength=10, hdMax = 999999.000, hdMin=0 <br>
+      "商品录入数据对象", 该行商品的金额 = 单价 * 数量 <br>
+    </td>
+  </tr>
+  <tr>
+    <td>修改金额</td>
+    <td>
+      获得焦点, 自动 selected <br>
+      金额: maxlength=9, hdMax = 999999.00, hdMin=0.00 <br>
+      "商品录入数据对象", 该行商品的单价 = 金额 / 数量. <br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>键盘事件</td>
+    <td>
+      上: 上一商品行的对应输入框, 如果已经是第一行商品, 则会员信息得到焦点 <br>
+      下: 上一商品行的对应输入框, 如果已经是最后商品, 付款按钮得到焦点  <br>
+      左: 同一商品行的品名/单价/数量/金额 切换 <br>
+      右: 同一商品行的品名/单价/数量/金额 切换 <br>
+      tab: 按顺序, 在输入框之间切换 <br>
+      enter 等同于向下 <br>
+    </td>
+  </tr>
+
+
+</table>
+
+</body>
+</html>

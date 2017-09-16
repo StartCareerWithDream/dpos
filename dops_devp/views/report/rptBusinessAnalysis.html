@@ -1,0 +1,231 @@
+<div class="mainContent">
+  <div>
+    <table class="dtlBar">
+      <tr>
+        <td style="padding-left: 0px;padding-right: 0px;width: 50px;">时间:</td>
+        <td style="width: 140px; padding-left: 0px;padding-right: 0px;">
+          <hd-date-input ng-model="dataManage.request.body.filters[0].value[0]" hd-date-input-format="YYYY-MM-DD"></hd-date-input>
+        </td>
+        <td style="width: 1px;padding-left: 0px;padding-right: 0px;">
+          -
+        </td>
+        <td style="width: 140px;padding-left: 0px;padding-right: 0px;">
+          <hd-date-input ng-model="dataManage.request.body.filters[0].value[1]" hd-date-input-format="YYYY-MM-DD"></hd-date-input>
+        </td>
+        <td  style="padding-right: 0px;width: 50px;">最近:</td>
+        <td  style="padding-left: 0px;padding-right: 0px;">
+          <ul class="hd-tab-pill">
+            <li ng-click="changeDate('DAY')" ng-class="{'focus':dataManage.other.index=='DAY'}">7天</li>
+            <li ng-click="changeDate('MONTH')" ng-class="{'focus':dataManage.other.index=='MONTH'}">1个月</li>
+            <li ng-click="changeDate('YEAR')" ng-class="{'focus':dataManage.other.index=='YEAR'}">3个月</li>
+          </ul>
+          <!--<ul class="hd-tab-pill" hd-tab ng-model="dataManage.request.params.scope">-->
+            <!--<li value="week" ng-click="changeDate('DAY')" class="hd-tab-active">7天</li>-->
+            <!--<li value="month" ng-click="changeDate('MONTH')">1个月</li>-->
+            <!--<li value="threeMonth" ng-click="changeDate('YEAR')">半年</li>-->
+          <!--</ul>-->
+        </td>
+        <td>
+          <div style="float: right">
+            <button btnSearch=m1 ng-click="search()" class="mainBtn s2-btn"><i class="iconfont icon-fangdajing"></i>查询</button>
+            <button btnsearch="s2" ng-click="reset()" class="mainBtn s1-btn">重置</button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-md-12" style="border-top: 1px solid #E6E6E6;border-bottom: 1px solid #E6E6E6;margin-bottom: 35px;">
+    <div class="col-md-2" style="padding-top: 50px;border-right: 1px solid #E6E6E6;">
+      <div id="summaryBarChart" style="width: 100%; height: 375px;"></div>
+    </div>
+    <div class="col-md-10">
+      <div class="col-md-12" style="height: 50px;">
+        <div class="col-md-10" style="margin-top: 6px;margin-left: 6px;">
+          <table>
+            <tr>
+              <td>夜班时间段:</td>
+              <td>
+                <select ng-model="dataManage.request.params.eveningWorkStart">
+                  <option>00:00</option>
+                  <option>01:00</option>
+                  <option>02:00</option>
+                  <option>03:00</option>
+                  <option>04:00</option>
+                  <option>05:00</option>
+                  <option>06:00</option>
+                  <option>07:00</option>
+                  <option>08:00</option>
+                  <option>09:00</option>
+                  <option>10:00</option>
+                  <option>11:00</option>
+                  <option>12:00</option>
+                  <option>13:00</option>
+                  <option>14:00</option>
+                  <option>15:00</option>
+                  <option>16:00</option>
+                  <option>17:00</option>
+                  <option>18:00</option>
+                  <option>19:00</option>
+                  <option>20:00</option>
+                  <option>21:00</option>
+                  <option>22:00</option>
+                  <option>23:00</option>
+                </select>
+              </td>
+              <td>-</td>
+              <td>
+                <select ng-model="dataManage.request.params.eveningWorkEnd">
+                  <option>00:00</option>
+                  <option>01:00</option>
+                  <option>02:00</option>
+                  <option>03:00</option>
+                  <option>04:00</option>
+                  <option>05:00</option>
+                  <option>06:00</option>
+                  <option>07:00</option>
+                  <option>08:00</option>
+                  <option>09:00</option>
+                  <option>10:00</option>
+                  <option>11:00</option>
+                  <option>12:00</option>
+                  <option>13:00</option>
+                  <option>14:00</option>
+                  <option>15:00</option>
+                  <option>16:00</option>
+                  <option>17:00</option>
+                  <option>18:00</option>
+                  <option>19:00</option>
+                  <option>20:00</option>
+                  <option>21:00</option>
+                  <option>22:00</option>
+                  <option>23:00</option>
+                </select>
+              </td>
+              <td>
+                <a class="chartEveningTime" ng-click="searchTime()" style="margin-left: 10px;">查询</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-2" style="margin-top: 10px;">
+          <div>
+            <button style="float: right;" btnsearch="s2" ng-click="chooseOptionPart()" class="mainBtn s1-btn">修改指标<i ng-class="{'iconfont icon-xiangxia':true == true,'iconfont icon-xiangxia':ifOpenOption == false}"></i></button>
+            <div class="hover-option" ng-show="showOption">
+              <div>
+                <table style="width: 100%">
+                  <tr style="height: 40px;">
+                    <td><input type="checkbox" ng-model="saleAmountBool" ng-click="chooseSaleAmountOption(saleAmountBool)"/></td>
+                    <td><span>销售额</span></td>
+                    <td><input type="checkbox" ng-model="unitPriceBool" ng-click="chooseUnitPriceOption(unitPriceBool)"/></td>
+                    <td><span>客单价</span></td>
+                    <td><input type="checkbox" ng-model="saleNumberBool" ng-click="chooseSaleNumberOption(saleNumberBool)"/></td>
+                    <td><span>销售笔数</span></td>
+                  </tr>
+                  <tr style="height: 40px;">
+                    <td><input type="checkbox" ng-model="eveningAmountBool" ng-click="chooseEveningSaleAmountOption(eveningAmountBool)"/></td>
+                    <td><span>夜班销售额</span></td>
+                  </tr>
+                  <tr style="height: 40px;">
+                    <td><input type="checkbox" ng-model="importBool" ng-click="chooseImportOption(importBool)"/></td>
+                    <td><span>进货额</span></td>
+                    <td><input type="checkbox" ng-model="retailGrossAmountBool" ng-click="chooseRetailGrossAmountOption(retailGrossAmountBool)"/></td>
+                    <td><span>零售毛利额</span></td>
+                    <td><input type="checkbox" ng-model="saleGrossRateBool" ng-click="chooseSaleGrossRateOption(saleGrossRateBool)"/></td>
+                    <td><span>毛利率</span></td>
+                  </tr>
+                  <tr style="height: 40px;">
+                    <!--<td><input type="checkbox" ng-model="ivnCountBool" ng-click="chooseIvnCountOption(ivnCountBool)"/></td>-->
+                    <!--<td><span>库存品项数</span></td>-->
+                    <td><input type="checkbox" ng-model="saleCountBool" ng-click="chooseSaleCountOption(saleCountBool)"/></td>
+                    <td><span>动销品项数</span></td>
+                  </tr>
+                  <tr style="height: 20px;line-height: 20px;">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button btnsearch="s2" ng-click="hideOption()" class="mainBtn s1-btn">确定</button></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div id="saleLineChart" style="width: 99%; height: 375px;"></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <table class="listBar">
+      <tr>
+        <th class="th" style="width: 15%;">日期</th>
+        <th class="th">销售额</th>
+        <th class="th">客单价</th>
+        <th class="th">销售笔数</th>
+        <th class="th" style="width: 10%;">夜班销售额</th>
+        <th class="th">进货额</th>
+        <th class="th">零售毛利额</th>
+        <th class="th">毛利率</th>
+        <!--<th class="th" style="width: 5%;">库存品项数</th>-->
+        <th class="th" style="width: 10%;">动销品项数</th>
+
+      </tr>
+      <tr class="tr" ng-repeat="item in recordTableData">
+        <td class="td">{{item.axisLabel}}</td>
+        <td class="td right">{{item.saleAmount.toFixed(2)}}</td>
+        <td class="td right">{{item.saleAmountAvg.toFixed(2)}}</td>
+
+        <td class="td center">{{item.saleNumber}}</td>
+        <td class="td right">{{item.eveningAmount.toFixed(2)}}</td>
+        <td class="td right">{{item.purchaseAmount.toFixed(2)}}</td>
+        <td class="td right">{{item.retailGrossAmount.toFixed(2)}}</td>
+        <td class="td right">{{item.saleGrossRate.toFixed(2)}}%</td>
+        <!--<td class="td center">{{item.ivnCount}}</td>-->
+        <td class="td center">{{item.saleCount}}</td>
+
+      </tr>
+    </table>
+  </div>
+  <div class="page-bar">
+    <!--<table style="width: 100%;">
+      <tr>
+        &lt;!&ndash; <td style="width:70px;">一共x页</td>
+         <td style="width:105px;">现在是第y页</td>&ndash;&gt;
+        <td ng-show="total>0">当前显示{{(currentPage-1)*pageSize+1}}-{{(total-currentPage*pageSize)>0?currentPage*pageSize:total}}行,共有{{total}}行</td>
+        &lt;!&ndash;<td style="width:40%;"></td>&ndash;&gt;
+        <td class="dpos-page">
+          <ul class="pull-right dpos-pagenation-div">
+            <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="currentPage=1;pageGo(1)" ng-disabled="currentPage === 1"><span
+              class="fa fa-angle-double-left"></span></li>
+            <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="pageFrom()" ng-disabled="currentPage === 1"><span
+              class="fa fa-angle-left"></span></li>
+            <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==1}" ng-click="currentPage=1;pageGo(1)"> 1</li>
+            <li class="dpos-page-div" ng-show="page>=3"> ...</li>
+            <li class="dpos-page-div" ng-show="pageCount>2" ng-class="{'dpos-clicked-page':currentPage==page}" ng-click="currentPage=page;pageGo(page)">
+              {{page}}
+            </li>
+            <li class="dpos-page-div" ng-show="pageCount>3" ng-class="{'dpos-clicked-page':currentPage==page+1}" ng-click="currentPage=page+1;pageGo(page+1)">
+              {{page+1}}
+            </li>
+            <li class="dpos-page-div" ng-show="pageCount>4" ng-class="{'dpos-clicked-page':currentPage==page+2}" ng-click="currentPage=page+2;pageGo(page+2)">
+              {{page+2}}
+            </li>
+            <li class="dpos-page-div" ng-show="pageCount>5" ng-class="{'dpos-clicked-page':currentPage==page+3}" ng-click="currentPage=page+3;pageGo(page+3)">
+              {{page+3}}
+            </li>
+            <li class="dpos-page-div" ng-show="page+3<pageCount-1"> ...</li>
+            <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==pageCount}" ng-show="pageCount>1"
+                ng-click="currentPage=pageCount;pageGo(pageCount)">{{pageCount}}
+            </li>
+            <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div" ng-click="pageTo(page+1)"><span class="fa fa-angle-right"></span></li>
+            <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div" ng-click="currentPage=pageCount;pageGo(pageCount)"><span
+              class="fa fa-angle-double-right"></span></li>
+          </ul>
+        </td>
+      </tr>
+    </table>-->
+  </div>
+</div>

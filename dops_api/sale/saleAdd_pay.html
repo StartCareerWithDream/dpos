@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>销售-付款</title>
+  <style>
+    body{
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table{
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td{
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+    td:first-child{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.13-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=销售收银及结算" target="_blank">销售收银及结算</a> </td>
+  </tr>
+
+  <th>操作</th>
+  <th>响应</th>
+  <tr>
+    <td >初始化</td>
+    <td>
+      如有会员数据对象, 则显示会员信息. 会员输入框的操作与顶栏相同, 不再复述 <br>
+      合计/现金 默认显示"商品数据对象"的金额合计 <br>
+      应收金额 = 支付数据对象中的应收金额, 默认为"合计"金额 <br>
+      根据"默认支付方式", XX支付方式样式选中 <br>
+
+      <br>
+      屏幕快捷键列表: <br>
+      1. F1: 如果尚未开通"在线支付", 显示开通, 进入lion支付方式设置; 否则"扫描支付" <br>
+      2. F2: 更多支付方式的对话框 <br>
+      3. F3: 现金支付选中 <br>
+      2. F4: 显示折扣弹出框 <br>
+      3. F5: 储值支付弹出框, 调用接口<a href="../apiDefine/_{shop}_member_get.js" target="_blank">/{shop}/member/get</a>, 得到最新会员储值余额信息. <br>
+      4. F6: 会员, 会员输入框获得焦点 <br>
+      5. F7: 优惠券弹出框, 输入后, 点击确认，调用<a href="../apiDefine/_{shop}_mp_calFav.js" target="_blank">/{shop}/mp/calFav</a>接口 <br>
+      5. F8: 当设置了抹零规则后, 对于"应收"按规则抹零 <br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击结算按钮</td>
+    <td>
+      调用接口<a href="../apiDefine/_{shop}_save_v2_save.js" target="_blank">/{shop}/sale/v2/save </a><br>
+      点击"确认", 关闭付款对话框<br>
+      销售单所有数据对象清空 <br>
+      初始化销售, 获取门店配置中销售相关的内容,调用接口 <a href="../apiDefine/_{shop}_save_v2_create.js" target="_blank">/{shop}/sale/v2/create</a><br>
+      调用收藏夹初始化接口<a href="../apiDefine/_{shop}_skuFavorite_get_byShop.js" target="_blank">/{shop}/skuFavorite/get/byShop</a>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"确定并打印小票"</td>
+    <td>
+      调用打印功能 <br>
+      关闭付款对话框. <br>
+      销售单所有数据对象清空 <br>
+      初始化销售, 获取门店配置中销售相关的内容,调用接口 <a href="../apiDefine/_{shop}_save_v2_create.js" target="_blank">/{shop}/sale/v2/create</a><br>
+      调用收藏夹初始化接口<a href="../apiDefine/_{shop}_skuFavorite_get_byShop.js" target="_blank">/{shop}/skuFavorite/get/byShop</a>
+    </td>
+  </tr>
+
+
+</table>
+
+</body>
+</html>

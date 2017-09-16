@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>标签统计报表</title>
+  <style>
+    body{
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table{
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td{
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+    td:first-child{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.12-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=标签统计报表" target="_blank">标签统计报表</a> </td>
+  </tr>
+
+  <th>操作</th>
+  <th>响应</th>
+  <tr>
+    <td >界面初始化</td>
+    <td>
+      时间段 默认显示 7天前的时间 （到） 今日时间<br>
+      7天: 起始日期= 今天 - 6, 截至日期 = 今天<br>
+      3个月: 起始日期= 今天 - 89, 截至日期 = 今天<br>
+      半年: 起始日期= 今天 - 182, 截至日期 = 今天<br>
+      <br>
+      调用接口<a href="../apiDefine/_{shopId}_inv_getShopSkuTags.js" target="_blank">/{shopId}/inv/getShopSkuTags</a>, 获取商品标签列<br>
+      标签控件框, 默认显示"全部"<br><br>
+      调用接口<a href="../apiDefine/_{shop}_report_v2_saleskutag_report.js" target="_blank">/{shop}/report/v2/saleskutag/report</a>得到报表内容<br>
+      支持分页, 默认10条一页<br><br>
+      零售额占比 = saleAmount / totalSaleAmount<br>
+      毛利率 = saleGrossAmount / saleAmount ，需要乘以100<br>
+      合计显示: 零售额, 零售成本 , 零售数量, 零售毛利额，目前暂时不显示汇总<br>
+
+
+
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击日期输入框</td>
+    <td>
+      调用日期选择控件
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击 7天/3个月/半年 </td>
+    <td>
+      按照规则,修改 起始日期, 结束日期 输入框中的值
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击 标签 </td>
+    <td>
+      下拉显示所有的商品标签, 可以多选打勾. 如已经有被选择的标签, 则默认打勾<br>
+      当商品标签一个都没有选择时, 标签控件框, 默认显示"全部"<br>
+      当商品标签已经选择一个或多个时, 标签控件框, 默认显示"已选择"<br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"查询"</td>
+    <td>
+      组织查询的各项参数<br>
+      调用接口<a href="../apiDefine/_{shop}_report_v2_saleskutag_report.js" target="_blank">/{shop}/report/v2/saleskutag/report</a>得到报表内容<br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"重置"</td>
+    <td>
+      查询中的各项条件, 回复初始值
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击列表中"/零售额/成本额/零售数量/零售额占比/零售毛利额"的排序</td>
+    <td>
+      组织查询的各项参数<br>
+      调用接口<a href="../apiDefine/_{shop}_report_v2_saleskutag_report.js" target="_blank">/{shop}/report/v2/saleskutag/report</a>得到报表内容<br>
+      其中"零售额占比"的排序用的字段, 就是 "零售额 saleAmount" 字段
+    </td>
+  </tr>
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<div class="pagination">
+  <ul class="page" maxshowpageitem="5" pagelistcount="10"  id="page"></ul>
+  <select style="display: inherit;height: 24px;width: 50px">
+    <option>10</option>
+    <option>30</option>
+    <option>50</option>
+  </select>
+  <span class="sum" style="position: relative;top: -26px;">
+      <span id="allTotal">0</span>
+      <span class="jump">跳转至
+          <input class="pageCount" maxlength="4" id="whichPage" hdFix="0" hdMin="1" onkeypress="return window.hdUtils.digitChk(this)" onchange="window.hdUtils.digitLmt(this)">页<button btnPage id="confirmId" onclick="return (!isNaN($('input[class=pageCount]').val()))">确定</button>
+      </span>
+  </span>
+</div>

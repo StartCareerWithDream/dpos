@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>$Title$</title>
+  <style>
+    body{
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table{
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td{
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+    td:first-child{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/dianwu/1.14/ux/prototype/xiaoshou/index.html#g=1&p=销售单详情查看、编辑和退货_有销售单退货_页面" target="_blank">http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/dianwu/1.14/ux/prototype/xiaoshou/index.html#g=1&p=销售单详情查看、编辑和退货_有销售单退货_页面</a> </td>
+  </tr>
+
+  <th>操作</th>
+  <th>响应</th>
+  <tr>
+    <td >界面初始化</td>
+    <td>
+      判断页面操作权限，权限ID：销售<br>
+      界面显示的操作权限判断：[销售]<br>
+
+      获取销售明细数据，调用接口<a href="../apiDefine/_{shop}_sale_v2_get.js" target="_blank">/sale/v2/get</a><br>
+      明细上方的新建按钮，编辑按钮，退货按钮，在没有绑定的时候，是置灰的不可点击的<br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击正常和加密的切换</td>
+    <td>
+      改变localStorage中获取s02c7595.sale-d2159c4c-711c-7790-022a-f7607fc3498f-encryptNumber的值;<br>
+      正常为true；取获取详情数据中的<i>encryptNumber</i><br>
+      加密为false;取获取详情数据中的<i>number</i> <br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击新增按钮</td>
+    <td>
+      路径跳转 <a href="saleAdd.html" target="_self">销售单新增</a><br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击编辑按钮</td>
+    <td>
+      路径跳转 <a href="saleMod.html" target="_self">销售单编辑</a><br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击退货按钮</td>
+    <td>
+      路径跳转 <a href="../saleReturn/saleReturnMod.html" target="_self">销售退货单编辑</a><br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击上一单/下一单切换</td>
+    <td>
+      这里的上下单取得是列表中的上下单<br>
+      参数fetchContext为false；参数的意思为是否包含上一单下一单的id<br>
+      根据不同的id，获取销售明细数据，调用接口<a href="../apiDefine/_{shop}_sale_v2_get.js" target="_blank">/sale/v2/get</a><br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击结算信息/创建和修改切换</td>
+    <td>
+      右侧内容展示切换
+    </td>
+  </tr>
+  <tr>
+    <td>点击列表中的商品名称</td>
+    <td>
+      获取数据，调用接口<a href="../apiDefine/_{shop}_shopSkuService_getSkuSimple.js" target="_blank">/shopSkuService/getSkuSimple</a><br>
+      获取标签数据，调用接口<a href="../apiDefine/_{shop}_shopSkuService_getShopSkuTags.js" target="_blank">/shopSkuService/getShopSkuTags</a><br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击单个商品详情上的保存按钮</td>
+    <td>
+      简称：非必填项，最大长度是 12 个字符<br>
+      最新进价,售价，成本价：非必填项，最大长度是 11 个字符，最大值是 999999<br>
+      自编码:非必填项，最大长度是 13 个字符<br>
+      标签：非必填项，多选，在标签输入框中输入后回车，添加的标签，再保存后可以添加为新的标签<br>
+      调用接口<a href="../apiDefine/_{shop}_shopSkuService_update.js" target="_blank">/shopSkuService/update</a><br>
+      并且刷新表格中的数据，调用接口 <a href="../apiDefine/_{shop}_sale_v2_refreshSaleLines.js" target="_blank">/sale/v2/refreshSaleLines</a><br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击打印小票按钮</td>
+    <td>
+      调取打印服务，会提供一个方法：doPrintSale<br>
+      参考这个界面设计中的打印系列，<a href="http://svn3.app.hd123.cn/svn/dnet/dpos/auth-server/trunk/src/doc/%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html" target="_blank">http://svn3.app.hd123.cn/svn/dnet/dpos/auth-server/trunk/src/doc/%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html</a>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>销售-会员</title>
+  <style>
+    body{
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table{
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td{
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+    td:first-child{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.13-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=销售收银及结算" target="_blank">销售收银及结算</a> </td>
+  </tr>
+
+  <th>操作</th>
+  <th>响应</th>
+  <tr>
+    <td >初始化</td>
+    <td>
+      当"销售-顶栏"中输入了正确的会员手机, 得到"会员数据对象"后, 会员信息界面才展示 <br>
+      <br>
+      权限: 如果有"会员"权限: <font colr="red">这个暂时没有</font> <br>
+      　"会员姓名"可编辑 <br>
+      　"编辑资料"enabled <br>
+      　"去充值"enabled <br>
+      <br>
+      从"会员数据对象"中获得"有效优惠券" <br>
+      从"会员数据对象"中获得"最常购买"的商品列表 <br>
+    </td>
+  </tr>
+  <tr>
+    <td >会员姓名编辑框输入</td>
+    <td>
+      maxlength=10 <br>
+      输入完毕, 失去焦点: 调用接口 <a href="../apiDefine/_{shop}_member_saveModify.js" target="_blank">/{shop}/member/saveModify</a> 保存会员信息 <br>
+      然后, 调用: <a href="../apiDefine/_{shop}_member_memberInfo.js" target="_blank">/{shop}/member/memberInfo</a> 获得会员详细的信息 <br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击"编辑资料"按钮</td>
+    <td>
+      弹出"编辑资料"窗口 <br>
+      调用接口, 获得会员标签列表: <a href="../apiDefine/_{shop}_member_taglist.js" target="_blank">/{shop}/member/taglist</a> <br>
+      姓名: maxlength 10 <br>
+      性别: 下拉 ["未知", "男", "女"] <br>
+      标签: 多选下拉框 <br>
+      备注: maxlength 100 <br>
+      会员地址: maxlength 100 <br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"编辑资料". "确定"按钮</td>
+    <td>
+      数据合法验证 <br>
+      <a href="../apiDefine/_{shop}_member_saveModify.js" target="_blank">/{shop}/member/saveModify</a> 保存会员信息 <br>
+      然后, 调用: <a href="../apiDefine/_{shop}_member_memberInfo.js" target="_blank">/{shop}/member/memberInfo</a> 获得会员详细的信息 <br>
+      弹出窗口关闭
+    </td>
+  </tr>
+  <tr>
+    <td>点击"编辑资料". "取消"按钮</td>
+    <td>
+      弹出窗口关闭
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击"最常购买"中的一个商品</td>
+    <td>
+      销售单.商品行数据, 增加该商品
+    </td>
+  </tr>
+
+
+</table>
+
+</body>
+</html>

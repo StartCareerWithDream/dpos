@@ -1,0 +1,1100 @@
+/* 药丸标签 */
+span[hdPill] {
+  font-size: 14px;
+  border-radius: 13px;
+  color: white;
+  min-width: 54px;
+  height: 24px;
+  display: inline-block;
+  line-height: 24px;
+  text-align: center;
+}
+span[hdPill_s] {
+  font-size: 12px;
+  border-radius: 13px;
+  color: white;
+  min-width: 46px;
+  height: 18px;
+  display: inline-block;
+  line-height: 18px;
+  text-align: center;
+}
+span[hdPill=undo],span[hdPill_s=undo] {
+  background-color: #F67309;
+}
+
+span[hdPill=doing],span[hdPill_s=doing] {
+  background-color: #11c3fe;
+}
+
+span[hdPill=done],span[hdPill_s=done] {
+  background-color: #7BD75F;
+}
+
+span[hdPill=stop],span[hdPill_s=stop] {
+  background-color: #FF5D83;
+}
+span[hdPill=invalid],span[hdPill_s=invalid] {
+  background-color: #c9c9c9;
+}
+
+/*--------多选下拉框 开始--------*/
+div[hdMultiple]  {position: relative;width: 100%;}
+div[hdMultiple] option {display: none;}
+
+/*div[hdMultipleFocus] {width: 1px;height:1px;position: absolute;left:0;top:0;z-index: -1}*/
+div[hdMultipleContent] {width: 100%; display: none; background-color:#ffffff;
+  position: absolute;border: 1px solid #C2CED3;border-radius: 2px;padding: 2px;
+  z-index:2;  box-shadow: 2px 2px 5px rgba(0,0,0,.1);}
+div[hdMultipleList] {display:block; max-height: 200px; overflow-y: auto;}
+div[hdMultipleList] .getHover {background-color:#E6EFF9}
+div[hdMultipleList] .notFound {display:none}
+div[hdMultipleList] strong {background-color: #FFBE21}
+div[hdMultipleList] .singleSelect {background-color: #D9EDF7}
+
+div[hdMultipleSearch] {display:block;position: relative; padding: 2px 8px;}
+div[hdMultipleSearch] input {padding-right: 20px}
+div[hdMultipleSearch] i {color: #BCBCBC;position: absolute; z-index: 10; top: 3px; right: 12px}
+
+div[hdMultipleCtrl] {display:block; height:28px;line-height: 28px;background-color: #F2F2F2;position: relative; padding: 0 8px}
+div[hdMultipleCtrl] a{padding-right: 8px;}
+
+div[hdMultiple] table{width:100%; border-collapse: separate; border-spacing: 0}
+div[hdMultiple] tr{height: 28px; cursor: pointer;}
+/*div[hdMultiple] tr:hover {background-color:#E6EFF9}*/
+
+div[hdMultiple] td{padding: 0 8px!important;}
+div[hdMultiple] td:first-child{width: 30px;position: relative;vertical-align: top; padding-top: 3px!important;}
+div[hdMultiple] td:last-child{width: auto; vertical-align: middle}
+/*--------多选下拉框 结束--------*/
+/**********单选输入建议框 - 开始***********/
+div[hdInputSearch]{display: none;
+  border: 1px solid #C2CED3;border-radius: 2px;padding:2px;z-index:2;  box-shadow: 2px 2px 5px rgba(0,0,0,.2);background-color:#ffffff;
+  position: absolute; max-height: 200px; overflow-y: auto; min-width: 100%;
+}
+
+div[hdInputSearch] table{width:100%; border-collapse: separate; border-spacing: 0}
+div[hdInputSearch] tr{cursor: pointer;}
+div[hdInputSearch] td{padding: 4px!important; background-color:transparent!important;}
+div[hdInputSearch] tr:hover{background-color:#E6EFF9}
+div[hdInputSearch] .getHover {background-color:#E6EFF9}
+/**********单选输入建议框 - 结束***********/
+/*指定风格定义————按钮*/
+
+/*******************模块按钮**************************/
+button[btnMain] {
+  /*模块按钮*/
+  border: 1px solid #11C3FE;
+  min-width: 90px;
+  min-height: 32px;
+}
+button[btnMain]:hover  {
+  color: #ffffff;
+  border: 1px solid #41CFFE;
+  background-color: #41CFFE;
+}
+button[btnMain]:focus  {
+  border: 1px solid #1194bf;
+}
+button[btnMain]:active {
+  color: #ffffff;
+  border: 1px solid #0FB0E5;
+  background-color: #0FB0E5;
+}
+
+
+button[btnMain=m1] {
+  /*模块按钮，主按钮，一个页面就一个*/
+  background-color: #11C3FE;
+  color: #ffffff;
+}
+button[btnMain=m1]:disabled {
+  border: 1px solid #F2F2F2;
+  color: #C9C9C9;
+  background-color: #F2F2F2
+}
+
+button[btnMain=m2] {
+  /*模块按钮，次按钮，一个页面可多个*/
+  background-color: #ffffff;
+  border: 1px solid #11C3FE;
+  color: #11C3FE;
+}
+button[btnMain=m2]:disabled {
+  border: 1px solid #F2F2F2;
+  color: #C9C9C9;
+  background-color: #ffffff
+}
+
+button[btnMain=m3]  {
+  /*模块按钮，删除类（删除、作废、禁用等），一个页面可多个*/
+  background-color: #ffffff;
+  border: 1px solid #F05050;
+  color: #F05050;
+}
+button[btnMain=m3]:hover  {
+  color: #ffffff;
+  border: 1px solid #F05050;
+  background-color: #F05050;
+}
+button[btnMain=m3]:focus  {
+  border: 1px solid #CB1212
+}
+button[btnMain=m3]:active {
+  color: #ffffff;
+  border: 1px solid #D93C43;
+  background-color: #D93C43;
+}
+button[btnMain=m3]:disabled {
+  border: 1px solid #F2F2F2;
+  color: #C9C9C9;
+  background-color: #ffffff
+}
+
+/*******************搜索按钮**************************/
+button[btnSearch] {
+  /*搜索按钮*/
+  /*letter-spacing: 2px;*/ /*文字间距，暂时不用*/
+  border: 1px solid #11C3FE;
+  min-width: 54px;
+  min-height: 28px;
+}
+button[btnSearch]:hover  {
+  color: #ffffff;
+  border: 1px solid #41CFFE;
+  background-color: #41CFFE;
+}
+button[btnSearch]:active {
+  color: #ffffff;
+  border: 1px solid #0FB0E5;
+  background-color: #0FB0E5;
+}
+
+button[btnSearch=s1] {
+  /*搜索按钮：搜索*/
+  background-color: #11C3FE;
+  color: #ffffff;
+}
+button[btnSearch=s1]:focus {
+  border: 1px solid #1194bf;
+}
+button[btnSearch=s1]:disabled {
+  border: 1px solid #F2F2F2;
+  color: #C9C9C9;
+  background-color: #F2F2F2
+}
+
+
+button[btnSearch=s2]  {
+  /*搜索按钮：清空*/
+  background-color: #ffffff;
+  border: 1px solid #F05050;
+  color: #F05050;
+}
+button[btnSearch=s2]:hover  {
+  color: #ffffff;
+  border: 1px solid #F05050;
+  background-color: #F05050;
+}
+button[btnSearch=s2]:focus {
+  border: 1px solid #CB1212;
+}
+button[btnSearch=s2]:active {
+  color: #ffffff;
+  border: 1px solid #D93C43;
+  background-color: #D93C43;
+}
+button[btnSearch=s2]:disabled {
+  border: 1px solid #F2F2F2;
+  color: #C9C9C9;
+  background-color: #ffffff
+}
+
+button[btnPage] {
+  /*搜索按钮*/
+  /*letter-spacing: 2px;*/ /*文字间距，暂时不用*/
+  font-size: 12px;
+  line-height: 20px;
+  border: 1px solid #11C3FE;
+  width: 50px;
+  height: 24px;
+  background-color: #11C3FE;
+  color: #ffffff;
+  margin-top: -1px;
+}
+button[btnPage]:hover  {
+  color: #ffffff;
+  border: 1px solid #41CFFE;
+  background-color: #41CFFE;
+}
+button[btnPage]:active {
+  color: #ffffff;
+  border: 1px solid #0FB0E5;
+  background-color: #0FB0E5;
+}
+
+/*******************批量操作按钮**************************/
+button[btnBatch] {
+  /*模块按钮*/
+  font-size: 12px;
+  border: 1px solid #7BD75F;
+  min-width: 64px;
+  min-height: 28px;
+}
+button[btnBatch]:hover  {
+  color: #ffffff;
+  border: 1px solid #95DF7F;
+  background-color: #95DF7F;
+}
+button[btnBatch]:focus  {
+  border: 1px solid #3bb716;
+}
+button[btnBatch]:active {
+  color: #ffffff;
+  border: 1px solid #66D147;
+  background-color: #66D147;
+}
+button[btnBatch]:disabled {
+  border: 1px solid #F2F2F2;
+  color: #C9C9C9;
+  background-color: #F2F2F2
+}
+
+button[btnBatch=b1] {
+  /*模块按钮，主按钮，一个页面就一个*/
+  background-color: #7BD75F;
+  color: #ffffff;
+}
+
+button[btnBatch=b2] {
+  /*模块按钮，次按钮，一个页面可多个*/
+  background-color: #ffffff;
+  border: 1px solid #66D147;
+  color: #66D147;
+}
+button[btnBatch=b2]:disabled {
+  border: 1px solid #F2F2F2;
+  color: #C9C9C9;
+  background-color: #ffffff
+}
+
+button[btnBatch=b3]  {
+  /*模块按钮，删除类（删除、作废、禁用等），一个页面可多个*/
+  background-color: #ffffff;
+  border: 1px solid #F05050;
+  color: #F05050;
+}
+button[btnBatch=b3]:hover  {
+  color: #ffffff;
+  border: 1px solid #F05050;
+  background-color: #F05050;
+}
+button[btnBatch=b3]:focus  {
+  border: 1px solid #CB1212;
+}
+button[btnBatch=b3]:active {
+  color: #ffffff;
+  border: 1px solid #D93C43;
+  background-color: #D93C43;
+}
+button[btnBatch=b3]:disabled {
+  border: 1px solid #F2F2F2;
+  color: #C9C9C9;
+  background-color: #ffffff
+}
+
+/*行内按钮颜色 用于行内按钮颜色*/
+.btnBlue {color: #11C3FE; cursor: pointer}
+.btnGreen {color: #7BD75F; cursor: pointer}
+.btnRed {color: #F05050; cursor: pointer}
+
+/*******************上传文件按钮**************************/
+div[hdFileUpload] {
+  display: inline-block;
+  position: relative;
+  border: none;
+  width: 90px;
+  height: 32px;
+  margin: 0;
+  line-height: normal;
+}
+div[hdFileUpload] input[type=file] {
+  visibility: hidden;
+  display: none;
+}
+/*******************上传图片按钮**************************/
+div[hdImageUpload] {
+  display: inline-block;
+  position: relative;
+  border: none;
+  min-width: 90px;
+  min-height: 90px;
+  margin: 0;
+  line-height: normal;
+}
+div[hdImageUpload] input[type=file] {
+  visibility: hidden;
+  display: none;
+}
+div[hdImageUpload] button {
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+}
+div[hdImageUpload] button i {
+  width: 40px;
+  height: 40px;
+}
+div[hdImageUpload] img {
+  display: inline-block;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  width: 92px;
+  height: 92px;
+}
+
+
+/**
+ * *********************** checkBox* ***********************
+ */
+.hdCheck {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: #F2F2F2;
+  margin: 0;
+  line-height: normal;
+
+  border-radius: 2px;
+  position: relative;
+}
+
+/**
+ * 隐藏默认的checkbox
+ */
+.hdCheck input[type=checkbox] {
+  visibility: hidden;
+}
+
+
+/**
+ * Create the checkbox button
+ */
+.hdCheck label {
+  border: 1px solid #C2CED3;
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  background: #ffffff;
+}
+
+/**
+ * Display the tick inside the checkbox
+ */
+.hdCheck label:after {
+  /*opacity: 0.2;*/
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 5px;
+  background: transparent;
+  top: 3px;
+  left: 2px;
+  border: 2px solid #ffffff;
+  border-top: none;
+  border-right: none;
+
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+/**
+ * Create the checked state
+ */
+.hdCheck input[type=checkbox]:checked + label {
+  border: 1px solid #11C3FE;
+  background: #11C3FE;
+}
+
+/**
+ * disable
+ */
+.hdCheck[disabled=disabled]  label{
+  background: #eeeff2;
+}
+.hdCheck[disabled=disabled]  label:after{
+  border: none;
+}
+.hdCheck[disabled=disabled] input[type=checkbox]:checked + label {
+  background: #eeeff2;
+  border: 1px solid #C2CED3;
+}
+.hdCheck[disabled=disabled] input[type=checkbox]:checked + label:after {
+  border: 2px solid #BCBCBC;
+  border-top: none;
+  border-right: none;
+}
+/**
+ * *********************** 标签1* ***********************
+ */
+ul[hdTab_1]{
+  border: none;
+  border-radius: 2px;
+  background-color: #EAF0F4;
+  display: inline-block;
+  /* 标签 不允许换行*/
+  white-space: nowrap;
+  /* 以下属性的值根据具体情况而定, 控制2个li之间的间距 董思捷觉得有点间距比较好 */
+  /*letter-spacing: 0;*/
+}
+ul[hdTab_1] li {
+  font-size: 13px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 2px;
+  min-width: 54px;
+  height: 24px;
+  padding: 0px 8px;
+  line-height: 26px;
+  text-align: center;
+  white-space: nowrap;
+  /*letter-spacing: 0;*/
+}
+
+ul[hdTab_1] li:hover {
+  background-color: #D6E1E9;
+}
+
+ul[hdTab_1] .tbfocus  {/* 加 important 保证在hover时 不变样*/
+  color: #ffffff !important;
+  background-color: #11C3FE !important;
+}
+
+/**
+ * *********************** 标签2* ***********************
+ */
+ul[hdTab_2]{
+  border-bottom: 1px solid #C2CED3;
+  outline: none;
+  display: block;
+  /* 标签 不允许换行*/
+  white-space: nowrap;
+}
+ul[hdTab_2] li {
+  border: 1px solid transparent;
+  border-bottom: none;
+  font-size: 13px;
+  display: inline-block;
+  cursor: pointer;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  min-width: 100px;
+  min-height: 24px;
+  padding: 4px 8px 0px 8px;
+  line-height: 18px;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 1px;
+  margin-bottom: -1px;
+}
+
+ul[hdTab_2] li:hover {
+  color: #11C3FE;
+}
+
+ul[hdTab_2] .tbfocus  {/* 加 important 保证在hover时 不变样*/
+  border: 1px solid #C2CED3;
+  border-bottom: 2px solid #EEEFF2;
+  font-weight: bold;
+  color: #11C3FE !important;
+  background-color: #EEEFF2 !important;
+}
+
+/**
+ * *********************** 标签3* ***********************
+ */
+ul[hdTab_3]{
+  border-bottom: 1px solid #C2CED3;
+  outline: none;
+  display: block;
+  /* 标签 不允许换行*/
+  white-space: nowrap;
+}
+ul[hdTab_3] li {
+  border: 2px solid transparent;
+  font-size: 13px;
+  display: inline-block;
+  cursor: pointer;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  min-width: 100px;
+  min-height: 24px;
+  padding: 0px 8px;
+  line-height: 24px;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 1px;
+  margin-bottom: -1px;
+}
+
+ul[hdTab_3] li:hover {
+  color: #11C3FE;
+}
+
+ul[hdTab_3] .tbfocus  {/* 加 important 保证在hover时 不变样*/
+  border-bottom: 2px solid #11C3FE;
+  font-weight: bold;
+  color: #11C3FE !important;
+}
+
+/**
+ * *********************** 标签4* ***********************
+ */
+ul[hdTab_4]{
+  border: none;
+  outline: none;
+  display: inline-block;
+  /* 标签 不允许换行*/
+  white-space: nowrap;
+  letter-spacing: -2px;
+}
+ul[hdTab_4] li {
+  border: none;
+  font-size: 14px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 2px;
+  background-color: #EAF0F4;
+  min-width: 142px;
+  min-height: 40px;
+  padding: 0px 8px;
+  line-height: 40px;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+
+ul[hdTab_4] li:hover {
+  background-color: #D6E1E9;
+}
+
+ul[hdTab_4] .tbfocus  {/* 加 important 保证在hover时 不变样*/
+  border-top: 4px solid #11C3FE;
+  border-radius:0px;
+  height: 36px;
+  line-height: 32px;
+  font-weight: bold;
+  background-color: #ffffff !important;
+}
+
+/**
+ * *********************** 标签5* ***********************
+ */
+ul[hdTab_5]{
+  border: none;
+  background-color: #ffffff;
+  display: inline-block;
+  /* 标签 不允许换行*/
+  white-space: nowrap;
+  /* 以下属性的值根据具体情况而定, 控制2个li之间的间距 董思捷觉得有点间距比较好 */
+  /*letter-spacing: 4px;*/
+}
+ul[hdTab_5] li {
+  font-size: 13px;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 50px;
+  min-width: 70px;
+  min-height: 24px;
+  height: 24px;
+  padding: 0px 8px;
+  line-height: 24px;
+  text-align: center;
+  white-space: nowrap;
+  /*letter-spacing: 0;*/
+}
+
+ul[hdTab_5] li:hover {
+  background-color: #ffffff;
+  border: 1px solid #11C3FE;
+  color: #11C3FE;
+}
+
+ul[hdTab_5] .tbfocus  {/* 加 important 保证在hover时 不变样*/
+  color: #ffffff !important;
+  background-color: #11C3FE !important;
+}
+
+/*******************HDTIP 弹出提示框**************************/
+.modal-tips {
+  z-index: 1000;
+  position: fixed;
+  top: 100px;
+  left: 40%;
+  height: 64px;
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.349019607843137);
+  text-align: left;
+  min-width: 300px;
+  max-width: 300px;
+}
+.modal-tips .i-success{color: #7BD75F;}
+.modal-tips .i-error{color: #F33333;}
+.modal-tips .i-warn{color: #F67309;}
+.modal-tips .i-info{color: #11c3fe;}
+
+
+.modal-tips .image-tip {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  float: left;
+  padding-left: 10px;
+  line-height: 64px;
+}
+.modal-tips .image-tip i{font-size: 40px;}
+
+.modal-tips .text-tip {
+  /*border: 1px solid black;*/
+  padding: 0;
+  height: 64px;
+  max-width: 220px;
+}
+.modal-tips td {
+  padding: 0;
+  /*border: 1px solid red;*/
+  word-break: break-all;
+}
+.modal-tips label {
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+}
+.modal-tips span {
+  display: block;
+  font-size: 13px;
+  color: #868686;
+}
+
+
+.hd-dialog .dialog__overlay{
+  background-color: rgba(40,51,81,0.6);
+}
+.hd-dialog .dialog__content {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: inherit;
+  min-width: inherit;
+  padding: 0;
+  border-radius: 2px;
+}
+
+.hd-dialog .hd-dialog-title {
+  padding: 0 40px 0 20px;
+  line-height: 40px;
+  height: 40px;
+  text-align: left;
+  border-bottom: 1px solid rgba(240, 243, 247, 1);
+}
+.hd-dialog .hd-dialog-close {
+  height: 32px;
+  width: 32px;
+  line-height: 32px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #bebaba;
+  cursor: pointer;
+  text-align: center;
+}
+.hd-dialog .hd-dialog-close:hover{
+  color: #FFF;
+  background-color:#ff3333;
+}
+.hd-dialog .hd-dialog-close:active{
+  color: #FFF;
+  background-color:#df1f1f;
+}
+
+.hd-dialog .hd-dialog-close i{
+  font-size: 11px;
+}
+.hd-dialog .hd-dialog-content{
+  overflow: overlay;
+  min-width: 266px;
+  min-height: 40px;
+  max-width: 804px;
+  max-height: 443px;
+  text-align: left;
+}
+.hd-dialog .hd-dialog-content-default{
+  width: 448px;
+  overflow: hidden;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.hd-dialog .hd-dialog-button {
+  padding: 30px;
+  text-align: center;
+}
+
+
+/* 批量*/
+.hd-dialog-patch .hd-dialog-content{
+  padding: 50px 50px 0 50px;
+}
+.hd-dialog-patch .hd-patch-title{
+  margin-bottom: 12px;
+  text-align: left;
+}
+.hd-dialog-patch .hd-patch-success-info{
+  color: green;
+  float: left;
+}
+.hd-dialog-patch .hd-patch-error-info{
+  color: red;
+  float: right;
+}
+.hd-dialog-patch .hd-patch-desc{
+  max-height: 100px;
+  text-align: center;
+  max-height: 150px;
+  overflow: scroll;
+}
+
+
+.hd-progress {
+  height: 20px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}
+.hd-progress  .hd-progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: #66D9FF;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+  -webkit-transition: width .6s ease;
+  -o-transition: width .6s ease;
+  transition: width .6s ease;
+}
+
+/*******************HDModel 弹出操作框**************************/
+.dialog,
+.dialog__overlay {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.dialog {
+  z-index: 998;
+  position: fixed;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.dialog__overlay {
+  position: absolute;
+  z-index: 1;
+  background: rgba(55, 58, 71, 0.9);
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  -webkit-backface-visibility: hidden;
+}
+
+.dialog--open .dialog__overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dialog__content {
+  width: 50%;
+  max-width: 560px;
+  min-width: 290px;
+  background: #fff;
+  padding: 4em;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+  opacity: 0;
+}
+
+.dialog--open .dialog__content {
+  pointer-events: auto;
+}
+
+/* Content */
+.dialog h2 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 2em;
+  padding: 0 0 2em;
+  margin: 0;
+}
+
+
+/*主题*/
+.dialog__overlay {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+
+.dialog.dialog--open .dialog__content,
+.dialog.dialog--close .dialog__content {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.dialog.dialog--open .dialog__content {
+  -webkit-animation-name: anim-open;
+  animation-name: anim-open;
+  -webkit-animation-timing-function: cubic-bezier(0.6,0,0.4,1);
+  animation-timing-function: cubic-bezier(0.6,0,0.4,1);
+}
+
+.dialog.dialog--close .dialog__content {
+  -webkit-animation-name: anim-close;
+  animation-name: anim-close;
+}
+
+@-webkit-keyframes anim-open {
+  0% { opacity: 0; -webkit-transform: scale3d(0, 0, 1); }
+  100% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); }
+}
+
+@keyframes anim-open {
+  0% { opacity: 0; -webkit-transform: scale3d(0, 0, 1); transform: scale3d(0, 0, 1); }
+  100% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1); }
+}
+
+@-webkit-keyframes anim-close {
+  0% { opacity: 1; }
+  100% { opacity: 0; -webkit-transform: scale3d(0.5, 0.5, 1); }
+}
+
+@keyframes anim-close {
+  0% { opacity: 1; }
+  100% { opacity: 0; -webkit-transform: scale3d(0.5, 0.5, 1); transform: scale3d(0.5, 0.5, 1); }
+}
+
+
+
+/* 调整 listbar searchbar detailBox  在 弹出框中的 minHeight maxHeight minWidth maxWidth */
+.hd-dialog .detailBox{
+  min-width: 784px;
+}
+.hd-dialog .listBar{
+  min-width: 784px;
+}
+.hd-dialog .searchBar{
+  min-width: 784px;
+}
+.hdDate{
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.hdDate i{
+  position: absolute;
+  right: 4px;
+  cursor: pointer;
+}
+/**
+
+ @Name： laydate 核心样式
+ @Author：贤心
+ @Site：http://sentsin.com/layui/laydate
+
+**/
+
+html{_background-image:url(about:blank); _background-attachment:fixed;}
+.laydate_box,  .laydate_box *{margin:0; padding:0; -moz-box-sizing:content-box; -webkit-box-sizing:content-box; box-sizing:content-box;}
+.laydate-icon,
+.laydate-icon-default,
+.laydate-icon-danlan,
+.laydate-icon-dahong,
+.laydate-icon-molv{height:22px; line-height:22px; padding-right:20px; border:1px solid #C6C6C6; background-repeat:no-repeat; background-position:right center;  background-color:#fff; outline:0;}
+/*.laydate-icon-default{ background-image:url(../skins/default/icon.png)}
+.laydate-icon-danlan{border:1px solid #B1D2EC; background-image:url(../skins/danlan/icon.png)}
+.laydate-icon-dahong{background-image:url(../skins/dahong/icon.png)}
+.laydate-icon-molv{background-image:url(../skins/molv/icon.png)}*/
+.laydate_box{width:240px; font:12px '\5B8B\4F53'; z-index:1000; *margin:-2px 0 0 -2px; *overflow:hidden; _margin:0; _position:absolute!important; background-color:#fff;}
+.laydate_box li{list-style:none;}
+.laydate_box .laydate_void{cursor:text!important;}
+.laydate_box a,  .laydate_box a:hover{text-decoration:none; blr:expression(this.onFocus=this.blur()); cursor:pointer;}
+.laydate_box a:hover{text-decoration:none;}
+.laydate_box cite,  .laydate_box label{position:absolute; width:0; height:0; border-width:5px; border-style:dashed; border-color:transparent; overflow:hidden; cursor:pointer;}
+.laydate_box .laydate_yms,  .laydate_box .laydate_time{display:none;}
+.laydate_box .laydate_show{display:block;}
+.laydate_box input{outline:0; font-size:14px; background-color:#fff;}
+.laydate_top{position:relative; height:26px; padding:5px; *width:100%; z-index:99;}
+.laydate_ym{position:relative; float:left; height:24px; cursor:pointer;}
+.laydate_ym input{float:left; height:24px; line-height:24px; text-align:center; border:none; cursor:pointer;}
+.laydate_ym .laydate_yms{position:absolute; left: -1px; top: 24px; height:181px;}
+.laydate_y{width:121px; margin-right:6px;}
+.laydate_y input{width:64px; margin-right:15px;}
+.laydate_y .laydate_yms{width:121px; text-align:center;}
+.laydate_y .laydate_yms a{position:relative; display:block; height:20px;}
+.laydate_y .laydate_yms ul{height:139px; padding:0; *overflow:hidden;}
+.laydate_y .laydate_yms ul li{float:left; width:60px; height:20px; line-height: 20px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
+.laydate_m{width:99px;}
+.laydate_m .laydate_yms{width:99px; padding:0;}
+.laydate_m input{width:42px; margin-right:15px;}
+.laydate_m .laydate_yms span{display:block; float:left; width:42px; margin: 5px 0 0 5px; line-height:24px; text-align:center; _display:inline;}
+.laydate_choose{display:block; float:left; position:relative; width:20px; height:24px;}
+.laydate_choose cite,  .laydate_tab cite{left:50%; top:50%;}
+.laydate_chtop cite{margin:-7px 0 0 -5px; border-bottom-style:solid;}
+.laydate_chdown cite,  .laydate_ym label{top:50%; margin:-2px 0 0 -5px; border-top-style:solid;}
+.laydate_chprev cite{margin:-5px 0 0 -7px;}
+.laydate_chnext cite{margin:-5px 0 0 -2px;}
+.laydate_ym label{right:28px;}
+.laydate_table{ width:230px; margin:0 5px; border-collapse:collapse; border-spacing:0px; }
+.laydate_table td{width:31px; height:19px; line-height:19px; text-align: center; cursor:pointer; font-size: 12px;}
+.laydate_table thead{height:22px; line-height:22px;}
+.laydate_table thead th{font-weight:400; font-size:12px; text-align:center;}
+.laydate_bottom{position:relative; height:22px; line-height:20px; padding:5px; font-size:12px;}
+.laydate_bottom #laydate_hms{position: relative; z-index: 1; float:left; }
+.laydate_time{ position:absolute; left:5px; bottom: 26px; width:129px; height:125px; *overflow:hidden;}
+.laydate_time .laydate_hmsno{ padding:5px 0 0 5px;}
+.laydate_time .laydate_hmsno span{display:block; float:left; width:24px; height:19px; line-height:19px; text-align:center; cursor:pointer; *margin-bottom:-5px;}
+.laydate_time1{width:228px; height:154px;}
+.laydate_time1 .laydate_hmsno{padding: 6px 0 0 8px;}
+.laydate_time1 .laydate_hmsno span{width:21px; height:20px; line-height:20px;}
+.laydate_msg{left:49px; bottom:67px; width:141px; height:auto; overflow: hidden;}
+.laydate_msg p{padding:5px 10px;}
+.laydate_bottom li{float:left; height:20px; line-height:20px; border-right:none; font-weight:900;}
+.laydate_bottom .laydate_sj{width:33px; text-align:center; font-weight:400;}
+.laydate_bottom input{float:left; width:21px; height:20px; line-height:20px; border:none; text-align:center; cursor:pointer; font-size:12px;  font-weight:400;}
+.laydate_bottom .laydte_hsmtex{height:20px; line-height:20px; text-align:center;}
+.laydate_bottom .laydte_hsmtex span{position:absolute; width:20px; top:0; right:0px; cursor:pointer;}
+.laydate_bottom .laydte_hsmtex span:hover{font-size:14px;}
+.laydate_bottom .laydate_btn{position:absolute; right:5px; top:5px;}
+.laydate_bottom .laydate_btn a{float:left; height:20px; padding:0 6px; _padding:0 5px;}
+.laydate_bottom .laydate_v{position:absolute; left:10px; top:6px; font-family:Courier; z-index:0;}
+
+
+/** *******************************************************************
+
+ @Name： laydate皮肤：默认
+ @Author：贤心
+ @Site：http://sentsin.com/layui/laydate
+
+**/
+
+
+/*.laydate-icon{border:1px solid #C6C6C6; background-image:url(icon.png)}*/
+
+.laydate_box,
+.laydate_ym,
+.laydate_ym .laydate_yms,
+.laydate_table,
+.laydate_table td,
+.laydate_bottom #laydate_hms,
+.laydate_time,
+.laydate_bottom .laydate_btn a{border:1px solid #ccc;}
+
+.laydate_y .laydate_yms a,
+.laydate_choose,
+.laydate_table thead,
+.laydate_bottom .laydte_hsmtex{background-color:#F6F6F6;}
+
+.laydate_box,
+.laydate_ym .laydate_yms,
+.laydate_time{box-shadow: 2px 2px 5px rgba(0,0,0,.1);}
+
+.laydate_box{border-top:none; border-bottom:none; background-color:#fff; color:#333;}
+.laydate_box input{color:#333;}
+.laydate_box .laydate_void{color:#ccc!important; /*text-decoration:line-through;*/}
+.laydate_box .laydate_void:hover{background-color:#fff!important}
+.laydate_box a,  .laydate_box a:hover{color:#333;}
+.laydate_box a:hover{color:#666;}
+.laydate_click{background-color:#eee!important;}
+.laydate_top{border-top:1px solid #C6C6C6;}
+.laydate_ym .laydate_yms{border:1px solid #C6C6C6; background-color:#fff;}
+.laydate_y .laydate_yms a{border-bottom:1px solid #C6C6C6;}
+.laydate_y .laydate_yms .laydate_chdown{border-top:1px solid #C6C6C6; border-bottom:none;}
+.laydate_choose{border-left:1px solid #C6C6C6;}
+.laydate_chprev{border-left:none; border-right:1px solid #C6C6C6;}
+.laydate_choose:hover,
+.laydate_y .laydate_yms a:hover{background-color:#fff;}
+.laydate_chtop cite{border-bottom-color:#666;}
+.laydate_chdown cite,  .laydate_ym label{border-top-color:#666;}
+.laydate_chprev cite{border-right-style:solid; border-right-color:#666;}
+.laydate_chnext cite{border-left-style:solid; border-left-color:#666;}
+.laydate_table td{border:none;  height:21px!important; line-height:21px!important; background-color:#fff;}
+.laydate_table .laydate_nothis{color:#999;}
+.laydate_table thead{height:21px!important; line-height:21px!important;}
+.laydate_table thead th{border-bottom:1px solid #ccc;}
+.laydate_bottom{border-bottom:1px solid #C6C6C6;}
+.laydate_bottom #laydate_hms{background-color:#fff;}
+.laydate_time{background-color:#fff;}
+.laydate_bottom .laydate_sj{border-right:1px solid #C6C6C6; background-color:#F6F6F6;}
+.laydate_bottom input{background-color:#fff;}
+.laydate_bottom .laydte_hsmtex{border-bottom:1px solid #C6C6C6;}
+.laydate_bottom .laydate_btn{border-right:1px solid #C6C6C6;}
+.laydate_bottom .laydate_v{color:#999}
+.laydate_bottom .laydate_btn a{border-right:none; background-color:#F6F6F6;}
+.laydate_bottom .laydate_btn a:hover{color:#000; background-color:#fff;}
+
+.laydate_m .laydate_yms span:hover,
+.laydate_y .laydate_yms ul li:hover,
+.laydate_table td:hover,
+.laydate_time .laydate_hmsno span:hover{background-color:#F3F3F3}
+
+
+@charset "UTF-8";
+/**
+ * Created by jsama on 2017/8/21.
+ * app 整体风格 - 样式
+ */
+.hdCheck input[type=checkbox]:checked + label {
+  background: #FFF;
+  border: 1px solid #C2CED3;
+}
+
+.hdCheck input[type=checkbox]:checked + label:after {
+  border: 2px solid #ff5146;
+  border-top: none;
+  border-right: none;
+}
+
+div[hdMultipleSearch] i {
+  line-height: 1.6;
+}
+div[hdMultiple] select:focus{
+  border: 1px solid #666666;
+  outline: 0;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="libs/jquery.min.js"></script>
+    <script src="index.controller.js"></script>
+    <script src="main.js"></script>
+</head>
+<body ng-controller="myCtrl" style="padding: 0;margin: 0">
+<!--下面的html临时使用，以后可以直接删除-->
+<button onclick="showMenu1()">销售</button>
+<div id="menu1" class="menu"  style="width: 1024px;height: 200px;display: none;">
+    <ul style="list-style-type: none;padding-left: 0">
+        <li style="cursor: pointer" ui-sref="/saleAdd/saleAddTop">销售新建</li>
+        <li style="cursor: pointer" ui-sref="/saleList">销售列表</li>
+        <li style="cursor: pointer" ui-sref="/saleDtl">销售明细</li>
+    </ul>
+</div>
+<div id="dpos-angular"></div>
+<!--下面的js临时使用，以后可以直接删除-->
+<script>
+    var count1 = 0;
+    function showMenu1() {
+        count1++;
+        if(count1%2 == 0){
+            document.getElementById('menu1').style.display = 'none';
+        }else{
+            document.getElementById('menu1').style.display = 'block';
+        }
+    }
+    //测试模拟用户、门店、权限
+    /*1、权限  window.sessionStorage.setItem('permissions', Ext.JSON.encode(Ext.clone(permissions)));
+     2、门店  window.sessionStorage.setItem('shop', Ext.JSON.encode(Ext.clone(shop)));
+     3、用户 window.sessionStorage.setItem('user', Ext.JSON.encode(Ext.clone(user)));
+     */
+    var jsPermissions = ["商品","进货","销售","销售退货","销售改价","库存","收藏夹","解款","收付款","采购","批发",'自行缴款','缴款登记',"进价查看"];
+    //var jsShop = {"id":"s01c1521","name":"董思捷门店1","shortName":"董思捷门店1","address":"\u5929\u6d25\u5e02\u5e02\u8f96\u533a\u4e1c\u4e3d\u533aeyshhgf ","owner":"b441a25b-a618-4d92-9625-25fcc7f37031","printSaleTpl":null,"saleTagTpl":"\u6a21\u677f\u4e00","changesMode":0,"onlinePayments":[],"serviceProvider":null,"serviceProviderName":null,"serviceProvider400Phone":"400-1234-4567","expireTime":null,"expireNoticeType":null,"expireNoticeDays":"3"};
+    //var jsShop = {"id":"s01c6530","name":"jsama\u70b8\u836f\u5e93","shortName":"\u96f7","address":"\u4e0a\u6d77\u5e02\u53bf\u5d07\u660e\u53bfsss ","owner":"087847e6-0532-4aed-b88a-cd6943e3637a","printSaleTpl":null,"saleTagTpl":"\u6a21\u677f\u4e00","changesMode":1,"onlinePayments":[],"serviceProvider":null,"serviceProviderName":null,"serviceProvider400Phone":"400-1234-5678","businessType":"\u65e5\u7528\u767e\u8d27","expireTime":"2044-09-03 15:59:11","expireNoticeType":null,"expireNoticeDays":"3","defaultPayModel":"\u73b0\u91d1\u652f\u4ed8","costPriceArithmetic":"assign","balanceBarcodeRule":null,"workShifts":{"shiftType":"threeShifts","allDay":false,"startTime":"07:00","endTime":"23:00","enable":true,"lines":[{"shiftName":"\u65e9\u73ed","lineNo":1,"startTime":"07:00","endTime":"13:00"},{"shiftName":"\u4e2d\u73ed","lineNo":2,"startTime":"13:00","endTime":"18:00"},{"shiftName":"\u665a\u73ed","lineNo":3,"startTime":"18:00","endTime":"23:00"}]}}
+    var jsShop = {"id":"s02c7595","name":"dami\u8d75","shortName":"dami\u8d75","address":"\u4e0a\u6d77\u5e02\u5e02\u8f96\u533a\u95f5\u884c\u533a\u6d77\u9f0e111 ","owner":"d2159c4c-711c-7790-022a-f7607fc3498f","printSaleTpl":null,"saleTagTpl":"\u6a21\u677f\u4e00","changesMode":0,"onlinePayments":[],"serviceProvider":null,"serviceProviderName":null,"serviceProvider400Phone":"400-1234-5678","businessType":"\u9910\u996e\u5e97","expireTime":"2045-01-15 11:13:51","expireNoticeType":null,"expireNoticeDays":"3","defaultPayModel":"\u73b0\u91d1\u652f\u4ed8","costPriceArithmetic":"assign","balanceBarcodeRule":null,"workShifts":null,"allowPayDelivery":false};
+    //var jsUser= {"id":"087847e6-0532-4aed-b88a-cd6943e3637a","name":"jsama","mobile":"13816638979","photo":null};
+    var jsUser = {"id":"d2159c4c-711c-7790-022a-f7607fc3498f","name":"\u8d75\u84c9","mobile":"18726081447","photo":null};
+
+
+
+    window.sessionStorage.clear();
+    window.sessionStorage.setItem('permissions', JSON.stringify(jsPermissions));
+    window.sessionStorage.setItem('shop', JSON.stringify(jsShop));
+    window.sessionStorage.setItem('user', JSON.stringify(jsUser));
+
+    $(function () {
+        window.extAngularUiViewRender();
+        $(".menu li").click(function(){
+            window.dposAngularIframe.attr("src","main.html#"+$(this).attr("ui-sref"))
+        });
+    });
+</script>
+</body>
+</html>

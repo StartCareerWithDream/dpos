@@ -1,0 +1,55 @@
+<table hdView>
+  <tr hdHead>
+    <td colspan="2">
+      <span hdHeadLine>
+      <!-- 标题*开始-->
+      销售收银
+      <!-- 标题*结束-->
+      </span></td>
+  </tr>
+  <tr hdContaner>
+    <td colspan="2">
+      <div hdContanerDiv>
+        <!-- 内容*开始-->
+        <div class="partBar h92 saleAdd">
+          <div class="partBox tableAuto">
+            <div class="partLeft saleAddLeft">
+              <div class="partDiv saleAddDiv">
+                <!-- 左侧内容开始-->
+                <!--销售顶栏-->
+                <div ui-view="saleAddTopView"></div>
+                <!--销售录入-->
+                <div ui-view="saleAddSkuView"></div>
+                <!--销售支付-->
+                <div ui-view="saleAddPayView"></div>
+                <!-- 左侧内容结束-->
+              </div>
+            </div>
+
+
+            <div class="partRight saleAddRight" ng-show="backLeftOrRight">
+              <div class="partDiv">
+                <!-- 右侧内容开始-->
+                <!-- 标签1 -->
+                <ul hdTab_3 class="pl0"><!--如一个界面中有多个同类型标签，则需要把name="tab1"修改其中的name-->
+                  <li name="tab3" onclick="$('li[name=tab3]').removeClass('tbfocus'); $(this).addClass('tbfocus');" ng-click="favoriteTab('收藏夹')" class="tbfocus">收藏夹</li>
+                  <li name="tab3" ng-show="saleAddMemberFlag" onclick="$('li[name=tab3]').removeClass('tbfocus'); $(this).addClass('tbfocus')" ng-click="memberTab('会员信息')">会员信息</li>
+                </ul>
+                  <div ui-view="saleAddFavoriteView" ng-show="favoriteFlag&&!memberFlag">
+
+                  </div>
+                  <div ui-view="saleAddMemberView"  ng-show="!favoriteFlag&&memberFlag">
+
+                  </div>
+                <!-- 右侧内容结束-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 内容*结束-->
+      </div>
+    </td>
+  </tr>
+</table>
+<div ui-view="saleAddPendingView"></div>
+<div ui-view="saleAddFavoriteModView"></div>

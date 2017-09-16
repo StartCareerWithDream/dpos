@@ -1,0 +1,204 @@
+<div class="mainContent">
+    <!--<table class="titleBar">-->
+        <!--<tr>-->
+            <!--<td class="td1">报表首页&nbsp;>&nbsp;-->
+                <!--<small>商品修改记录</small>-->
+            <!--</td>-->
+        <!--</tr>-->
+    <!--</table>-->
+    <!--<div class="hr"></div>-->
+    <table class="dtlBar">
+        <tr>
+            <td width="10%">商品:</td>
+            <!--<td width="21%"><input type="text" class="hd-form-control" ng-model="dataManage.request.query.filter[0].value"-->
+            <!--ng-keyup="enterSearch()" placeholder="输入关键字或条码回车搜索"/></td>-->
+            <td width="30%">
+                <input ng-model="dataManage.request.shopquery.query" ng-cloak="" style="width: 273px" maxlength="16" hdMust="代码" hdInputSearch="hdInputSearch1" title="输入2个字符之后开始搜索">
+            </td>
+            <td width="10%">操作人:</td>
+            <td width="20%">
+                <div hdMultiple="ModifyRecordUpdMult" needSearch >
+                    <select>
+                        <option>请输入或选择操作人</option>
+                    </select>
+                    <div hdMultipleContent>
+                        <div hdMultipleList>
+                            <table>
+                                <tr ng-repeat="item in dataManage.response.updatertags" itemObj="{{item}}">
+                                    <td>
+                                        <div class="hdCheck"><input type="checkbox"><label></label></div>
+                                    </td>
+                                    <td text>{{item.name}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div hdMultipleCtrl>
+                            <a checkAll>全选</a><a checkNone>清除</a>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td width="10%">修改内容:</td>
+            <td width="20%">
+                <div hdMultiple="ModifyRecordModMult" needSearch >
+                    <select>
+                        <option>请选择</option>
+                    </select>
+                    <div hdMultipleContent>
+                        <div hdMultipleList>
+                            <table>
+                                <tr ng-repeat="item in dataManage.changetags" itemObj="{{item}}">
+                                    <td>
+                                        <div class="hdCheck"><input type="checkbox"><label></label></div>
+                                    </td>
+                                    <td text>{{item.name}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div hdMultipleCtrl>
+                            <a checkAll>全选</a><a checkNone>清除</a>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%">时间:</td>
+            <td width="30%">
+                <hd-date-input ng-model="dataManage.request.query.filters[3].value[0]"
+                               hd-date-input-format="YYYY-MM-DD" style="width: 130px"></hd-date-input>
+                -
+                <hd-date-input ng-model="dataManage.request.query.filters[3].value[1]"
+                               hd-date-input-format="YYYY-MM-DD" style="width: 130px"></hd-date-input>
+            </td>
+            <td width="10%">最近：</td>
+            <td  width="20%">
+                <ul class="hd-tab-pill">
+                    <li value="sevenDay" ng-click="changeDate('sevenDay')" ng-class="{'focus':dataManage.other.index=='sevenDay'}">7天</li>
+                    <li value="month" ng-click="changeDate('threeMonth')" ng-class="{'focus':dataManage.other.index=='threeMonth'}">1个月</li>
+                    <li value="threeMonth" ng-click="changeDate('sixMonth')" ng-class="{'focus':dataManage.other.index=='sixMonth'}">3个月</li>
+                </ul>
+            </td>
+            <td width="10%"></td>
+            <td  width="20%" style="text-align: right">
+                <button btnsearch="s1" ng-click="search()"><i class="iconfont icon-fangdajing"></i>查询</button>
+                <button btnsearch="s2" ng-click="reset()">重置</button>
+            </td>
+        </tr>
+        <!--<tr>-->
+            <!--<td colspan="5"></td>-->
+            <!--<td>-->
+                <!--<div style="float: right">-->
+
+                <!--</div>-->
+            <!--</td>-->
+        <!--</tr>-->
+    </table>
+
+    <div>
+        <table class="listBar">
+            <tbody class="tableCon">
+            <tr>
+                <th class="th left padding-left-10" width="25%">
+                    <i class="iconfont icon-morenpaixu sortIcon" aria-hidden="true" style="display: none"></i>名称
+                </th>
+                <th class="th left padding-left-10" width="15%">
+                    <i class="iconfont icon-morenpaixu sortIcon" aria-hidden="true" style="display: none"></i>条码
+                </th>
+                <th class="th center" width="15%">
+                    <i class="iconfont icon-jiangxu sortIcon" aria-hidden="true"></i>修改时间
+                </th>
+                <th class="th left padding-left-10" width="10%">操作人员</th>
+                <th class="th left padding-left-10" width="35%">修改内容</th>
+            </tr>
+            <tr class="tr" ng-repeat="item in dataManage.response.items">
+                <td class="td  padding-left-10" style="text-align: left">{{item.name}}</td>
+                <td class="td  padding-left-10">{{item.barcode}}</td>
+                <td class="td center">{{item.updateTime}}</td>
+                <td class="td  padding-left-10" style="text-align: left">{{item.updateName}}</td>
+                <td class="td  padding-left-10">
+                    <!--line-height: 25px;height: 50px;-->
+                    <div style="width:80%;float: left">
+                        <div ng-if="dataManage.show[$index][0] == 'true'">售价：{{item.originalVal.salePrice}}&nbsp;调整为：{{item.newVal.salePrice}}</div>
+                        <div ng-if="dataManage.show[$index][1] == 'true'">条码：{{item.originalVal.barcode}}&nbsp;调整为：{{item.newVal.barcode}}</div>
+                        <div ng-if="dataManage.show[$index][2] == 'true'">最新进价：{{item.originalVal.lastInPrice}}&nbsp;调整为：{{item.newVal.lastInPrice}}</div>
+                        <div ng-if="dataManage.show[$index][3] == 'true'">最小库存数：{{item.originalVal.minInvQty}}&nbsp;调整为：{{item.newVal.minInvQty}}</div>
+                        <div ng-if="dataManage.show[$index][4] == 'true'">自编码：{{item.originalVal.code}}&nbsp;调整为：{{item.newVal.code}}</div>
+                        <div ng-if="dataManage.show[$index][5] == 'true'">是否自动补货：{{item.originalVal.autoRpl == true ? '是' : '否'}}&nbsp;调整为：{{item.newVal.autoRpl
+                            == true ?
+                            '是' : '否'}}
+                        </div>
+                        <div ng-if="dataManage.show[$index][6] == 'true'">成本价：{{item.originalVal.costPrice}}&nbsp;调整为：{{item.newVal.costPrice}}</div>
+                    </div>
+                    <div style="float: right;padding: 12px 15px 0px 0px;height: 100%;line-height: 100%">
+                        <i ng-if="dataManage.show[$index][7] == 'hide'" class="iconfont icon-xiangxia" ng-click="toggle($index)"></i>
+                        <i ng-if="dataManage.show[$index][7] == 'true'" class="iconfont icon-xiangshang" ng-click="toggle($index)"></i>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="page-bar">
+        <table style="width: 100%;">
+            <tr>
+                <!-- <td style="width:70px;">一共x页</td>
+                 <td style="width:105px;">现在是第y页</td>-->
+                <td ng-show="total>0">
+                    当前显示{{(currentPage-1)*pageSize+1}}-{{(total-currentPage*pageSize)>0?currentPage*pageSize:total}}行,共有{{total}}行
+                </td>
+                <!--<td style="width:40%;"></td>-->
+                <td class="dpos-page">
+                    <ul class="pull-right dpos-pagenation-div">
+                        <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div"
+                            ng-click="currentPage=1;pageGo(1)" ng-disabled="currentPage === 1"><span
+                                class="fa fa-angle-double-left"></span></li>
+                        <li ng-hide="currentPage==1" class="dpos-current-page dpos-page-div" ng-click="pageFrom()"
+                            ng-disabled="currentPage === 1"><span
+                                class="fa fa-angle-left"></span></li>
+                        <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==1}"
+                            ng-click="currentPage=1;pageGo(1)"> 1
+                        </li>
+                        <li class="dpos-page-div" ng-show="page>=3"> ...</li>
+                        <li class="dpos-page-div" ng-show="pageCount>2"
+                            ng-class="{'dpos-clicked-page':currentPage==page}" ng-click="currentPage=page;pageGo(page)">
+                            {{page}}
+                        </li>
+                        <li class="dpos-page-div" ng-show="pageCount>3"
+                            ng-class="{'dpos-clicked-page':currentPage==page+1}"
+                            ng-click="currentPage=page+1;pageGo(page+1)">
+                            {{page+1}}
+                        </li>
+                        <li class="dpos-page-div" ng-show="pageCount>4"
+                            ng-class="{'dpos-clicked-page':currentPage==page+2}"
+                            ng-click="currentPage=page+2;pageGo(page+2)">
+                            {{page+2}}
+                        </li>
+                        <li class="dpos-page-div" ng-show="pageCount>5"
+                            ng-class="{'dpos-clicked-page':currentPage==page+3}"
+                            ng-click="currentPage=page+3;pageGo(page+3)">
+                            {{page+3}}
+                        </li>
+                        <li class="dpos-page-div" ng-show="page+3<pageCount-1"> ...</li>
+                        <li class="dpos-page-div" ng-class="{'dpos-clicked-page':currentPage==pageCount}"
+                            ng-show="pageCount>1"
+                            ng-click="currentPage=pageCount;pageGo(pageCount)">{{pageCount}}
+                        </li>
+                        <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div"
+                            ng-click="pageTo(page+1)"><span class="fa fa-angle-right"></span></li>
+                        <li ng-hide="currentPage==pageCount" class="dpos-current-page dpos-page-div"
+                            ng-click="currentPage=pageCount;pageGo(pageCount)"><span
+                                class="fa fa-angle-double-right"></span></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div hdInputSearch="hdInputSearch1">
+    <table>
+        <tr ng-repeat="item in dataManage.names" itemObj="{{item}}">
+            <td>{{item.name}}</td>
+        </tr>
+    </table>
+</div>

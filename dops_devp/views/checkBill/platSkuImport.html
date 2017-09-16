@@ -1,0 +1,72 @@
+
+<div class="mainContent">
+  <table class="titleBar">
+    <tr>
+      <td class="td1" style="width: 45%"><a ui-sref="checkBillImport">导入盘点单</a> > 从云平台中批量导入商品资料</td>
+      <td class="td2" >
+        <button class="btn Main" ng-click="clickImportPage()">{{txtBtn1}}</button>
+        <button class="btn Soft" ng-click="clickImportAll()">导入全部商品</button>
+      </td>
+    </tr>
+    <tr>
+      <td class="titleBar-cleanInfo" colspan="2">
+        <!--<div>-->
+        <i class="fa fa-info-circle titleBar-icon"></i>
+        您可以逐页查看并逐个修改如下商品资料，并选中后批量导入。共有 {{skuCountAll}} 条，当前显示 {{skuCountPage}} 条。
+      <!--</div>-->
+      </td>
+
+    </tr>
+  </table>
+  <div class="hr"></div>
+  <div>
+    <table class="listBar">
+      <colgroup>
+        <col style="width: 1px">
+        <col style="width: 120px">
+        <col style="width: auto">
+        <col style="width: 50px">
+        <col style="width: 60px">
+        <col style="width: 60px">
+        <col style="width: 90px">
+        <col style="width: 80px">
+        <!--<col style="width: 80px">-->
+        <col style="width: 80px">
+      </colgroup>
+      <tr>
+        <th class="th"><input type="checkbox" ng-model="selectPage" ng-click="clickChkAll(selectPage)"></th>
+        <th class="th">商品条码</th>
+        <th class="th">商品名称</th>
+        <th class="th">规格</th>
+        <th class="th">计量单位</th>
+        <th class="th">售价</th>
+        <th class="th">是否称重商品</th>
+        <th class="th">标签</th>
+        <!--<th class="th">关注库存</th>-->
+        <th class="th">最低库存数</th>
+      </tr>
+      <tr class="tr" ng-repeat="sku in dataManage.skuList">
+        <td class="td center"><input type="checkbox" ng-model="sku.selected" ng-click="clickChkSingle(sku.selected)"></td>
+        <td class="td">{{sku.barcode}}</td>
+        <td class="td">{{sku.name}}</td>
+        <td class="td">{{sku.qpcText}}</td>
+        <td class="td">{{sku.munit}}</td>
+        <td class="td right"><input ng-model="sku.salePrice" maxlength="6" style="width: 70px; text-align: right"
+                                    onkeypress="return (!(event.keyCode > 57||event.keyCode < 48) || (event.keyCode ==46))"
+                                    onchange="isNaN(this.value)? this.value=0: this.value=parseFloat(this.value).toFixed(2) "></td>
+        <td class="td center"><input type="checkbox" ng-model="sku.weighed"></td>
+        <td class="td">
+          <select style="width: 80px" ng-model="sku.tag"><option ng-repeat="tag in dataManage.tags" value="{{tag.name}}">{{tag.name}}</option></select>
+        </td>
+        <!--<td class="td center"><input type="checkbox" ng-model="sku.focus" ></td>-->
+        <td class="td center"><input ng-model="sku.minInvQty"maxlength="4" style="width: 60px; text-align: right"
+                                    onkeypress="return !(event.keyCode > 57||event.keyCode < 48)"
+                                    onchange="isNaN(this.value)? this.value=0: null"></td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+
+

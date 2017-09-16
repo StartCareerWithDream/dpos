@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>销售收银及结算</title>
+  <style>
+    body{
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table{
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td{
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+    td:first-child{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.13-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=销售收银及结算" target="_blank">销售收银及结算</a> </td>
+  </tr>
+
+  <th>操作</th>
+  <th>响应</th>
+  <tr>
+    <td >整体初始化</td>
+    <td>
+      判断页面操作权限，权限ID：销售<br>
+      if !当前门店是否为本机绑定门店 then<br>
+      　　提示必须绑定 <br>
+      　　绑定调用接口<a href="../apiDefine/_{shop}_pos_create.js" target="_blank">/{shop}/pos/create</a><br>
+      <font color="red">需要一份绑定/判断的完整规则</font><br>
+      <br>
+
+      按esc, 弹出框关闭 <br>
+      <br>
+
+      如果第一次访问"销售", 需要打开"操作引导". <font color="red">需要一份操作引导的使用方法</font><br>
+      <br>
+      获取门店配置中销售相关的内容, 调用接口<a href="../apiDefine/_{shop}_save_v2_create.js" target="_blank">/{shop}/sale/v2/create</a><br>
+      <font color="red">目前设置了解: 支付方式列表, 默认支付方式, 抹零方式; 其他如: 班次/收银缴款/标签打印/电子秤条码规则 还需要了解清楚  </font><br>
+      <font color="red">目前收银机了解: 打印小票/打印标签/启用钱箱  还需要了解清楚 </font><br>
+      <br>
+      获取门店收藏夹信息, 调用接口<a href="../apiDefine/_{shop}_skuFavorite_get_byShop.js" target="_blank">/{shop}/skuFavorite/get/byShop</a><br>
+      <br>
+      本地缓存: <br>
+      1. localStorage.getItem('{shop}.sale-order'): 销售单商品信息缓存, 如有, 则默认增加缓存中的销售商品信息 <br>
+      　　同时, 缓存中如果已经有"会员"信息, 则在"收藏夹"右侧, 显示会员的信息界面 <br>
+      2. localStorage.getItem('{shop}.sale-pendingSaleOrder'): 挂单记录缓存, 如有, 则将信息加入页面的内存中, 供后期使用 <br>
+      　　同时, 便利其中的记录, 如果time + 24小时 < 当前时间, 则认为"过期", 删除此单 <br>
+      3. localStorage.getItem('{shop}.sale-{user}-encryptNumber'): 加密流水号的选项: boolean <br>
+      <br>
+      按钮初始: 当没有任何商品信息时, "付款"按钮显示为"快速收银"按钮. <br>
+      <br>
+      录入屏幕快捷键列表: <br>
+      1. F1: 清屏, 删除所有商品行, 需要用户确认 <br>
+      2. F3: 删行, 当焦点在一个商品行中, 删除该行商品 <br>
+      3. F5: 数量, 当焦点在一个商品行中, 商品数量可编辑并得到焦点; 如不在, 并且有商品行, 则最后一个商品, 商品数量可编辑并得到焦点 <br>
+      4. F6: 会员, 会员输入框获得焦点 <br>
+      5. F8: 挂单, 打开挂单界面 <br>
+      5. F9: 当按钮为"快速收银", 则打开快速收银界面; 当按钮为"付款", 则打开付款页面 <br>
+
+    </td>
+  </tr>
+  <tr>
+    <td>操作顶栏界面</td>
+    <td> <a href="saleAdd_top.html" target="saleAdd_top">销售-顶栏</a> </td>
+  </tr>
+  <tr>
+    <td>挂单界面</td>
+    <td> <a href="saleAdd_pending.html" target="saleAdd_pending">销售-挂单</a> </td>
+  </tr>
+  <tr>
+    <td>商品录入界面</td>
+    <td> <a href="saleAdd_sku.html" target="saleAdd_sku">销售-录入</a> </td>
+  </tr>
+  <tr>
+    <td>收藏夹界面</td>
+    <td>
+      <a href="saleAdd_favorite.html" target="saleAdd_favorite">销售-收藏夹</a>  <br>
+      <a href="saleAdd_favoriteMod.html" target="saleAdd_favoriteMod">销售-收藏夹编辑</a>
+    </td>
+  </tr>
+  <tr>
+    <td>会员信息界面</td>
+    <td> <a href="saleAdd_member.html" target="saleAdd_member">销售-会员</a> </td>
+  </tr>
+  <tr>
+    <td>结算界面</td>
+    <td> <a href="saleAdd_pay.html" target="saleAdd_pay">销售-结算</a> </td>
+  </tr>
+
+</table>
+
+
+</body>
+</html>

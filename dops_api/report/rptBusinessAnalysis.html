@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>经营分析报表</title>
+  <style>
+    body {
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td {
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+
+    td:first-child {
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/1.9.5-SNAPSHOT/server/dpos-ux/prototype/pc/index.html#g=1&p=经营分析报表" target="_blank">经营分析报表UX页面</a>
+    </td>
+  </tr>
+
+  <th>整体操作</th>
+  <th>响应</th>
+  <tr>
+    <td>界面初始化</td>
+    <td>
+      <!--判断页面操作权限，权限ID：@@@@@@@@<br>-->
+      <!--界面显示的操作权限判断：[ 新增按钮 &#45;&#45; 权限ID：@@@@, 编辑按钮 &#45;&#45; 权限ID：@@@@ ]<br>-->
+      <!--获取@@@@数据，调用接口<a href="/src/main/angular/json/接口路径.js" target="_blank">接口路径</a><br>-->
+      进入页面分析报表页面<a href="../apiDefine/_(report)_analysis.js" target="_blank">经营分析报表接口路径</a>/{shopUuid}/report/operationanalysis <br></br>
+
+      时间段 默认显示 7天前的时间 （到） 今日时间</br>
+      <!--最近 跨度时间标签选中 '7天'</br>-->
+      <!--[X]商品标签 默认为空</br>-->
+      <!--[X]商品 默认为空</br>-->
+      汇总图 x轴展示销售额 进货2个种类</br>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;y轴展示出默认搜索条件的 销售额[#F56E6A] 进货额[#4FA8F9] ,柱状图宽度默认30px,柱状图顶显示数值</br>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;y轴最大值是所给数据最大值加上1000（最大值小于1w） 10000 （最大值小于100w）, 最小值是0, y轴值有10个间隔</br>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;鼠标悬浮柱状图显示提示2个种类的种类名称(ex:销售额 进货额) 销售值(ex:2500 300) </br></br>
+      趋势图 图表时间段 非加盟店 加盟店(1.9.5版本)都展示并可以修改</br>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;夜班时间控件晚班时间展示默认 23:00 至 07:00</br>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;折线图转折点标点统一为圆点</br>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;x轴展示具体时间,x轴展示的数据个数不会超过8个,x轴数据总个数不会超过30个,在1000分辨率下 x轴数据每隔3个展示在图表上</br>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;y轴最大值是所给数据最大值加上50（最大值小于0.1w） 1000（最大值小于1w） 10000 （最大值小于100w）, 最小值是0, y轴值有5个间隔,y轴一共有3条 图表左侧2条为 数量(笔) 金额(元), 右边为利率(%) Y轴不显示坐标刻度</br>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;y轴展示出默认搜索条件的 销售额[#F56E6A] 客单价[#009999] 销售笔数[#6EC71E] 夜班销售额[#FFCC00] 鼠标悬浮显示种类名称及其对应值(ex:毛利额 300)</br>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;种类legend全部展示为圆点颜色默认为销售额[#F56E6A] 客单价[#009999] 销售笔数[#6EC71E] 夜班销售额[#FFCC00]库存品项数[#1B1B1B] 动销品项数[#FF66CC] 进货[#4FA8F9] 毛利额[#ff6600] 毛利率[#cc3300] </br>
+
+      销售额表格 固定展示列'日期'、'销售额'、'毛利额'、'毛利率'、'客单价'、'夜班销售总额'、'动销品项数'、'进货'</br>
+      日期这列数据会根据所选 按天或月份 或者 年份展示不同时间单位的值</br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>改变搜索条件</td>
+    <td>
+      <!--获取@@@@数据，调用接口<a href="/src/main/angular/json/接口路径.js" target="_blank">接口路径</a><br>-->
+      时间段 初始日期可以选择 一个时间</br>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;结束日期可以选择 一个时间</br>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;2个日期时间段间隔进行判断 如果查询时间段小于40天，则按天(传DAY)，如果大于40天，则按自然月(传MONTH)，如果大于365天，则按自然年传(YEAR)</br>
+
+      最近时间段标签 可选择 '7天' '3个月'  '半年'其中一个,  3个选项:近7天= (今天-6天)  近3个月  = (今天 - 89 天) 近半年 = (今天 -182天) (时间标签只是方便选择时间段不进行查询数据)</br>
+
+      <!--[X]商品标签 </br>-->
+
+      <!--[X]时间段 商品</br>-->
+
+      点击搜索按钮  获取数据，调用接口<a href="../apiDefine/_(report)_analysis.js" target="_blank">经营分析报表接口路径 /{shopUuid}/report/operationanalysis</a></br>
+      趋势图和销售额图随着搜索条件改变展示数值也变化</br>
+      点击默认按钮 初试时间和结束时间变成7天前时间和今日 夜班时间变成初始23:00 结束 07:00</br></br>
+
+      <!--趋势图图表夜班时间段 如果不是加盟会员展示,是加盟会员不展示 夜班时间段初始时间23:00</br>-->
+      趋势图图表夜班时间段 目前1.95版本 是否是加盟会员不影响 夜班时间段选择</br>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;夜班时间段2个时间选择范围是0:00 ~ 23:00 选择完之后,点击查询 趋势图会根据所选夜班时间展示数据 </br></br>
+
+      点击修改指标按钮 弹出框展示 '销售额'、'毛利额'、'毛利率'、'客单价'、'夜班销售总额'、'库存品项数'、'动销品项数'、'进货' 9个勾选项</br>
+      勾选项勾选完成后 点击确定按钮 弹窗关闭 趋势图只展示所勾选的勾选项折线图</br></br>
+
+      销售额表格 固定展示列'日期'、'销售额'、'毛利额'、'毛利率'、'客单价'、'夜班销售总额'、'动销品项数'、'进货'</br>
+      销售额表格 固定展示列表格数据随着顶栏搜索条件改变而变化</br>
+    </td>
+  </tr>
+  <tr>
+    <td>页面整体样式</td>
+    <td>
+      最小分辨率时页面宽度为1000px,小于1000px时不在进行响应式变化  </br>
+      页面内图表会根据 分辨率改变进行响应式的变化 </br>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

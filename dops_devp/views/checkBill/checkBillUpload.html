@@ -1,0 +1,76 @@
+<div class="mainContent">
+  <div>
+    <button class="btn Main pull-right" ui-sref="checkBillList">返回盘点单列表</button>
+  </div>
+  <div class="dtlBar">
+    <table align="center">
+      <tr class="dtlBar-info">
+        <td align="center">
+          <div class="dtlBar-info">
+            请选择需要导入的Excel文件
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <button has-permission="库存" class="btn Main" id="exclUpLoadBtn" ><i class="fa fa-file-o"></i> &nbsp;选择文件</button>
+          <!--<button class="btn Main btn-file-upload btn-upFile" ng-click="addPic()">上传已选择的文件</button>-->
+          <!--<span>******************</span>-->
+          <!--<input readonly class="input-readonly" ng-model="fileName" id="exclUpLoad" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">-->
+          <input has-permission="库存" type="file" id="exclUpLoad" name="upload" alt="no" class="plat-upFlie" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" onchange="angular.element(this).scope().fileNameChanged(this)">
+          <!--<button  class="btn-chooseFile md-sm md-raised" md-colors="{background: 'blue'}">选择文件</button>-->
+          <!--<button style="" class="btn-upFile md-sm md-raised" md-colors="{background: 'light-blue'}" ng-click="addPic()">上传</button>-->
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="upLoadFile-content dtlBar-info">
+            <div>导入条件:</div>
+            <ul>
+              <li>第一行必须为表格标题，否则将会遗漏数据</li>
+              <li>第一列标题为商品条码，条码长度不能超过20位</li>
+              <li>第二列标题为商品数量</li>
+              <li><i class="fa fa-file"></i>模板文件<a href="//download.qianfan123.com/resources/excel/cb_template.xlsx">下载地址</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!--查看是否有重复-->
+<hd-dialog id="confirmFileDialog">
+  <!-- 按钮是浮在header上的-->
+  <div class="hd-dialog-close" ng-click="closeDialog()"><i class="iconfont icon-fou"></i></div>
+  <div class="hd-dialog-content confirmFileDialog">
+
+    <div>该文件有如下商品存在重复记录</div>
+    <form name="myConfirmForm">
+      <div style="padding: 10px;border-bottom: 1px solid #d3d3d3;">
+        <div style="overflow-y:scroll;height: 200px;margin-bottom: 10px;padding-bottom:20px; ">
+          <table style="height: 100%;">
+            <tr>
+              <td style="width: 180px;border-right: 1px solid #d3d3d3;">
+                <ul>
+                  <li style="list-style: none;" ng-repeat="a in singleFileList track by $index">{{a}}</li>
+                </ul>
+              </td>
+              <td style="width: 180px;">
+                <ul style="margin-top: 0px;">
+                  <li style="list-style: none;" ng-repeat="b in triFileList track by $index">{{b}}</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div style="margin-top: 20px;">如果继续操作，系统会将重复的商品记录的数量进行累加</div>
+      <div>请确认是否继续操作？</div>
+    </form>
+  </div>
+  <div class="hd-dialog-button">
+    <button class=" btn Main" style="margin-left:68px; " ng-class="{'forbidden-btn-changepwd':myPwdForm.$invalid == true,}" type="button" ng-click="confirmFile()" ng-disabled="myConfirmForm.$invalid">继续操作</button>
+    <button class="btn Soft" type="reset" data-dialog-close ng-click="closeDialog()">取消</button>
+  </div>
+</hd-dialog>

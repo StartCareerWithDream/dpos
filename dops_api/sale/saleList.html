@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>$Title$</title>
+  <style>
+    body{
+      font-family: Calibri, "Microsoft YaHei";
+      font-size: 14px;
+    }
+
+    table{
+      border-collapse: separate;
+      border-spacing: 1px;
+      background-color: gainsboro;
+      width: 100%;
+    }
+
+    td{
+      background-color: white;
+      padding: 4px;
+      vertical-align: top;
+      line-height: 180%;
+    }
+    td:first-child{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<table>
+
+  <tr>
+    <td>页面布局</td>
+    <td><a href="http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/dianwu/1.14/ux/prototype/xiaoshou/index.html#g=1&p=销售查询" target="_blank">http://ftp.hddomain.cn/wikifs/PDC/DNET/site/dpos/dianwu/1.14/ux/prototype/xiaoshou/index.html#g=1&p=销售查询</a> </td>
+  </tr>
+
+  <th>操作</th>
+  <th>响应</th>
+  <tr>
+    <td >界面初始化</td>
+    <td>
+      判断页面操作权限，权限ID：销售<br>
+      界面显示的操作权限判断：[销售]<br>
+
+      获取销售单列表数据，调用接口<a href="../apiDefine/_{shop}_sale_v2_list.js" target="_blank">/sale/v2/list</a> 默认查询条件: 生成日期时段[今天, 今天]; <br>
+      <!--获取pos机号列表数据，调用接口<a href="../apiDefine/_{shop}_pos_list.js" target="_blank">/pos/list</a><br>-->
+      获取商品列表数据，调用接口<a href="../apiDefine/_{shop}_shopSkuService_queryInputSearch.js" target="_blank">/shopSkuService/queryInputSearch</a><br>
+      获取会员列表数据，调用接口<a href="../apiDefine/_{shop}_customer_query.js" target="_blank">/costomer/query</a><br>
+      注意：如果存在退货，则退货的标志展示在表格中的单号前面<br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击销售收银按钮</td>
+    <td>
+      路径跳转 <a href="saleAdd.html" target="_self">销售收银</a><br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>点击销售退货按钮</td>
+    <td>
+      路径跳转 <a href="../saleReturn/saleReturnAdd.html" target="_self">销售退货</a><br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击查询按钮</td>
+    <td>
+      查询条件: pos机号=, 商品= ，金额>=, 金额<=, 会员=; 支付方式[,], 操作人%=%, 流水号%=%, 优惠>=, 优惠<=,生成日期时段[,]<br>
+      输入POS机号,输入的值要求最大是999的正整数<br>
+      使用组件库中的带搜索的下拉框，进行匹配<br>
+      输入筛选条件中的商品<br>
+      使用组件库中的带搜索的下拉框，进行匹配<br>
+      输入筛选条件中的会员<br>
+      使用组件库中的带搜索的下拉框，进行匹配<br>
+      支付方式的枚举:现金(CASH),微信(WEIXIN),支付宝(ALIPAY),储值支付(BALANCE),翼支付(BESTPAY),赊账(CREDIT),其他(OTHER)；支付方式为多选<br>
+      金额默认保留两位小数<br>
+      获取销售单列表数据，调用接口<a href="../apiDefine/_{shop}_sale_v2_list.js" target="_blank">/sale/v2/list</a><br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击清空按钮</td>
+    <td>清除所有筛选表单数据</td>
+  </tr>
+  <tr>
+    <td>点击日历按钮</td>
+    <td>
+      获取销售单列表数据，调用接口<a href="../apiDefine/_{shop}_sale_v2_list.js" target="_blank">/sale/v2/list</a><br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击切换按日/按周/按月/按日期</td>
+    <td>
+      改变日历的展示形式<br>
+      按日：日历可以选择今天及今天以前；<br>
+      按周：日历展示一周的开始时间和结束时间，切换日历，选择开始时间，结束时间相应变化<br>
+      按月: 日历展示年份和月份，只能选择年和月<br>
+      按日期：出现两个日历，可以任选；<br>
+      其中有个最近的选择：“7天”，日历变化为以今天以前的第7天开始，到今天结束<br>
+      “3个月”，日历变化为以今天以前的第3个月开始，到今天结束<br>
+      “半年”，日历变化为以今天以前的半年开始，到今天结束<br>
+      获取销售单列表数据，调用接口<a href="../apiDefine/_{shop}_sale_v2_list.js" target="_blank">/sale/v2/list</a><br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击列表中的表头进行排序</td>
+    <td>
+      增加排序参数，值为:"ASC"或者"DESC"<br>
+      pos机号：{"property":"posNo","direction":""}<br>
+      单号：{"property":"number","direction":""}<br>
+      金额：{"property":"amount","direction":""}<br>
+      数量：{"property":"qty","direction":""}<br>
+      会员：{"property":"customer","direction":""}<br>
+      创建人：{"property":"creator","direction":""}<br>
+      创建时间：{"property":"created","direction":""}<br>
+      获取销售单列表数据，调用接口<a href="../apiDefine/_{shop}_sale_v2_list.js" target="_blank">/sale/v2/list</a><br>
+    </td>
+  </tr>
+  <tr>
+    <td>点击表格中的单号</td>
+    <td>路径跳转 <a href="saleDtl.html" target="_self">销售明细</a><br></td>
+  </tr>
+</table>
+
+</body>
+</html>

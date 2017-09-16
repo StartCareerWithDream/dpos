@@ -1,0 +1,262 @@
+<html>
+<head>
+  <title>工具</title>
+  <meta charset="UTF-8">
+
+  <style type="text/css">
+    body {
+      font-family: Calibri, "Microsoft YaHei";
+    }
+
+    h1, h2, h3 {
+      font-family: Calibri, "Microsoft YaHei";
+      line-height: 100%;
+    }
+
+    h4 {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 0px;
+    }
+
+    table {
+      width: 100%;
+      height: 100%;
+    }
+
+    td {
+      height: 100%;
+      vertical-align: top;
+    }
+
+    td.t1 {
+      width: 400px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      border: 1px solid gainsboro;
+    }
+  </style>
+  <script type="text/javascript" src="router.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+  //显示代码
+  function setValue(s) {
+    document.getElementById('txtCmd').value = s;
+    document.getElementById('txtCmd').focus();
+    document.getElementById('txtCmd').select();
+  }
+
+  //创建程序目录，创建文件
+  function createProgram() {
+    var sCmd, sMdHTML, sMdJs, sDirHTML, sDirJs, sFileHMTL, sFileJs;
+    sCmd = 'rem 请在具体产品的angular目录下，cmd命令行执行 \n'
+      + 'md css\n'
+      + 'md img\n'
+      + 'md json\n'
+      + 'md js\n'
+      + 'md js\\directives\n'
+      + 'md libs\n\n';
+
+    for (i = 0; i < router.length; i++) {
+      if (router[i] == null) {
+        continue;
+      }
+
+      //创建view目录
+      sDirHTML = 'views\\' + router[i].path.replace(/\//g, "\\");
+      sMdHTML = 'md ' + sDirHTML;
+      sFileHMTL = 'echo.>' + sDirHTML + router[i].name + '.html';
+
+      //创建JS目录
+      sDirJs = 'js\\' + router[i].path.replace(/\//g, "\\");
+      sMdJs = 'md ' + sDirJs;
+      sFileJs = 'echo.>' + sDirJs + router[i].name + '.controller.js';
+
+      sCmd = sCmd + sMdHTML + '\n' + sFileHMTL + '\n' + sMdJs + '\n' + sFileJs + '\n';
+    }
+
+    setValue(sCmd);
+  }
+
+
+  //创建路由代码
+  function createRouter() {
+    var sCmd, sRouter;
+    sCmd = '';
+
+    for (i = 0; i < router.length; i++) {
+      if (router[i] == null) {
+        continue;
+      }
+
+      //创建router的代码
+      sRouter = '/* 工具自动生成：' + router[i].module + router[i].name + ' */\n'
+        + '.state(\'app.' + router[i].name + '\', {\n'
+        + '  url: \'/' + router[i].name + '\',\n'
+        + '  templateUrl: \'./views/' + router[i].path + router[i].name + '.html\',\n'
+        + '  controller: \'' + router[i].name + '.Controller\',\n'
+        + '  resolve: {\n'
+        + '      deps: [\'$ocLazyLoad\', function ($ocLazyLoad) {\n'
+        + '          return $ocLazyLoad.load({\n'
+        + '              name: \'' + router[i].name + '\',\n'
+        + '              files: [\n'
+        + '                  dir + \'./js/' + router[i].path + router[i].name + '.controller.js\'\n'
+        + '              ]\n'
+        + '          })\n'
+        + '      }]\n'
+        + '  }\n'
+        + '})\n'
+      sCmd = sCmd + sRouter + '\n\n';
+    }
+
+    setValue(sCmd);
+  }
+
+  //创建设计目录，文件
+  function createDesign() {
+    var sCmd, sMdHTML, sDirHTML, sFileHMTL;
+    sCmd = 'rem 请在具体产品的src\doc\design目录下，cmd命令行执行 \n\n';
+
+    for (i = 0; i < router.length; i++) {
+      if (router[i] == null) {
+        continue;
+      }
+
+      //创建设计目录
+      sDirHTML = '' + router[i].path.replace(/\//g, "\\");
+      sMdHTML = 'md ' + sDirHTML;
+      //sFileHMTL = 'echo.>' + sDirHTML + router[i].name + '.html';
+      sFileHMTL = 'copy coder\\designTemplate.html ' + sDirHTML + router[i].name + '.html';
+
+      sCmd = sCmd + sMdHTML + '\n' + sFileHMTL + '\n';
+    }
+
+    setValue(sCmd);
+  }
+
+
+  //创建设计中的索引内容
+  function createDesignContent() {
+    var sCmd, sModule, sLine, sPreModule;
+    sCmd = '';
+    sPreModule = '$$$$$$$$';
+
+    for (i = 0; i < router.length; i++) {
+      if (router[i] == null) {
+        continue;
+      }
+
+      sModule = '';
+      //创建分类行
+      if (sPreModule != router[i].module) {
+        sModule = '\n        <h3>' + router[i].module + '</h3>\n';
+        sPreModule = router[i].module;
+      }
+
+      sLine = '        <h4><a href="' + router[i].path + router[i].name + '.html" target="js">' + router[i].page + '</a></h4>';
+
+      sCmd = sCmd + sModule + sLine + '\n';
+    }
+
+    var sHead = '<html>\n'
+      + '<head>\n'
+      + '    <title>界面设计</title>\n'
+      + '    <meta charset="UTF-8">\n'
+      + '    <style type="text/css">\n'
+      + '        body{\n'
+      + '            font-family: Calibri, "Microsoft YaHei";\n'
+      + '        }\n'
+      + '        h1,h2,h3 {\n'
+      + '            line-height: 100%;\n'
+      + '        }\n'
+      + '        h4{\n'
+      + '            font-weight: normal;\n'
+      + '            font-size: 14px;\n'
+      + '            line-height: 0px;\n'
+      + '        }\n'
+      + '        table{\n'
+      + '            width: 100%;\n'
+      + '            height: 100%;\n'
+      + '        }\n'
+      + '        td{\n'
+      + '            height: 100%;\n'
+      + '            vertical-align: top;\n'
+      + '        }\n'
+      + '        td.t1{\n'
+      + '            width: 400px;\n'
+      + '        }\n'
+      + '        div{\n'
+      + '            width: 100%;\n'
+      + '            height: 100%;\n'
+      + '            overflow: auto;\n'
+      + '            border: 1px solid gainsboro;\n'
+      + '            padding-left: 4px;\n'
+      + '        }\n'
+      + '        iframe{\n'
+      + '            width: 100%;\n'
+      + '            height: 100%;\n'
+      + '            overflow: auto;\n'
+      + '            border: 1px solid gainsboro;\n'
+      + '        }\n'
+      + '    </style>\n'
+      + '</head>\n'
+      + '<body>\n'
+      + '<table>\n'
+      + '    <tr><td class="t1">\n'
+      + '      <div>\n'
+      + '        <h1>界面设计</h1>\n';
+
+    var sEnd = '      </div>\n'
+      + '    </td>\n'
+      + '        <td>\n'
+      + '            <iframe name="js" src="about:blank"></iframe>\n'
+      + '        </td>\n'
+      + '    </tr>\n'
+      + '</table>\n'
+      + '\n'
+      + '</body>\n'
+      + '</html>';
+
+    setValue(sHead + sCmd + sEnd);
+
+  }
+
+  //看看router的内容
+  function showRouter() {
+    setValue(JSON.stringify(router));
+  }
+
+</script>
+
+<table>
+  <tr>
+    <td class="t1">
+      <h1>程序工具</h1>
+      <button onclick="createProgram()">创建程序目录，创建文件</button>
+      <br><br>
+      <button onclick="createRouter()">创建路由代码</button>
+      <br><br>
+
+      <h1>设计</h1>
+      <button onclick="createDesign()">创建设计目录，文件</button>
+      <br><br>
+      <button onclick="createDesignContent()">创建设计主页内容</button>
+      <br><br>
+
+      <h1>其他</h1>
+      <button onclick="showRouter()">就想看看Router中定义了啥</button>
+
+    </td>
+    <td>
+      <textarea id="txtCmd" readonly></textarea>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

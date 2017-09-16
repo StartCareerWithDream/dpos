@@ -1,0 +1,103 @@
+<div class="mainContent" style="min-width: 700px;width: 74%;display: inline-block;">
+  <table class="titleBar">
+    <tr>
+      <td class="td1">
+        <span ng-show="dataManage.item.number">单号:{{dataManage.item.number}}</span>
+        <span ng-bind-html="dataManage.item.state|status"></span>
+      </td>
+      <td class="td2">
+        <button class="btn Soft" ui-sref="employeePayDeliveryList">取消</button>
+        <button class="btn Main"  ng-show="canPay(dataManage.item)" ng-click="pay()">确认缴款</button>
+      </td>
+    </tr>
+  </table>
+  <div class="hr"></div>
+  <div class="headBar">
+    <div class="headBarText">概要</div>
+  </div>
+  <br>
+
+  <table class="dtlBar">
+    <tr>
+      <td width="20%">生成日期:</td>
+      <td width="30%">{{dataManage.item.generateDate|dateFormat}}</td>
+      <td width="20%">班次:</td>
+      <td width="30%">{{dataManage.item.workShift}}</td>
+    </tr>
+    <tr>
+      <td>缴款店员:</td>
+      <td>{{dataManage.item.cashier}}</td>
+      <td>收款人:</td>
+      <td>{{dataManage.item.creator.name}}</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: text-top">备注:</td>
+      <td colspan="5">
+        <textarea ng-model="dataManage.item.remark" style="width: 60%;height: 100px;resize: none;" maxlength="100"></textarea>
+      </td>
+    </tr>
+  </table>
+
+  <br>
+
+  <div class="headBar">
+    <div class="headBarText">详情</div>
+  </div>
+  <br>
+
+  <table class="listBar">
+    <tr>
+      <th class="th" width="25%">支付方式</th>
+      <th class="th" width="25%">待缴款</th>
+      <th class="th" width="25%">实缴款</th>
+      <th class="th" width="25%">长短款</th>
+    </tr>
+
+    <tr class="tr" ng-repeat="item in dataManage.item.paymentRecords">
+      <td class="td">{{item.paymentMethod}}</td>
+      <td class="td right">
+        {{item.amount| currency:'￥'}}
+      </td>
+      <td class="td right">
+        <input hdMin="0" hdFix="2" hdMax="999999.99" ng-if="item.paymentMethod=='现金'" ng-model="item.realPayAmount"
+               style="text-align: right;" onkeypress="return window.hdUtils.digitChk(this)"
+               onchange="window.hdUtils.digitLmt(this)" ng-class="{isCache:item.paymentMethod=='现金'}" auto-focus/>
+        <input hdMin="0" hdFix="2" hdMax="999999.99" ng-if="item.paymentMethod=='其他'" ng-model="item.realPayAmount"
+               style="text-align: right;" onkeypress="return window.hdUtils.digitChk(this)"
+               onchange="window.hdUtils.digitLmt(this)" ng-class="{isCache:item.paymentMethod=='现金'}"/>
+        <span ng-if="item.paymentMethod!='现金'&&item.paymentMethod!='其他'">{{item.realPayAmount| currency:'￥'}}</span>
+      </td>
+      <td class="td right">{{item.realPayAmount-item.amount| currency:'￥'}}</td>
+    </tr>
+    <tr class="tr">
+      <td class="td">合计</td>
+      <td class="td right">{{dataManage.item.paymentRecords |sumOfItems: 'amount' | currency:'￥'}}</td>
+      <td class="td right">{{dataManage.item.paymentRecords |sumOfItems: 'realPayAmount' | currency:'￥'}}</td>
+      <td class="td right">{{((dataManage.item.paymentRecords |sumOfItems: 'realPayAmount')-(dataManage.item.paymentRecords |sumOfItems: 'amount')) |
+        currency:'￥'}}
+      </td>
+    </tr>
+  </table>
+</div>
+<div ng-hide="dataManage.item.state==null" style="width: 24%; display: inline-block;min-width: 100px;float: right;font-size: 14px;
+    color: #777777;">
+  <ul hdTab_3>
+    <li class="tbfocus">创建与修改</li>
+  </ul>
+  <div class="list">
+    <ul>
+      <li ng-if="dataManage.item.lastModified">
+        <span class="lefttime"><i></i>
+          上次修改于 {{dataManage.item.lastModified}}<br>
+          操作人：{{dataManage.item.lastModifier.name}}
+        </span>
+      </li>
+      <li ng-if="dataManage.item.created">
+        <span class="lefttime"><i></i>
+          创建于 {{dataManage.item.created}}<br>
+          操作人：{{dataManage.item.creator.name}}
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>

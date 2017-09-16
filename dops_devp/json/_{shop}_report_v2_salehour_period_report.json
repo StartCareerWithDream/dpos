@@ -1,0 +1,76 @@
+{
+  "data": [
+    {
+      "date": "00:00 -- 01:00",
+      "saleAmount": 0,
+      "saleCount": 0,
+      "wholesaleAmount": 0,
+      "wholesaleCount": 0,
+      "returnAmount": 0,
+      "returnCount": 0,
+      "saleCostAmount": 0,
+      "saleGrossAmount": 0,
+      "returnCostAmount": 0,
+      "returnGrossAmount": 0,
+      "wholesaleCostAmount": 0,
+      "wholesaleGrossAmount": 0,
+      "tags": [
+        {
+          "saleSkuTagName": "日料",
+          "saleAmount": 0,
+          "saleQty": 0,
+          "wholesaleAmount": 0,
+          "wholesaleQty": 0,
+          "returnAmount": 0,
+          "returnQty": 0,
+          "saleCostAmount": 0,
+          "saleGrossAmount": 0,
+          "returnCostAmount": 0,
+          "returnGrossAmount": 0,
+          "wholesaleCostAmount": 0,
+          "wholesaleGrossAmount": 0
+        },
+        {
+          "saleSkuTagName": "中国",
+          "saleAmount": 0,
+          "saleQty": 0,
+          "wholesaleAmount": 0,
+          "wholesaleQty": 0,
+          "returnAmount": 0,
+          "returnQty": 0,
+          "saleCostAmount": 0,
+          "saleGrossAmount": 0,
+          "returnCostAmount": 0,
+          "returnGrossAmount": 0,
+          "wholesaleCostAmount": 0,
+          "wholesaleGrossAmount": 0
+        },
+        {
+          "saleSkuTagName": "韩国",
+          "saleAmount": 0,
+          "saleQty": 0,
+          "wholesaleAmount": 0,
+          "wholesaleQty": 0,
+          "returnAmount": 0,
+          "returnQty": 0,
+          "saleCostAmount": 0,
+          "saleGrossAmount": 0,
+          "returnCostAmount": 0,
+          "returnGrossAmount": 0,
+          "wholesaleCostAmount": 0,
+          "wholesaleGrossAmount": 0
+        }
+      ]
+    }
+  ],
+  "success": true,
+  "message": [
+    "string"
+  ],
+  "fields": [
+    {
+      "key": "string"
+    }
+  ],
+  "total":0
+}

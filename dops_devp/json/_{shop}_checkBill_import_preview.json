@@ -1,0 +1,315 @@
+{
+  "data": [
+    {
+      "lineNo": 1,
+      "shopSkuId": "shopId1",
+      "shopSkuBarcode": "条形码1",
+      "shopSkuName": "商品1",
+      "qty": 1,
+      "invQty": 2,
+      "profitQty": 3
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 11,
+      "invQty": 22,
+      "profitQty": 33
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    },
+    {
+      "lineNo": 2,
+      "shopSkuId": "shopId2",
+      "shopSkuBarcode": "条形码2",
+      "shopSkuName": "商品2",
+      "qty": 0,
+      "invQty": 0,
+      "profitQty": 0
+    }
+  ],
+  "success": true,
+  "message": [
+    "string"
+  ],
+  "fields": [
+    {
+      "key": "string"
+    }
+  ],
+  "total":33,
+  "summary": {
+    "normalCount": 10,
+    "undefinedCount": 1
+  }
+}
